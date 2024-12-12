@@ -31,13 +31,13 @@ function TruckTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr 1fr 1fr 1fr">
+      <Table columns="0.6fr 1.3fr 1.3fr 1.3fr 1fr 1fr 1fr 1fr 0.5fr">
         <Table.Header role="row">
           <div></div>
           <div>Placa</div>
-          <div>Tarjeta Operaciones</div>
+          <div>Tarjeta de Operaciones</div>
           <div>Seguro</div>
-          <div>Capacidad</div>
+          <div>Capacidad (kg)</div>
           <div>Tracción</div>
           <div>Año</div>
           <div>HP</div>

@@ -16,12 +16,23 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, formState, reset } = useForm({
-    defaultValues: isEditSession ? editValues : {},
+    defaultValues: isEditSession
+      ? {
+          ...editValues,
+          operationsCard: editValues.operationsCard.split("T")[0],
+          insurance: editValues.insurance.split("T")[0],
+        }
+      : {},
   });
+
   const { errors } = formState;
 
   function onSubmit(data) {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
+    console.log(data);
+    const image =
+      typeof data.image === "string"
+        ? data.image
+        : data.image[0] || truckToEdit.image || null;
 
     if (isEditSession)
       editTruck(
@@ -105,30 +116,30 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      {/* <FormRow
+      <FormRow
         label="Tarjeta de Operaciones"
         error={errors?.operationsCard?.message}
       >
         <Input
-          type="text"
+          type="date"
           disabled={isWorking}
           id="operationsCard"
           {...register("operationsCard", {
             required: "This field is required",
           })}
         />
-      </FormRow> */}
+      </FormRow>
 
-      {/* <FormRow label="Seguro" error={errors?.insurance?.message}>
+      <FormRow label="Seguro" error={errors?.insurance?.message}>
         <Input
-          type="text"
+          type="date"
           disabled={isWorking}
           id="insurance"
           {...register("insurance", {
             required: "This field is required",
           })}
         />
-      </FormRow> */}
+      </FormRow>
 
       <FormRow label="Foto del camión" error={errors?.image?.message}>
         <FileInput

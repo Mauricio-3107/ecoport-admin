@@ -13,6 +13,7 @@ export async function getTrucks() {
 
 export async function createEditTruck(newTruck, id) {
   const hasImagePath = newTruck.image?.startsWith?.(supabaseUrl);
+  console.log(newTruck.image.name);
 
   const imageName = `${Math.random()}-${newTruck.image.name}`.replaceAll(
     "/",
@@ -28,10 +29,10 @@ export async function createEditTruck(newTruck, id) {
 
   // a) create
   if (!id) query = query.insert([{ ...newTruck, image: imagePath }]);
-  
+
   // b) edit
   if (id) query = query.update({ ...newTruck, image: imagePath }).eq("id", id);
-  
+
   const { data, error } = await query.select().single();
 
   if (error) {

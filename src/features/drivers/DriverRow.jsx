@@ -42,19 +42,28 @@ const LicensePlate = styled.div`
   font-family: "Sono";
 `;
 
-function DriverRow({ driver, truckDriverAssignments, availableTrucks }) {
+function DriverRow({ driver, availableTrucks }) {
   const { isCreating, createDriver } = useCreateDriver();
   const { isDeleting, deleteDriver } = useDeleteDriver();
   const { isUnassigning, unassignTruck } = useUnassignTruckDriver();
 
-  const { id: driverId, fullName, licenseNumber, phoneNumber } = driver;
+  const {
+    id: driverId,
+    fullName,
+    licenseNumber,
+    phoneNumber,
+    licensePlate,
+    assignmentId,
+  } = driver;
 
-  const itHasTruck = truckDriverAssignments.find(
-    (assignment) => assignment.drivers.id === driverId
-  );
+  // const itHasTruck = truckDriverAssignments.find(
+  //   (assignment) => assignment.drivers.id === driverId
+  // );
 
-  const licensePlate = itHasTruck ? itHasTruck.trucks.licensePlate : null;
-  const tdaId = itHasTruck?.id;
+  // const licensePlate = itHasTruck ? itHasTruck.trucks.licensePlate : null;
+  // const tdaId = itHasTruck?.id;
+  const itHasTruck = Boolean(licensePlate && assignmentId);
+  console.log(itHasTruck, fullName);
 
   function handleDuplicate() {
     createDriver({
@@ -134,7 +143,7 @@ function DriverRow({ driver, truckDriverAssignments, availableTrucks }) {
                   onConfirm={() =>
                     unassignTruck({
                       assignmentEndDate: { assignmentEndDate: fromToday(0) },
-                      id: tdaId,
+                      id: assignmentId,
                     })
                   }
                   disabled={isUnassigning}

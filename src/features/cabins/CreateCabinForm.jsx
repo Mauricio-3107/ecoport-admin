@@ -25,8 +25,11 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log(data);
+    const image =
+      typeof data.image === "string"
+        ? data.image
+        : data.image[0] || cabinToEdit.image || null;
+
     if (isEditSession)
       editCabin(
         { newCabinData: { ...data, image: image }, id: editId },

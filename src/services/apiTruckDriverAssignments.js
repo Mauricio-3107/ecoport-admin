@@ -6,7 +6,7 @@ export async function getTruckDriverAssignments() {
     .select(
       `
       id, 
-      drivers (id),
+      drivers (id, fullName, licenseNumber, phoneNumber),
       trucks (id, licensePlate)
     `
     )
