@@ -84,7 +84,7 @@ function ClientRow({ client }) {
         </Modal>
       </div>
     </Table.Row>
-    // My boy
+    // My freaking boy
   );
 }
 
