@@ -52,7 +52,7 @@ function ClientRow({ client }) {
       <Client>{name}</Client>
       <ContactName>{contactName}</ContactName>
       <PhoneNumber>{phoneNumber}</PhoneNumber>
-      
+
       <div>{email}</div>
       <div>{city}</div>
       <div>{type}</div>
@@ -84,6 +84,7 @@ function ClientRow({ client }) {
         </Modal>
       </div>
     </Table.Row>
+    // My boy
   );
 }
 
