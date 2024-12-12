@@ -19,9 +19,11 @@ function CreateTripForm({
   const { errors } = formState;
 
   const bolivianLocations = [
-    { value: "cochabamba", label: "Cochabamba" },
-    { value: "santa-cruz", label: "Santa Cruz" },
-    { value: "la-paz", label: "La Paz" },
+    { value: "Cochabamba", label: "Cochabamba" },
+    { value: "Santa Cruz", label: "Santa Cruz" },
+    { value: "La Paz", label: "La Paz" },
+    { value: "Oruro", label: "Oruro" },
+    { value: "Tarija", label: "Tarija" },
   ];
 
   const chileanLocations = [

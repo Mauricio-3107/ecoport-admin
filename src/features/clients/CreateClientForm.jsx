@@ -6,8 +6,9 @@ import FileInput from "../../ui/FileInput";
 import Button from "../../ui/Button";
 import { useCreateClient } from "./useCreateClient";
 import { useEditClient } from "./useEditClient";
+import MySelect from "../../ui/MySelect";
 
-function CreateClientForm({ clientToEdit = {}, onCloseModal }) {
+function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
   const { isCreating, createClient } = useCreateClient();
   const { isEditing, editClient } = useEditClient();
   const isWorking = isCreating || isEditing;
@@ -21,6 +22,14 @@ function CreateClientForm({ clientToEdit = {}, onCloseModal }) {
 
   const { errors } = formState;
 
+  const bolivianLocations = [
+    { value: "Cochabamba", label: "Cochabamba" },
+    { value: "Santa Cruz", label: "Santa Cruz" },
+    { value: "La Paz", label: "La Paz" },
+    { value: "Oruro", label: "Oruro" },
+    { value: "Tarija", label: "Tarija" },
+  ];
+
   function onSubmit(data) {
     const image =
       typeof data.image === "string"
@@ -29,7 +38,7 @@ function CreateClientForm({ clientToEdit = {}, onCloseModal }) {
 
     if (isEditSession)
       editClient(
-        { newClientData: { ...data, image: image }, id: editId },
+        { newClientData: { ...data, image: image, type: type }, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -39,7 +48,7 @@ function CreateClientForm({ clientToEdit = {}, onCloseModal }) {
       );
     else
       createClient(
-        { ...data, image: image },
+        { ...data, image: image, type: type },
         {
           onSuccess: () => {
             reset();
@@ -93,6 +102,18 @@ function CreateClientForm({ clientToEdit = {}, onCloseModal }) {
           id="phoneNumber"
           disabled={isWorking}
           {...register("phoneNumber", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+
+      <FormRow label="Ciudad" error={errors?.origin?.message}>
+        <MySelect
+          id="city"
+          options={bolivianLocations}
+          label="ciudad"
+          type="white"
+          {...register("city", {
             required: "This field is required",
           })}
         />

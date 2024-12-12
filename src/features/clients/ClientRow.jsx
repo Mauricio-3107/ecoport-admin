@@ -36,7 +36,16 @@ const PhoneNumber = styled.div`
 
 function ClientRow({ client }) {
   const { isDeleting, deleteClient } = useDeleteClient();
-  const { id: clientId, name, contactName, email, phoneNumber, image } = client;
+  const {
+    id: clientId,
+    name,
+    contactName,
+    email,
+    phoneNumber,
+    image,
+    city,
+    type,
+  } = client;
   return (
     <Table.Row role="row">
       <Img src={image} />
@@ -44,6 +53,8 @@ function ClientRow({ client }) {
       <ContactName>{contactName}</ContactName>
       <PhoneNumber>{phoneNumber}</PhoneNumber>
       <div>{email}</div>
+      <div>{city}</div>
+      <div>{type}</div>
       <div>
         <Modal>
           <Menus.Menu>
