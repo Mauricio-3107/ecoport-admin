@@ -11,6 +11,14 @@ const Row = styled.div`
     `}
 
   ${(props) =>
+    props.type === "horizontal-no-space" &&
+    css`
+      justify-content: start;
+      align-items: center;
+      gap: 1.6rem;
+    `}
+
+  ${(props) =>
     props.type === "vertical" &&
     css`
       flex-direction: column;

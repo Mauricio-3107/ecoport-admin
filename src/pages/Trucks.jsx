@@ -1,8 +1,8 @@
-import TruckTable from "../features/trucks/truckTable";
+import TruckTable from "../features/trucks/TruckTable";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import AddTruck from "../features/trucks/AddTruck";
-import TruckTableOperations from "../features/truck/TruckTableOperations";
+import TruckTableOperations from "../features/trucks/TruckTableOperations";
 
 function Trucks() {
   return (

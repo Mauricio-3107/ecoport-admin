@@ -1,0 +1,107 @@
+import { useForm } from "react-hook-form";
+
+import FormRow from "../../ui/FormRow";
+import Input from "../../ui/Input";
+import Form from "../../ui/Form";
+import Button from "../../ui/Button";
+import MySelect from "../../ui/MySelect";
+
+function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
+  const { register, handleSubmit, formState, reset } = useForm();
+  const { errors } = formState;
+
+  function onSubmit(data) {
+    console.log(data);
+  }
+
+  const bolivianLocations = [
+    { value: "cochabamba", label: "Cochabamba" },
+    { value: "santa-cruz", label: "Santa Cruz" },
+    { value: "la-paz", label: "La Paz" },
+  ];
+
+  const chileanLocations = [
+    { value: "arica", label: "Arica" },
+    { value: "iquique", label: "Iquique" },
+  ];
+
+  const currentTrucks = truckDriverAssignments.map((assignment) => ({
+    value: assignment.id,
+    label: `${assignment.licensePlate} (${assignment.fullName
+      .split(" ")
+      .slice(0, 2)
+      .join(" ")})`,
+  }));
+
+  return (
+    <Form
+      type={onCloseModal ? "modal" : "regular"}
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormRow label="Origen" error={errors?.origin?.message}>
+        <MySelect
+          id="origin"
+          options={tripType === "export" ? bolivianLocations : chileanLocations}
+          label="ciudad"
+          type="white"
+          {...register("origin", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Destination" error={errors?.destination?.message}>
+        <MySelect
+          id="destination"
+          options={tripType === "import" ? bolivianLocations : chileanLocations}
+          label="ciudad"
+          type="white"
+          {...register("destination", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Placa" error={errors?.assignmentId?.message}>
+        <MySelect
+          id="assignmentId"
+          options={currentTrucks}
+          label="unidad"
+          type="white"
+          {...register("assignmentId", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Inicio viaje" error={errors?.startDate?.message}>
+        <Input
+          type="date"
+          id="startDate"
+          {...register("startDate", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Flete" error={errors?.price?.message}>
+        <Input
+          type="number"
+          id="price"
+          {...register("price", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow>
+        {/* type is an HTML attribute! */}
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
+          Cancelar
+        </Button>
+        <Button>{"Create new truck"}</Button>
+      </FormRow>
+    </Form>
+  );
+}
+
+export default CreateTripForm;

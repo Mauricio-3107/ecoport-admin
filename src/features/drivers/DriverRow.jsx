@@ -56,12 +56,13 @@ function DriverRow({ driver, availableTrucks }) {
     assignmentId,
   } = driver;
 
-  // const itHasTruck = truckDriverAssignments.find(
-  //   (assignment) => assignment.drivers.id === driverId
-  // );
+  const driverToEdit = {
+    id: driverId,
+    fullName,
+    licenseNumber,
+    phoneNumber,
+  };
 
-  // const licensePlate = itHasTruck ? itHasTruck.trucks.licensePlate : null;
-  // const tdaId = itHasTruck?.id;
   const itHasTruck = Boolean(licensePlate && assignmentId);
   console.log(itHasTruck, fullName);
 
@@ -125,7 +126,7 @@ function DriverRow({ driver, availableTrucks }) {
 
             {/* Windows */}
             <Modal.Window name="edit-driver-form">
-              <CreateDriverForm driverToEdit={driver} />
+              <CreateDriverForm driverToEdit={driverToEdit} />
             </Modal.Window>
 
             {!itHasTruck && (

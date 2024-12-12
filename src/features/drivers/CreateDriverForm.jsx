@@ -21,6 +21,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
   // New
 
   function onSubmit(data) {
+    console.log(data);
     if (isEditSession)
       editDriver(
         { newDriverData: { ...data }, id: editId },
