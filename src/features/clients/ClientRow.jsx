@@ -52,6 +52,7 @@ function ClientRow({ client }) {
       <Client>{name}</Client>
       <ContactName>{contactName}</ContactName>
       <PhoneNumber>{phoneNumber}</PhoneNumber>
+      
       <div>{email}</div>
       <div>{city}</div>
       <div>{type}</div>
