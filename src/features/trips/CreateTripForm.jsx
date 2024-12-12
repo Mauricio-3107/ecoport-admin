@@ -5,14 +5,18 @@ import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import MySelect from "../../ui/MySelect";
+import { useCreateTrip } from "./useCreateTrip";
 
-function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
+function CreateTripForm({
+  tripType,
+  truckDriverAssignments,
+  clientsObject,
+  onCloseModal,
+}) {
+  const { isCreating, createTrip } = useCreateTrip();
+
   const { register, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
-
-  function onSubmit(data) {
-    console.log(data);
-  }
 
   const bolivianLocations = [
     { value: "cochabamba", label: "Cochabamba" },
@@ -33,6 +37,23 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
       .join(" ")})`,
   }));
 
+  const currentClients = clientsObject.map((client) => ({
+    value: client.id,
+    label: client.name,
+  }));
+
+  function onSubmit(data) {
+    createTrip(
+      { ...data, tripType: tripType },
+      {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      }
+    );
+  }
+
   return (
     <Form
       type={onCloseModal ? "modal" : "regular"}
@@ -49,6 +70,7 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
           })}
         />
       </FormRow>
+
       <FormRow label="Destination" error={errors?.destination?.message}>
         <MySelect
           id="destination"
@@ -60,6 +82,7 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
           })}
         />
       </FormRow>
+
       <FormRow label="Placa" error={errors?.assignmentId?.message}>
         <MySelect
           id="assignmentId"
@@ -71,6 +94,7 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
           })}
         />
       </FormRow>
+
       <FormRow label="Inicio viaje" error={errors?.startDate?.message}>
         <Input
           type="date"
@@ -80,15 +104,33 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
           })}
         />
       </FormRow>
+
       <FormRow label="Flete" error={errors?.price?.message}>
         <Input
           type="number"
           id="price"
           {...register("price", {
             required: "This field is required",
+            min: {
+              value: 1,
+              message: "Flete debe ser positivo",
+            },
           })}
         />
       </FormRow>
+
+      <FormRow label="Cliente" error={errors?.client?.message}>
+        <MySelect
+          id="client"
+          options={currentClients}
+          label="cliente"
+          type="white"
+          {...register("client", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+
       <FormRow>
         {/* type is an HTML attribute! */}
         <Button
@@ -98,7 +140,7 @@ function CreateTripForm({ tripType, truckDriverAssignments, onCloseModal }) {
         >
           Cancelar
         </Button>
-        <Button>{"Create new truck"}</Button>
+        <Button disabled={isCreating}>Create new trip</Button>
       </FormRow>
     </Form>
   );

@@ -28,7 +28,6 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log(data);
     const image =
       typeof data.image === "string"
         ? data.image

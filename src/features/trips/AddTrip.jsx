@@ -2,7 +2,7 @@ import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import CreateTripForm from "./CreateTripForm";
 
-function AddTrip({ tripType, truckDriverAssignments }) {
+function AddTrip({ tripType, truckDriverAssignments, clientsObject }) {
   return (
     <div>
       <Modal>
@@ -13,6 +13,7 @@ function AddTrip({ tripType, truckDriverAssignments }) {
           <CreateTripForm
             tripType={tripType}
             truckDriverAssignments={truckDriverAssignments}
+            clientsObject={clientsObject}
           />
         </Modal.Window>
       </Modal>
