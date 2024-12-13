@@ -1,7 +1,22 @@
 import supabase from "./supabase";
 
-export async function getTrips() {
-  const { data, error } = await supabase.from("trips").select("*");
+export async function getTrips({ filter, sortBy }) {
+  let query = supabase
+    .from("trips")
+    .select(
+      "id, tripType, origin, destination, startDate, truckDriverAssignments(id, trucks(licensePlate), drivers(fullName)), clients(name)"
+    );
+
+  // Filter query.eq(column, value)
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+
+  // SortBy
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  const { data, error } = await query;
   if (error) {
     console.error(error);
     throw new Error("Trips could not be loaded");

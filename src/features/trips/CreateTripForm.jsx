@@ -38,8 +38,18 @@ function CreateTripForm({
       .slice(0, 2)
       .join(" ")})`,
   }));
-
-  const currentClients = clientsObject.map((client) => ({
+  
+  const clientsImport = clientsObject.filter(
+    (client) => client.type === tripType
+  );
+  const clientsExport = clientsObject.filter(
+    (client) => client.type === tripType
+  );
+  const currentClientsImport = clientsImport.map((client) => ({
+    value: client.id,
+    label: client.name,
+  }));
+  const currentClientsExport = clientsExport.map((client) => ({
     value: client.id,
     label: client.name,
   }));
@@ -124,7 +134,9 @@ function CreateTripForm({
       <FormRow label="Cliente" error={errors?.client?.message}>
         <MySelect
           id="client"
-          options={currentClients}
+          options={
+            tripType === "export" ? currentClientsExport : currentClientsImport
+          }
           label="cliente"
           type="white"
           {...register("client", {

@@ -6,19 +6,20 @@ import { useTrips } from "./useTrips";
 
 function TripTable() {
   const { isLoading: isLoadingTrips, trips } = useTrips();
- 
+
   if (isLoadingTrips) return <Spinner />;
+  console.log(trips);
   return (
     <Menus>
-      <Table columns="0.6fr 1.3fr 1.3fr 1.3fr 1fr 1fr 1fr 0.5fr">
+      <Table columns="0.1fr 1fr 1fr 1fr 1fr 1.3fr 1fr 0.5fr">
         <Table.Header role="header">
           <div></div>
-          <div>Trip Type</div>
-          <div>Origin</div>
-          <div>Destination</div>
-          <div>Start Date</div>
-          <div>Truck</div>
-          <div>Client</div>
+          <div>Tipo</div>
+          <div>Origen</div>
+          <div>Destino</div>
+          <div>Fecha</div>
+          <div>Unidad</div>
+          <div>Cliente</div>
           <div></div>
         </Table.Header>
         <Table.Body

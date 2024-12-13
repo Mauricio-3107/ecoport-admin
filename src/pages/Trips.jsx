@@ -1,5 +1,6 @@
 import { useClients } from "../features/clients/useClients";
 import AddTrip from "../features/trips/AddTrip";
+import CreateTripOperations from "../features/trips/CreateTripOperations";
 import TripTable from "../features/trips/TripTable";
 import { useTruckDriverAssignments } from "../features/truckDriverAssignments/useTruckDriverAssignments";
 import Heading from "../ui/Heading";
@@ -15,6 +16,7 @@ function Trips() {
   const clientsObject = clients.map((client) => ({
     id: client.id,
     name: client.name,
+    type: client.type,
   }));
 
   const tdaForm = truckDriverAssignments.map((assignment) => ({
@@ -27,7 +29,7 @@ function Trips() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All Trips</Heading>
-        <p>TEST</p>
+        <CreateTripOperations />
       </Row>
       <Row>
         <TripTable />
