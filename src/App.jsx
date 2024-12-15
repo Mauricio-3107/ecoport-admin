@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Clients from "./pages/Clients";
+import Company from "./pages/Company";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function App() {
             <Route path="clients" element={<Clients />} />
             <Route path="users" element={<Users />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="company" element={<Company />} />
             <Route path="account" element={<Account />} />
           </Route>
           <Route path="login" element={<Login />} />

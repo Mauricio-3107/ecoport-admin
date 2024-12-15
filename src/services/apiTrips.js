@@ -4,7 +4,7 @@ export async function getTrips({ filter, sortBy }) {
   let query = supabase
     .from("trips")
     .select(
-      "id, tripType, origin, destination, startDate, truckDriverAssignments(id, trucks(licensePlate), drivers(fullName)), clients(name)"
+      "id, tripType, origin, destination, startDate, price, truckDriverAssignments(id, trucks(licensePlate), drivers(fullName)), clients(id, name)"
     );
 
   // Filter query.eq(column, value)
@@ -40,6 +40,16 @@ export async function createEditTrip(newTrip, id) {
   if (error) {
     console.error(error);
     throw new Error("Viaje no pudo ser creado");
+  }
+
+  return data;
+}
+
+export async function deleteTrip(id) {
+  const { data, error } = await supabase.from("trips").delete().eq("id", id);
+  if (error) {
+    console.error(error);
+    throw new Error("Trip could not be deleted");
   }
 
   return data;

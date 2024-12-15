@@ -2,6 +2,7 @@ import {
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
+  HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
   HiOutlineHome,
   HiOutlineHomeModern,
@@ -113,6 +114,12 @@ function MainNav() {
           <StyledNavLink to="/clients">
             <HiOutlineBriefcase />
             <span>Clients</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/company">
+            <HiOutlineDocumentText />
+            <span>Company</span>
           </StyledNavLink>
         </li>
       </NavList>

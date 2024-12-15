@@ -6,16 +6,25 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import MySelect from "../../ui/MySelect";
 import { useCreateTrip } from "./useCreateTrip";
+import { useEditTrip } from "./useEditTrip";
 
 function CreateTripForm({
   tripType,
   truckDriverAssignments,
   clientsObject,
+  tripToEdit = {},
   onCloseModal,
 }) {
   const { isCreating, createTrip } = useCreateTrip();
+  const { isEditing, editTrip } = useEditTrip();
+  const isWorking = isCreating || isEditing;
 
-  const { register, handleSubmit, formState, reset } = useForm();
+  const { id: editId, ...editValues } = tripToEdit;
+  const isEditSession = Boolean(editId);
+
+  const { register, handleSubmit, formState, reset } = useForm({
+    defaultValues: isEditSession ? editValues : {},
+  });
   const { errors } = formState;
 
   const bolivianLocations = [
@@ -27,8 +36,8 @@ function CreateTripForm({
   ];
 
   const chileanLocations = [
-    { value: "arica", label: "Arica" },
-    { value: "iquique", label: "Iquique" },
+    { value: "Arica", label: "Arica" },
+    { value: "Iquique", label: "Iquique" },
   ];
 
   const currentTrucks = truckDriverAssignments.map((assignment) => ({
@@ -38,7 +47,7 @@ function CreateTripForm({
       .slice(0, 2)
       .join(" ")})`,
   }));
-  
+
   const clientsImport = clientsObject.filter(
     (client) => client.type === tripType
   );
@@ -55,15 +64,26 @@ function CreateTripForm({
   }));
 
   function onSubmit(data) {
-    createTrip(
-      { ...data, tripType: tripType },
-      {
-        onSuccess: () => {
-          reset();
-          onCloseModal?.();
-        },
-      }
-    );
+    if (isEditSession)
+      editTrip(
+        { newTripData: { ...data, tripType: tripType }, id: editId },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
+    else
+      createTrip(
+        { ...data, tripType: tripType },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
   }
 
   return (
@@ -154,7 +174,9 @@ function CreateTripForm({
         >
           Cancelar
         </Button>
-        <Button disabled={isCreating}>Create new trip</Button>
+        <Button disabled={isWorking}>
+          {isEditSession ? "Edit trip" : "Create new trip"}
+        </Button>
       </FormRow>
     </Form>
   );

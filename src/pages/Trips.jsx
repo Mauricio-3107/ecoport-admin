@@ -13,6 +13,7 @@ function Trips() {
   const { isLoading: isLoadingClients, clients } = useClients();
 
   if (isLoadingTda || isLoadingClients) return <Spinner />;
+
   const clientsObject = clients.map((client) => ({
     id: client.id,
     name: client.name,
@@ -32,7 +33,10 @@ function Trips() {
         <CreateTripOperations />
       </Row>
       <Row>
-        <TripTable />
+        <TripTable
+          truckDriverAssignments={tdaForm}
+          clientsObject={clientsObject}
+        />
         <Row type="horizontal-no-space">
           <AddTrip
             tripType="export"
