@@ -1,11 +1,12 @@
 import Menus from "../../ui/Menus";
+import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import TripRow from "./TripRow";
 import { useTrips } from "./useTrips";
 
 function TripTable({ truckDriverAssignments, clientsObject }) {
-  const { isLoading: isLoadingTrips, trips } = useTrips();
+  const { isLoading: isLoadingTrips, trips, count } = useTrips();
 
   if (isLoadingTrips) return <Spinner />;
   return (
@@ -21,6 +22,7 @@ function TripTable({ truckDriverAssignments, clientsObject }) {
           <div>Cliente</div>
           <div></div>
         </Table.Header>
+
         <Table.Body
           data={trips}
           render={(trip) => (
@@ -32,6 +34,10 @@ function TripTable({ truckDriverAssignments, clientsObject }) {
             />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menus>
   );

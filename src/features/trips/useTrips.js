@@ -18,14 +18,19 @@ export function useTrips() {
   const [field, direction] = sortRaw.split("-");
   const sortBy = { field, direction };
 
+  // Pagination
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
+  // Query
   const {
     isLoading,
-    data: trips,
+    data: { data: trips, count } = {},
     error,
   } = useQuery({
-    queryKey: ["trips", filter, sortBy],
-    queryFn: () => getTrips({ filter, sortBy }),
+    queryKey: ["trips", filter, sortBy, page],
+    queryFn: () => getTrips({ filter, sortBy, page }),
   });
+  
 
-  return { isLoading, trips, error };
+  return { isLoading, trips, error, count };
 }
