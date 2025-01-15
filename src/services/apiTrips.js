@@ -1,4 +1,5 @@
 import { PAGE_SIZE } from "../utils/constants";
+import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
 export async function getTrips({ filter, sortBy, page }) {
@@ -60,6 +61,22 @@ export async function deleteTrip(id) {
   if (error) {
     console.error(error);
     throw new Error("Trip could not be deleted");
+  }
+
+  return data;
+}
+
+// Returns all BOOKINGS that were created after the given date. Useful to get bookings created in the last 30 days, for example.
+export async function getTripsAfterDate(date) {
+  const { data, error } = await supabase
+    .from("trips")
+    .select("created_at, totalPrice, extrasPrice")
+    .gte("created_at", date)
+    .lte("created_at", getToday({ end: true }));
+
+  if (error) {
+    console.error(error);
+    throw new Error("Trips could not get loaded");
   }
 
   return data;
