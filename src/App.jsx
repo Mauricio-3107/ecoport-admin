@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {
+function App() {  
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>

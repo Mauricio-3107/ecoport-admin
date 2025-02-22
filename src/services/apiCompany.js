@@ -16,7 +16,7 @@ export async function updateCompany(newData) {
   const { data, error } = await supabase
     .from("company")
     .update(newData)
-    // There is only ONE row of settings, and it has the ID=1, and so this is the updated one
+    // There is only ONE row of company, and it has the ID=1, and so this is the updated one
     .eq("id", 1)
     .single();
 
