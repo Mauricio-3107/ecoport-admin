@@ -1,0 +1,5 @@
+TRUCKS:
+Set the access policy to authenticated role.
+
+IMAGES:
+Double slash on the URL.

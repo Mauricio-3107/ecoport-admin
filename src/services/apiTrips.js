@@ -31,8 +31,6 @@ export async function getTrips({ filter, sortBy, page }) {
     console.error(error);
     throw new Error("Trips could not be loaded");
   }
-  console.log(data);
-  console.log(count);
   return { data, count };
 }
 

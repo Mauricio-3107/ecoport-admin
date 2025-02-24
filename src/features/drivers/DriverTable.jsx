@@ -39,6 +39,7 @@ function DriverTable() {
   const isLoading = isLoadingDrivers || isLoadingTda || isLoadingTrucks;
 
   if (isLoading) return <Spinner />;
+
   // Drivers
   const enrichedDrivers = enrichDriversWithAssignments(
     drivers,
@@ -54,6 +55,7 @@ function DriverTable() {
   const assignedTruckIds = new Set(
     truckDriverAssignments.map((assignment) => assignment.trucks.id)
   );
+  console.log(assignedTruckIds);
 
   const availableTrucks = allTrucks.filter(
     (truck) => !assignedTruckIds.has(truck.id)

@@ -31,10 +31,11 @@ function UpdateCompanyForm() {
 
   function handleUpdate(e, field) {
     const { value } = e.target;
+    console.log(e.target.value);
     if (!value) return;
     updateCompany({ [field]: value });
   }
-  
+
   return (
     <Form>
       <FormRow label={`Seprec ${extraCompany}`}>

@@ -14,7 +14,7 @@ function Clients() {
       <Row>
         <ClientTable />
         <Row type="horizontal-no-space">
-          <AddClient type="export" />
+          <AddClient type="export" /> 
           <AddClient type="import" />
         </Row>
       </Row>

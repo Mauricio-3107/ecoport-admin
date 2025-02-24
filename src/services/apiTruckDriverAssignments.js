@@ -4,8 +4,7 @@ export async function getTruckDriverAssignments() {
   const { data, error } = await supabase
     .from("truckDriverAssignments")
     .select(
-      `
-      id, 
+      `id, 
       drivers (id, fullName, licenseNumber, phoneNumber),
       trucks (id, licensePlate)
     `

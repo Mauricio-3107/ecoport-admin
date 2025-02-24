@@ -66,7 +66,7 @@ function TruckRow({ truck }) {
 
   return (
     <Table.Row role="row">
-      <Img src={image} />
+      <Img src={image} alt={licensePlate} />
       <LicensePlate>{licensePlate}</LicensePlate>
       <OperationsCardInsurance>
         {operationsCard.split("T")[0]}

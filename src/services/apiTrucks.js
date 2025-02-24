@@ -13,16 +13,25 @@ export async function getTrucks() {
 
 export async function createEditTruck(newTruck, id) {
   const hasImagePath = newTruck.image?.startsWith?.(supabaseUrl);
-  console.log(newTruck.image.name);
 
   const imageName = `${Math.random()}-${newTruck.image.name}`.replaceAll(
     "/",
     ""
   );
+  // This was creating 2 slashes
+  // const imagePath = hasImagePath
+  //   ? newTruck.image
+  //   : `${supabaseUrl}/storage/v1/object/public/truck-images/${imageName}`;
+
+  // Suggested change to deal with the 2 slashes
+  const bucketUrl = new URL(
+    "/storage/v1/object/public/truck-images/",
+    supabaseUrl
+  );
 
   const imagePath = hasImagePath
     ? newTruck.image
-    : `${supabaseUrl}/storage/v1/object/public/truck-images/${imageName}`;
+    : new URL(imageName, bucketUrl).href;
 
   // 1. Create/Edit Truck
   let query = supabase.from("trucks");

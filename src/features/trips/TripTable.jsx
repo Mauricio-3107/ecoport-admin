@@ -9,6 +9,7 @@ function TripTable({ truckDriverAssignments, clientsObject }) {
   const { isLoading: isLoadingTrips, trips, count } = useTrips();
 
   if (isLoadingTrips) return <Spinner />;
+  
   return (
     <Menus>
       <Table columns="0.1fr 1fr 1fr 1fr 1fr 1.3fr 1fr 0.5fr">

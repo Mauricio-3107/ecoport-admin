@@ -106,7 +106,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
 
       <FormRow label="Capacidad" error={errors?.capacity?.message}>
         <Input
-          type="number"
+          type="text"
           disabled={isWorking}
           id="capacity"
           {...register("capacity", {

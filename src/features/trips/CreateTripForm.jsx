@@ -51,13 +51,16 @@ function CreateTripForm({
   const clientsImport = clientsObject.filter(
     (client) => client.type === tripType
   );
+
   const clientsExport = clientsObject.filter(
     (client) => client.type === tripType
   );
+
   const currentClientsImport = clientsImport.map((client) => ({
     value: client.id,
     label: client.name,
   }));
+  
   const currentClientsExport = clientsExport.map((client) => ({
     value: client.id,
     label: client.name,
