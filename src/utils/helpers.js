@@ -1,4 +1,12 @@
-import { differenceInDays, formatDistance, parseISO, add } from "date-fns";
+import {
+  differenceInDays,
+  formatDistance,
+  parseISO,
+  add,
+  addMonths,
+  isAfter,
+  isSameDay,
+} from "date-fns";
 
 // We want to make this function work for both Date objects and strings (which come from Supabase)
 export const subtractDates = (dateStr1, dateStr2) =>
@@ -32,4 +40,19 @@ export function fromToday(numDays, withTime = false) {
   const date = add(new Date(), { days: numDays });
   if (!withTime) date.setUTCHours(0, 0, 0, 0);
   return date.toISOString().slice(0, -1);
+}
+
+export function getStatusDate(expirationDate) {
+  const today = new Date();
+  const expDate = parseISO(expirationDate);
+  const oneMonthBefore = addMonths(expDate, -1);
+  if (
+    isAfter(today, oneMonthBefore) ||
+    isSameDay(expDate, today) ||
+    isAfter(today, expDate)
+  ) {
+    return "strong-red";
+  } else {
+    return "green";
+  }
 }

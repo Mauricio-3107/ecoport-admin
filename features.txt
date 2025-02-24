@@ -1,2 +1,6 @@
 TRUCKS:
 Filter by the ejes (6 ejes, 5 ejes);
+
+DASHBOARD:
+- Load Utilization (%) – The percentage of the truck’s maximum capacity that is currently being used.
+- 

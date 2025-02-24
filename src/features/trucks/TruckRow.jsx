@@ -7,6 +7,7 @@ import Menus from "../../ui/Menus";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useCreateTruck } from "./useCreateTruck";
 import Table from "../../ui/Table";
+import { getStatusDate } from "../../utils/helpers";
 
 const Img = styled.img`
   display: block;
@@ -32,7 +33,8 @@ const Capacity = styled.div`
 const OperationsCardInsurance = styled.div`
   font-family: "Sono";
   font-weight: 500;
-  color: var(--color-green-700);
+  color: ${({ status }) =>
+    status === "green" ? "var(--color-green-700)" : "var(--color-red-700)"};
 `;
 
 function TruckRow({ truck }) {
@@ -68,10 +70,10 @@ function TruckRow({ truck }) {
     <Table.Row role="row">
       <Img src={image} alt={licensePlate} />
       <LicensePlate>{licensePlate}</LicensePlate>
-      <OperationsCardInsurance>
+      <OperationsCardInsurance status={getStatusDate(operationsCard)}>
         {operationsCard.split("T")[0]}
       </OperationsCardInsurance>
-      <OperationsCardInsurance>
+      <OperationsCardInsurance status={getStatusDate(insurance)}>
         {insurance.split("T")[0]}
       </OperationsCardInsurance>
       <Capacity>{capacity}</Capacity>

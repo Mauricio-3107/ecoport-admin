@@ -1,9 +1,14 @@
+import {
+  HiOutlineCheckCircle,
+  HiOutlineExclamationTriangle,
+} from "react-icons/hi2";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import { useCompany } from "./useCompany";
 import { useUpdateCompany } from "./useUpdateCompany";
+import { getStatusDate } from "../../utils/helpers";
 
 function splitDate(date) {
   return date.split("T")[0];
@@ -38,7 +43,17 @@ function UpdateCompanyForm() {
 
   return (
     <Form>
-      <FormRow label={`Seprec ${extraCompany}`}>
+      <FormRow
+        label={`Seprec ${extraCompany}`}
+        icon={
+          getStatusDate(seprecExtra) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(seprecExtra)}
+      >
         <Input
           type="date"
           id="seprecExtra"
@@ -48,7 +63,17 @@ function UpdateCompanyForm() {
         />
       </FormRow>
 
-      <FormRow label={`Seprec ${mainCompany}`}>
+      <FormRow
+        label={`Seprec ${mainCompany}`}
+        icon={
+          getStatusDate(seprec) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(seprec)}
+      >
         <Input
           type="date"
           id="seprec"
@@ -58,7 +83,17 @@ function UpdateCompanyForm() {
         />
       </FormRow>
 
-      <FormRow label={`Permiso Ocasional ${extraCompany}`}>
+      <FormRow
+        label={`Permiso Ocasional ${extraCompany}`}
+        icon={
+          getStatusDate(ocassionalDocumentExtra) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(ocassionalDocumentExtra)}
+      >
         <Input
           type="date"
           id="ocassionalDocumentExtra"
@@ -68,7 +103,17 @@ function UpdateCompanyForm() {
         />
       </FormRow>
 
-      <FormRow label={`Permiso Ocasional ${mainCompany}`}>
+      <FormRow
+        label={`Permiso Ocasional ${mainCompany}`}
+        icon={
+          getStatusDate(ocassionalDocument) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(ocassionalDocument)}
+      >
         <Input
           type="date"
           id="ocassionalDocument"
@@ -78,7 +123,17 @@ function UpdateCompanyForm() {
         />
       </FormRow>
 
-      <FormRow label={`Expiración token  ${extraCompany}`}>
+      <FormRow
+        label={`Expiración token  ${extraCompany}`}
+        icon={
+          getStatusDate(expirationTokenExtra) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(expirationTokenExtra)}
+      >
         <Input
           type="date"
           id="expirationTokenExtra"
@@ -88,7 +143,17 @@ function UpdateCompanyForm() {
         />
       </FormRow>
 
-      <FormRow label={`Expiración token  ${mainCompany}`}>
+      <FormRow
+        label={`Expiración token  ${mainCompany}`}
+        icon={
+          getStatusDate(expirationToken) === "green" ? (
+            <HiOutlineCheckCircle />
+          ) : (
+            <HiOutlineExclamationTriangle />
+          )
+        }
+        color={getStatusDate(expirationToken)}
+      >
         <Input
           type="date"
           id="expirationToken"

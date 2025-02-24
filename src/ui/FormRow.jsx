@@ -36,12 +36,22 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function FormRow({ label, error, children }) {
+const IconSvg = styled.div`
+  & svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: ${({ color }) =>
+      color === "green" ? "var(--color-green-700)" : "var(--color-red-700)"};
+  }
+`;
+
+function FormRow({ label, error, children, icon = null, color }) {
   return (
     <StyledFormRow>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
+      {icon && <IconSvg color={color}>{icon}</IconSvg>}
     </StyledFormRow>
   );
 }

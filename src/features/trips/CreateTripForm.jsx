@@ -48,23 +48,12 @@ function CreateTripForm({
       .join(" ")})`,
   }));
 
-  const clientsImport = clientsObject.filter(
-    (client) => client.type === tripType
-  );
-
-  const clientsExport = clientsObject.filter(
-    (client) => client.type === tripType
-  );
-
-  const currentClientsImport = clientsImport.map((client) => ({
-    value: client.id,
-    label: client.name,
-  }));
-  
-  const currentClientsExport = clientsExport.map((client) => ({
-    value: client.id,
-    label: client.name,
-  }));
+  const currentClients = clientsObject
+    .filter((client) => client.type === tripType)
+    .map((client) => ({
+      value: client.id,
+      label: client.name,
+    }));
 
   function onSubmit(data) {
     if (isEditSession)
@@ -157,9 +146,7 @@ function CreateTripForm({
       <FormRow label="Cliente" error={errors?.client?.message}>
         <MySelect
           id="client"
-          options={
-            tripType === "export" ? currentClientsExport : currentClientsImport
-          }
+          options={currentClients}
           label="cliente"
           type="white"
           {...register("client", {
