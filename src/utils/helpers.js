@@ -56,3 +56,18 @@ export function getStatusDate(expirationDate) {
     return "green";
   }
 }
+
+export function formatRate(rate) {
+  return (
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(rate) + "/km"
+  );
+}
+
+export const formatKilometers = (value) =>
+  new Intl.NumberFormat("de", { maximumFractionDigits: 2 }).format(value) +
+  " km";

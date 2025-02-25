@@ -1,18 +1,17 @@
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash } from "react-icons/hi2";
 import styled from "styled-components";
 import { useDeleteTruck } from "./useDeleteTruck";
 import CreateTruckForm from "./CreateTruckForm";
 import Modal from "../../ui/Modal";
 import Menus from "../../ui/Menus";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useCreateTruck } from "./useCreateTruck";
 import Table from "../../ui/Table";
 import { getStatusDate } from "../../utils/helpers";
 
 const Img = styled.img`
   display: block;
   width: 6.4rem;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 3 / 2.5;
   object-fit: cover;
   object-position: center;
   transform: scale(1.5) translateX(-7px);
@@ -39,7 +38,6 @@ const OperationsCardInsurance = styled.div`
 
 function TruckRow({ truck }) {
   const { isDeleting, deleteTruck } = useDeleteTruck();
-  const { createTruck, isCreating } = useCreateTruck();
 
   const {
     id: truckId,
@@ -52,19 +50,6 @@ function TruckRow({ truck }) {
     operationsCard,
     insurance,
   } = truck;
-
-  function handleDuplicate() {
-    createTruck({
-      licensePlate: `Copy of ${licensePlate}`,
-      image,
-      capacity,
-      year,
-      hp,
-      traction,
-      operationsCard,
-      insurance,
-    });
-  }
 
   return (
     <Table.Row role="row">
@@ -86,14 +71,6 @@ function TruckRow({ truck }) {
             <Menus.Toggle id={truckId} />
 
             <Menus.List id={truckId}>
-              <Menus.Button
-                icon={<HiSquare2Stack />}
-                onClick={handleDuplicate}
-                disabled={isCreating}
-              >
-                Duplicate
-              </Menus.Button>
-
               <Modal.Open opens="edit-truck-form">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

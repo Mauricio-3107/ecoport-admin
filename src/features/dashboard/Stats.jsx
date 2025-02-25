@@ -1,52 +1,50 @@
 import {
+  HiOutlineArrowsRightLeft,
   HiOutlineBanknotes,
-  HiOutlineBriefcase,
-  HiOutlineCalendarDays,
   HiOutlineChartBar,
+  HiOutlineGlobeAlt,
 } from "react-icons/hi2";
 import Stat from "./Stat";
-import { formatCurrency } from "../../utils/helpers";
+import { formatCurrency, formatKilometers, formatRate } from "../../utils/helpers";
 
-function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
+function Stats({ trips, kilometers }) {
   // 1.
-  const numBookings = bookings.length;
+  const numTrips = trips.length;
 
   // 2.
-  const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
+  const sales = trips.reduce((acc, cur) => acc + cur.price, 0);
 
   // 3.
-  const checkins = confirmedStays.length;
+  // const kilometes = 0;
 
-  // 4.
-  const occupancyRate =
-    confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
-    (numDays * cabinCount);
+  // 4.$/km
+  const priceKmRate = formatRate(sales / kilometers);
 
   return (
     <>
       <Stat
-        title="Bookings"
+        title="Viajes"
         color="blue"
-        icon={<HiOutlineBriefcase />}
-        value={numBookings}
+        icon={<HiOutlineArrowsRightLeft />}
+        value={numTrips}
       />
       <Stat
-        title="Sales"
+        title="Ventas"
         color="green"
         icon={<HiOutlineBanknotes />}
         value={formatCurrency(sales)}
       />
       <Stat
-        title="Check ins"
+        title="Kilometros"
         color="indigo"
-        icon={<HiOutlineCalendarDays />}
-        value={checkins}
+        icon={<HiOutlineGlobeAlt />}
+        value={formatKilometers(kilometers)}
       />
       <Stat
-        title="Ocuupancy rate"
+        title="Tasa ventas / Km"
         color="yellow"
         icon={<HiOutlineChartBar />}
-        value={Math.round(occupancyRate * 100) + "%"}
+        value={priceKmRate}
       />
     </>
   );
