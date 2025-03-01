@@ -29,10 +29,15 @@ const LicenseNumber = styled.div`
   font-weight: 600;
 `;
 
-const PhoneNumber = styled.div`
+const PhoneNumberWhatssapLink = styled.a`
   font-family: "Sono";
   font-weight: 500;
   color: var(--color-green-700);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const LicensePlate = styled.div`
@@ -85,7 +90,14 @@ function DriverRow({ driver, availableTrucks }) {
       <div></div>
       <FullName>{fullName}</FullName>
       <LicenseNumber>{licenseNumber}</LicenseNumber>
-      <PhoneNumber>{phoneNumber}</PhoneNumber>
+      <PhoneNumberWhatssapLink
+        href={`https://wa.me/${phoneNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {phoneNumber}
+      </PhoneNumberWhatssapLink>
+
       <LicensePlate>{licensePlate || <span>&mdash;</span>}</LicensePlate>
       <div>
         <Modal>

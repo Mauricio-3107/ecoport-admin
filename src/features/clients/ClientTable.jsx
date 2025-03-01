@@ -30,11 +30,11 @@ function ClientTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 0.3fr">
+      <Table columns="0.6fr 1.5fr 1fr 0.5fr 1.5fr 1fr 0.5fr 0.3fr">
         <Table.Header role="row">
           <div></div>
           <div>Nombre</div>
-          <div>Contacto</div>
+          <div>Encargado(a)</div>
           <div>Telefono</div>
           <div>Correo</div>
           <div>Ciudad</div>

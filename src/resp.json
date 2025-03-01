@@ -1,0 +1,53 @@
+[
+  {
+    "code": 0,
+    "data": [
+      {
+        "code": 0,
+        "imei": "867019050383035",
+        "status": "行驶",
+        "lng": "-67.056428",
+        "lat": "-17.978204",
+        "speed": 20,
+        "course": 282,
+        "accStatus": true,
+        "licenseNumber": "4707FKN",
+        "endTime": 1758937504,
+        "platformEndTime": 1758937504,
+        "activateTime": 1695775274,
+        "statusTimeDesc": "10秒",
+        "signalTime": 1740581736,
+        "gpsTime": 1740581736,
+        "positionType": "GPS",
+        "address": "Oruro, Bolivia",
+        "isWireless": 0
+      }
+    ]
+  },
+
+  {
+    "code": 0,
+    "data": [
+      {
+        "code": 0,
+        "imei": "867019050383035",
+        "status": "行驶",
+        "lng": "-67.069550",
+        "lat": "-17.976098",
+        "speed": 47,
+        "course": 281,
+        "accStatus": true,
+        "licenseNumber": "4707FKN",
+        "endTime": 1758937504,
+        "platformEndTime": 1758937504,
+        "activateTime": 1695775274,
+        "statusTimeDesc": "2分36秒",
+        "signalTime": 1740581887,
+        "gpsTime": 1740581887,
+        "positionType": "GPS",
+        "address": "Oruro, Bolivia",
+        "isWireless": 0
+      }
+    ]
+  }
+]

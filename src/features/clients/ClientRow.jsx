@@ -28,10 +28,34 @@ const ContactName = styled.div`
   font-weight: 600;
 `;
 
-const PhoneNumber = styled.div`
+const PhoneNumberWhatssapLink = styled.a`
   font-family: "Sono";
   font-weight: 500;
   color: var(--color-green-700);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const EmailLink = styled.a`
+  font-family: "Sono";
+  font-weight: 500;
+  color: var(--color-blue-700);
+  text-decoration: none;
+  display: block;
+  max-width: 100%; /* Ensures it doesn't exceed the column width */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevents wrapping to a new line */
+
+  &:hover {
+    text-decoration: underline;
+    overflow: visible; /* Show full text on hover */
+    white-space: normal; /* Allow wrapping */
+    word-break: break-all;
+  }
 `;
 
 function ClientRow({ client }) {
@@ -51,9 +75,15 @@ function ClientRow({ client }) {
       <Img src={image} />
       <Client>{name}</Client>
       <ContactName>{contactName}</ContactName>
-      <PhoneNumber>{phoneNumber}</PhoneNumber>
+      <PhoneNumberWhatssapLink
+        href={`https://wa.me/${phoneNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {phoneNumber}
+      </PhoneNumberWhatssapLink>
 
-      <div>{email}</div>
+      <EmailLink href={`mailto:${email}`}>{email}</EmailLink>
       <div>{city}</div>
       <div>{type}</div>
       <div>
