@@ -15,24 +15,32 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-const MySelect = React.forwardRef(({ options, label, ...props }, ref) => {
-  const finalOptions = [
-    {
-      value: "",
-      label: `Selecciona ${label}`,
-    },
-    ...options,
-  ];
-  return (
-    <StyledSelect ref={ref} {...props}>
-      {finalOptions.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </StyledSelect>
-  );
-});
+const MySelect = React.forwardRef(
+  ({ selectLabel=true, options, label, ...props }, ref) => {
+    let finalOptions;
+    if (selectLabel === true) {
+      finalOptions = [
+        {
+          value: "",
+          label: `Selecciona ${label}`,
+        },
+        ...options,
+      ];
+    } else {
+      finalOptions = [...options];
+    }
+
+    return (
+      <StyledSelect ref={ref} {...props}>
+        {finalOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </StyledSelect>
+    );
+  }
+);
 
 // Add display name for debugging and ESLint
 MySelect.displayName = "MySelect";

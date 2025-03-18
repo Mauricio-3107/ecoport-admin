@@ -37,7 +37,7 @@ function TruckTable() {
           <div>Placa</div>
           <div>Tarjeta de Operaciones</div>
           <div>Seguro</div>
-          <div>Capacidad (kg)</div>
+          <div>Tara (kg)</div>
           <div>Tracción</div>
           <div>Año</div>
           <div>HP</div>

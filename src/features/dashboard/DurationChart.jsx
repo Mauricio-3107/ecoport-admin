@@ -17,7 +17,7 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
+  grid-column: 1 / span 2;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -30,46 +30,87 @@ const ChartBox = styled.div`
 
 const startDataLight = [
   {
-    duration: "1 night",
-    value: 0,
-    color: "#ef4444",
+    duration: "3147 FHD",
+    value: 1,
+    color: "#b91c1c", // Deep Red (Power, urgency)
   },
   {
-    duration: "2 nights",
+    duration: "3458 XLN",
     value: 0,
-    color: "#f97316",
+    color: "#ea580c", // Burnt Orange (Visibility, energy)
   },
   {
-    duration: "3 nights",
+    duration: "4016 LBN",
     value: 0,
-    color: "#eab308",
+    color: "#facc15", // Highway Yellow (Caution, visibility)
   },
   {
-    duration: "4-5 nights",
+    duration: "4271 KRS",
     value: 0,
-    color: "#84cc16",
+    color: "#15803d", // Deep Green (Stability, trucking culture)
   },
   {
-    duration: "6-7 nights",
-    value: 0,
-    color: "#22c55e",
+    duration: "4476 HDE",
+    value: 1,
+    color: "#065f46", // Dark Teal Green (Strong, industrial)
   },
   {
-    duration: "8-14 nights",
-    value: 0,
-    color: "#14b8a6",
+    duration: "4781 IXN",
+    value: 1,
+    color: "#2563eb", // Trucking Blue (Trust, logistics)
   },
   {
-    duration: "15-21 nights",
-    value: 0,
-    color: "#3b82f6",
+    duration: "4707 FKN",
+    value: 1,
+    color: "#1e3a8a", // Navy Blue (Reliability, professionalism)
   },
   {
-    duration: "21+ nights",
+    duration: "4820 XIN",
+    value: 1,
+    color: "#525252", // Dark Gray (Strength, industry)
+  },
+  {
+    duration: "5207 LUE",
+    value: 1,
+    color: "#71717a", // Steel Gray (Heavy-duty, toughness)
+  },
+  {
+    duration: "5255 DSD",
+    value: 1,
+    color: "#0f172a", // Midnight Blue (Solid, corporate)
+  },
+  {
+    duration: "5255 DTG",
+    value: 1,
+    color: "#eab308", // Safety Yellow (Visibility, trucking signs)
+  },
+  {
+    duration: "5570 FDC",
+    value: 1,
+    color: "#991b1b", // Dark Red (Strength, urgency)
+  },
+  {
+    duration: "5570 FCY",
+    value: 1,
+    color: "#3730a3", // Deep Indigo (Powerful, premium feel)
+  },
+  {
+    duration: "5608 FDX",
     value: 0,
-    color: "#a855f7",
+    color: "#3f3f46", // Charcoal Gray (Rugged, dependable)
+  },
+  {
+    duration: "5730 XGP",
+    value: 0,
+    color: "#d97706", // Dark Amber (Bold, heavy-duty)
+  },
+  {
+    duration: "6005 DTR",
+    value: 0,
+    color: "#1c1917", // Asphalt Black (Road, trucking industry)
   },
 ];
+
 
 const startDataDark = [
   {
@@ -141,14 +182,17 @@ function prepareData(startData, stays) {
   return data;
 }
 
-function DurationChart({ confirmedStays }) {
+function DurationChart({ confirmedStays, todayKilometers }) {
+  console.log(confirmedStays.at(0));
+
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
 
   return (
     <ChartBox>
-      <Heading as="h2">Stay duration summary</Heading>
+      <Heading as="h2">Actividad de Hoy</Heading>
+      <Heading as="h4">{todayKilometers}</Heading>
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie

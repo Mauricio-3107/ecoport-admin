@@ -1,10 +1,11 @@
 import Filter from "../../ui/Filter";
 
-function DashboardFilter() {
+function PerformanceTrucksFilter() {
   return (
     <Filter
       filterField="last"
       options={[
+        { value: "Today", label: "Today" },
         { value: "7", label: "Last 7 days" },
         { value: "30", label: "Last 30 days" },
       ]}
@@ -12,4 +13,4 @@ function DashboardFilter() {
   );
 }
 
-export default DashboardFilter;
+export default PerformanceTrucksFilter;

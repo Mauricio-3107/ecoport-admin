@@ -1,6 +1,6 @@
 import {
   HiOutlineCheckCircle,
-  HiOutlineExclamationTriangle,
+  HiOutlineExclamationCircle,
 } from "react-icons/hi2";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
@@ -49,7 +49,7 @@ function UpdateCompanyForm() {
           getStatusDate(seprecExtra) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(seprecExtra)}
@@ -69,7 +69,7 @@ function UpdateCompanyForm() {
           getStatusDate(seprec) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(seprec)}
@@ -89,7 +89,7 @@ function UpdateCompanyForm() {
           getStatusDate(ocassionalDocumentExtra) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(ocassionalDocumentExtra)}
@@ -109,7 +109,7 @@ function UpdateCompanyForm() {
           getStatusDate(ocassionalDocument) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(ocassionalDocument)}
@@ -129,7 +129,7 @@ function UpdateCompanyForm() {
           getStatusDate(expirationTokenExtra) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(expirationTokenExtra)}
@@ -149,7 +149,7 @@ function UpdateCompanyForm() {
           getStatusDate(expirationToken) === "green" ? (
             <HiOutlineCheckCircle />
           ) : (
-            <HiOutlineExclamationTriangle />
+            <HiOutlineExclamationCircle />
           )
         }
         color={getStatusDate(expirationToken)}

@@ -17,7 +17,7 @@ const StyledToday = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  grid-column: 1 / span 2;
+  grid-column: 3 / span 2;
   padding-top: 2.4rem;
 `;
 

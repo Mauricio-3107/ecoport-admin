@@ -1,6 +1,8 @@
 import {
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
+  HiOutlineChartBar,
+  HiOutlineClipboard,
   HiOutlineCog6Tooth,
   HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
@@ -120,6 +122,18 @@ function MainNav() {
           <StyledNavLink to="/company">
             <HiOutlineDocumentText />
             <span>Company</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/pickup">
+            <HiOutlineClipboard />
+            <span>Pickup</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/performanceTrucks">
+            <HiOutlineChartBar />
+            <span>Performance</span>
           </StyledNavLink>
         </li>
       </NavList>

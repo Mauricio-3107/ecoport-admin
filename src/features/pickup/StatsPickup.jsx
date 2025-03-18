@@ -4,7 +4,7 @@ import {
   HiOutlineChartBar,
   HiOutlineGlobeAlt,
 } from "react-icons/hi2";
-import Stat from "./Stat";
+import StatPickup from "./StatPickup";
 import { formatCurrency, formatKilometers, formatRate } from "../../utils/helpers";
 
 function Stats({ trips, kilometers }) {
@@ -19,25 +19,25 @@ function Stats({ trips, kilometers }) {
 
   return (
     <>
-      <Stat
-        title="Viajes"
+      <StatPickup
+        title="Placa"
         color="blue"
         icon={<HiOutlineArrowsRightLeft />}
         value={numTrips}
       />
-      <Stat
+      <StatPickup
         title="Ventas"
         color="green"
         icon={<HiOutlineBanknotes />}
         value={formatCurrency(sales)}
       />
-      <Stat
+      <StatPickup
         title="Kilometros"
         color="indigo"
         icon={<HiOutlineGlobeAlt />}
         value={formatKilometers(kilometers)}
       />
-      <Stat
+      <StatPickup
         title="Tasa ventas / Km"
         color="yellow"
         icon={<HiOutlineChartBar />}

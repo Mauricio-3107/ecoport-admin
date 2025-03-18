@@ -6,7 +6,7 @@ export async function getTrips({ filter, sortBy, page }) {
   let query = supabase
     .from("trips")
     .select(
-      "id, tripType, origin, destination, startDate, price, truckDriverAssignments(id, trucks(licensePlate), drivers(fullName)), clients(id, name)",
+      "id, tripType, origin, destination, startDate, price, cargoType, cargoWeight, containerType, truckDriverAssignments(id, trucks(licensePlate), drivers(fullName)), clients(id, name)",
       { count: "exact" }
     );
 
@@ -66,9 +66,12 @@ export async function deleteTrip(id) {
 
 // Returns all TRIPS that were created after the given date. Useful to get bookings created in the last 30 days, for example.
 export async function getTripsAfterDate(date) {
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("trips")
-    .select("startDate, price")
+    .select(
+      "startDate, price, cargoWeight, truckDriverAssignments(id, trucks(licensePlate, traction, tare), drivers(fullName))",
+      { count: "exact" }
+    )
     .gte("startDate", date)
     .lte("startDate", getToday({ end: true }));
 
@@ -77,5 +80,5 @@ export async function getTripsAfterDate(date) {
     throw new Error("Trips could not get loaded");
   }
 
-  return data;
+  return { data, count };
 }

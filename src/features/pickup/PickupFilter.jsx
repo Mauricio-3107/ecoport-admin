@@ -1,6 +1,6 @@
 import Filter from "../../ui/Filter";
 
-function DashboardFilter() {
+function PickupFilter() {
   return (
     <Filter
       filterField="last"
@@ -12,4 +12,4 @@ function DashboardFilter() {
   );
 }
 
-export default DashboardFilter;
+export default PickupFilter;

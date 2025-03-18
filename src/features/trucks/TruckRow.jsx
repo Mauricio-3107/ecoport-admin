@@ -24,7 +24,7 @@ const LicensePlate = styled.div`
   font-family: "Sono";
 `;
 
-const Capacity = styled.div`
+const Tare = styled.div`
   font-family: "Sono";
   font-weight: 600;
 `;
@@ -43,7 +43,7 @@ function TruckRow({ truck }) {
     id: truckId,
     licensePlate,
     image,
-    capacity,
+    tare,
     year,
     hp,
     traction,
@@ -61,7 +61,7 @@ function TruckRow({ truck }) {
       <OperationsCardInsurance status={getStatusDate(insurance)}>
         {insurance.split("T")[0]}
       </OperationsCardInsurance>
-      <Capacity>{capacity}</Capacity>
+      <Tare>{tare}</Tare>
       <div>{traction}</div>
       <div>{year}</div>
       <div>{hp}</div>

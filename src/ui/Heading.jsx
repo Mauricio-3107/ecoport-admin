@@ -1,10 +1,5 @@
 import styled, { css } from "styled-components";
 
-// const test = css`
-//   text-align: center;
-//   ${10 > 5 && "background-color: yellow"}
-// `;
-
 const Heading = styled.h1`
   ${(props) =>
     props.as === "h1" &&
@@ -33,6 +28,14 @@ const Heading = styled.h1`
       font-size: 3rem;
       font-weight: 600;
       text-align: center;
+    `}
+
+    ${(props) =>
+    props.as === "h5" &&
+    css`
+      font-size: 2rem;
+      font-weight: 500;
+      font-style: italic;
     `}
     
   line-height: 1.4;

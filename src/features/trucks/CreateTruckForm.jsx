@@ -104,12 +104,12 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Capacidad" error={errors?.capacity?.message}>
+      <FormRow label="Tara" error={errors?.tare?.message}>
         <Input
           type="text"
           disabled={isWorking}
-          id="capacity"
-          {...register("capacity", {
+          id="tare"
+          {...register("tare", {
             required: "This field is required",
           })}
         />

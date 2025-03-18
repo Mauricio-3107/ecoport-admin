@@ -31,12 +31,22 @@ function TripRow({ trip, truckDriverAssignments, clientsObject }) {
     origin,
     destination,
     startDate,
+    cargoType,
+    cargoWeight,
+    containerType,
     clients: { name },
     truckDriverAssignments: {
       trucks: { licensePlate },
       drivers: { fullName },
     },
   } = trip;
+
+  const containerWeights = { 20: 2300, 40: 3700 };
+
+  const totalCargoWeight =
+    cargoType === "consolidado"
+      ? Number(cargoWeight) - containerWeights[containerType]
+      : Number(cargoWeight);
 
   const tripToEdit = {
     id: trip.id,
@@ -47,6 +57,9 @@ function TripRow({ trip, truckDriverAssignments, clientsObject }) {
     startDate: trip.startDate.split("T")[0],
     client: trip.clients.id,
     price: trip.price,
+    cargoType: trip.cargoType,
+    cargoWeight: totalCargoWeight,
+    containerType: trip.containerType,
   };
 
   return (

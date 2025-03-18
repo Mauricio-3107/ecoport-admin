@@ -21,6 +21,8 @@ import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import Pickup from "./pages/Pickup";
+import PerformanceTrucks from "./pages/PerformanceTrucks";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +62,8 @@ function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="company" element={<Company />} />
               <Route path="account" element={<Account />} />
+              <Route path="pickup" element={<Pickup />} />
+              <Route path="performanceTrucks" element={<PerformanceTrucks />} />
             </Route>
 
             <Route path="login" element={<Login />} />

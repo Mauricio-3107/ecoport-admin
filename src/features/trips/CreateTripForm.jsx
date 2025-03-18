@@ -22,7 +22,7 @@ function CreateTripForm({
   const { id: editId, ...editValues } = tripToEdit;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState, reset, watch } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
@@ -56,9 +56,22 @@ function CreateTripForm({
     }));
 
   function onSubmit(data) {
+    const containerWeights = { 20: 2300, 40: 3700 };
+
+    const totalCargoWeight =
+      data.cargoType === "consolidado"
+        ? Number(data.cargoWeight) + containerWeights[data.containerType]
+        : Number(data.cargoWeight);
+
+    const tripData = {
+      ...data,
+      cargoWeight: totalCargoWeight, // Use the calculated weight
+      tripType,
+    };
+
     if (isEditSession)
       editTrip(
-        { newTripData: { ...data, tripType: tripType }, id: editId },
+        { newTripData: tripData, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -67,15 +80,12 @@ function CreateTripForm({
         }
       );
     else
-      createTrip(
-        { ...data, tripType: tripType },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        }
-      );
+      createTrip(tripData, {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      });
   }
 
   return (
@@ -119,6 +129,61 @@ function CreateTripForm({
         />
       </FormRow>
 
+      <FormRow label="Cliente" error={errors?.client?.message}>
+        <MySelect
+          id="client"
+          options={currentClients}
+          label="cliente"
+          type="white"
+          {...register("client", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+
+      <FormRow label="Carga" error={errors?.cargoType?.message}>
+        <MySelect
+          id="cargoType"
+          options={[
+            { value: "consolidado", label: "Consolidado" },
+            { value: "desconsolidado", label: "Desconsolidado" },
+          ]}
+          label="tipo de carga"
+          type="white"
+          {...register("cargoType", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+
+      <FormRow label="Peso bruto (kg)" error={errors?.cargoWeight?.message}>
+        <Input
+          type="number"
+          id="cargoWeight"
+          {...register("cargoWeight", {
+            required: "This field is required",
+            min: { value: 1, message: "Debe ser positivo" },
+          })}
+        />
+      </FormRow>
+
+      {watch("cargoType") === "consolidado" && (
+        <FormRow label="Container" error={errors?.containerType?.message}>
+          <MySelect
+            id="containerType"
+            options={[
+              { value: "20", label: "20'" },
+              { value: "40", label: "40'" },
+            ]}
+            label="tipo de contenedor"
+            type="white"
+            {...register("containerType", {
+              required: "Container type is required for Consolidado",
+            })}
+          />
+        </FormRow>
+      )}
+
       <FormRow label="Inicio viaje" error={errors?.startDate?.message}>
         <Input
           type="date"
@@ -139,18 +204,6 @@ function CreateTripForm({
               value: 1,
               message: "Flete debe ser positivo",
             },
-          })}
-        />
-      </FormRow>
-
-      <FormRow label="Cliente" error={errors?.client?.message}>
-        <MySelect
-          id="client"
-          options={currentClients}
-          label="cliente"
-          type="white"
-          {...register("client", {
-            required: "This field is required",
           })}
         />
       </FormRow>
