@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Heading from "./Heading";
 import { useDarkMode } from "../context/DarkModeContext";
+import { formatRuntime } from "../utils/helpers";
 
 const ChartBox = styled.div`
   background-color: ${(props) =>
@@ -41,14 +42,6 @@ const NoDataMessage = styled.p`
   font-size: 1.6rem;
   color: ${(props) => (props.$isDarkMode ? "#e5e7eb" : "#374151")};
 `;
-
-function formatRuntime(seconds) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  if (hours === 0) return `${minutes} min`; // Show only minutes if < 1 hour
-  return `${hours}h ${minutes}m`; // Show hours and minutes normally
-}
 
 function convertSecondsToHours(seconds) {
   return (seconds / 3600).toFixed(2); // Convert to hours with 2 decimal places

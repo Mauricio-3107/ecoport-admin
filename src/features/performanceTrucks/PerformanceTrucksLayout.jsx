@@ -22,7 +22,7 @@ function PerformanceTrucksLayout() {
   // searchParams
   const [searchParams] = useSearchParams();
 
-  //Filer value. It is already formatted on the desired value property
+  //Filter value. It is already formatted on the desired value property
   const filterValuePeriod = !searchParams.get("last")
     ? "Today"
     : searchParams.get("last");

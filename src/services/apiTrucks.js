@@ -1,7 +1,10 @@
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getTrucks() {
-  const { data, error } = await supabase.from("trucks").select("*");
+  const { data, error } = await supabase
+    .from("trucks")
+    .select("*")
+    .eq("isActive", true);
 
   if (error) {
     console.error(error);
@@ -42,7 +45,7 @@ export async function createEditTruck(newTruck, id) {
   // b) edit
   if (id) query = query.update({ ...newTruck, image: imagePath }).eq("id", id);
 
-  const { data, error } = await query.select().single();
+  const { data: truck, error } = await query.select().single();
 
   if (error) {
     console.error(error);
@@ -50,26 +53,50 @@ export async function createEditTruck(newTruck, id) {
   }
 
   // 2. Upload the image
-  if (hasImagePath) return data;
+  if (hasImagePath) return truck;
 
   const { error: storageError } = await supabase.storage
     .from("truck-images")
     .upload(imageName, newTruck.image);
 
-  // 3. Delete the cabin if there was an error uploading the image
+  // 3. Delete the truck if there was an error uploading the image
   if (storageError) {
-    await supabase.from("trucks").delete().eq("id", data.id);
+    await supabase.from("trucks").delete().eq("id", truck.id);
     console.error(storageError);
     throw new Error(
       "La imagen del camión no pudo cargar y el camión no fue creado"
     );
   }
 
-  return data;
+  // 4. Automatically add the truck to the fuelConsumption table
+  const { error: fuelError } = await supabase.from("fuelConsumption").insert([
+    {
+      truckId: truck.id, // Reference the newly created truck
+      litersFueled: 0, // Default value (can be updated later)
+      odometerKm: 0, // Default value
+      fuelEfficiency: 0, // Default value
+      location: "", // Default placeholder
+    },
+  ]);
+
+  if (fuelError) {
+    console.error(
+      "Error al agregar el camión a la tabla de combustible:",
+      fuelError
+    );
+    throw new Error(
+      "El camión fue creado pero no pudo ser agregado a la tabla de combustible"
+    );
+  }
+
+  return truck;
 }
 
 export async function deleteTruck(id) {
-  const { data, error } = await supabase.from("trucks").delete().eq("id", id);
+  const { data, error } = await supabase
+    .from("trucks")
+    .update({ isActive: false })
+    .eq("id", id);
 
   if (error) {
     console.error(error);

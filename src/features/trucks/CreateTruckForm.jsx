@@ -45,7 +45,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
       );
     else
       createTruck(
-        { ...data, image: image },
+        { ...data, image: image, isActive: true },
         {
           onSuccess: () => {
             reset();

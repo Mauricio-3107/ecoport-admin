@@ -1,8 +1,8 @@
+import { BsFuelPump } from "react-icons/bs";
 import {
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
   HiOutlineChartBar,
-  HiOutlineClipboard,
   HiOutlineCog6Tooth,
   HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
@@ -12,6 +12,7 @@ import {
   HiOutlineUser,
   HiOutlineUsers,
 } from "react-icons/hi2";
+import { LiaTruckPickupSolid } from "react-icons/lia";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -126,8 +127,14 @@ function MainNav() {
         </li>
         <li>
           <StyledNavLink to="/pickup">
-            <HiOutlineClipboard />
+            <LiaTruckPickupSolid />
             <span>Pickup</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/fuel">
+            <BsFuelPump />
+            <span>Fuel</span>
           </StyledNavLink>
         </li>
         <li>

@@ -1,50 +1,49 @@
+import styled from "styled-components";
 import {
-  HiOutlineArrowsRightLeft,
-  HiOutlineBanknotes,
-  HiOutlineChartBar,
+  HiOutlineBookmarkSquare,
+  HiOutlineClock,
   HiOutlineGlobeAlt,
+  HiOutlineMapPin,
 } from "react-icons/hi2";
+import { formatKilometers, formatRuntime } from "../../utils/helpers";
 import StatPickup from "./StatPickup";
-import { formatCurrency, formatKilometers, formatRate } from "../../utils/helpers";
 
-function Stats({ trips, kilometers }) {
-  // 1.
-  const numTrips = trips.length;
+const StatsBox = styled.div`
+  grid-column: 3 / span 2;
+  display: grid;
+  gap: 1.6rem;
+  align-items: center;
+`;
 
-  // 2.
-  const sales = trips.reduce((acc, cur) => acc + cur.price, 0);
-
-  // 3.
-  const priceKmRate = formatRate(sales / kilometers);
-
+function StatsPickup({ licensePlate, kilometers, runtime }) {
   return (
-    <>
+    <StatsBox>
       <StatPickup
-        title="Placa"
-        color="blue"
-        icon={<HiOutlineArrowsRightLeft />}
-        value={numTrips}
-      />
-      <StatPickup
-        title="Ventas"
-        color="green"
-        icon={<HiOutlineBanknotes />}
-        value={formatCurrency(sales)}
-      />
-      <StatPickup
-        title="Kilometros"
+        title="Kilómetros"
         color="indigo"
         icon={<HiOutlineGlobeAlt />}
         value={formatKilometers(kilometers)}
       />
       <StatPickup
-        title="Tasa ventas / Km"
+        title="Tiempo manejado"
         color="yellow"
-        icon={<HiOutlineChartBar />}
-        value={priceKmRate}
+        icon={<HiOutlineClock />}
+        value={formatRuntime(runtime)}
       />
-    </>
+      <StatPickup
+        title="Ubicación actual"
+        color="green"
+        icon={<HiOutlineMapPin />}
+        value={"Cochabamba"}
+      />
+      <StatPickup
+        title="Placa"
+        color="blue"
+        icon={<HiOutlineBookmarkSquare />}
+        value={licensePlate}
+      />
+    </StatsBox>
   );
 }
 
-export default Stats;
+export default StatsPickup;

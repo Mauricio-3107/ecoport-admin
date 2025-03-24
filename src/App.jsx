@@ -23,6 +23,8 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Pickup from "./pages/Pickup";
 import PerformanceTrucks from "./pages/PerformanceTrucks";
+import Fuel from "./pages/Fuel";
+import FuelTruckId from "./features/fuel/FuelTruckId";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,6 +66,8 @@ function App() {
               <Route path="account" element={<Account />} />
               <Route path="pickup" element={<Pickup />} />
               <Route path="performanceTrucks" element={<PerformanceTrucks />} />
+              <Route path="fuel" element={<Fuel />} />
+              <Route path="fuel/:truckId" element={<FuelTruckId />} />
             </Route>
 
             <Route path="login" element={<Login />} />

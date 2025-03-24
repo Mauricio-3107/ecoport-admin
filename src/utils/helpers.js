@@ -71,3 +71,11 @@ export function formatRate(rate) {
 export const formatKilometers = (value) =>
   new Intl.NumberFormat("de", { maximumFractionDigits: 2 }).format(value) +
   " km";
+
+export function formatRuntime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  if (hours === 0) return `${minutes} min`; // Show only minutes if < 1 hour
+  return `${hours}h ${minutes}m`; // Show hours and minutes normally
+}

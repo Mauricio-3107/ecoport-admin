@@ -55,7 +55,6 @@ function DriverTable() {
   const assignedTruckIds = new Set(
     truckDriverAssignments.map((assignment) => assignment.trucks.id)
   );
-  console.log(assignedTruckIds);
 
   const availableTrucks = allTrucks.filter(
     (truck) => !assignedTruckIds.has(truck.id)

@@ -1,11 +1,5 @@
 import supabase from "./supabase";
 
-// const { data, error } = await supabase.from("countries").select(`
-//   id,
-//   name,
-//   cities ( id, name )
-// `);
-
 export async function getDrivers() {
   const { data, error } = await supabase.from("drivers").select("*");
   if (error) {

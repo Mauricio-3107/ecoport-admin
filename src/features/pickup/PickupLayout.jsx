@@ -2,48 +2,53 @@ import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import StatsPickup from "./StatsPickup";
 // import SalesChart from "./SalesChart";
-import { useRecentTrips } from "./../dashboard/useRecentTrips";
-import { useTotalMileageTrucks } from "./../dashboard/useTotalMileageTrucks";
 import { useSearchParams } from "react-router-dom";
+import { usePickupMileageRuntime } from "./usePickupMileageRuntime";
+import PickupImage from "./PickupImage";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   /* grid-template-rows: auto auto 34rem; */
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto;
   gap: 2.4rem;
 `;
 
 function PickupLayout() {
-  // Placeholder
-  // const { isLoading: isLoading2, confirmedStays } = useRecentStays();
-
-  // Recent trips
-  const { trips, isLoading: isLoadingTrips } = useRecentTrips();
-
-  // Total Mileage trucks
-  const { totalMileageTrucks, isLoading: isLoadingTotalMileage } =
-    useTotalMileageTrucks();
-
   // searchParams
   const [searchParams] = useSearchParams();
 
-  // Loading states
-  if (isLoadingTrips || isLoadingTotalMileage) return <Spinner />;
+  //Filter value. It is already formatted on the desired value property
+  const filterValuePeriod = !searchParams.get("last")
+    ? "Today"
+    : searchParams.get("last");
 
-  //Filer value
-  const filterValue = !searchParams.get("last")
-    ? 7
-    : Number(searchParams.get("last"));
+  // Mileage and runtime
+  const { isLoading, pickupMileageRuntime } = usePickupMileageRuntime();
 
-  let pastKilometers;
-  if (filterValue === 7) pastKilometers = totalMileageTrucks.last7Days;
-  if (filterValue === 30) pastKilometers = totalMileageTrucks.last30Days;
+  const periodMilesPropertyPickup =
+    filterValuePeriod === "Today"
+      ? `miles${filterValuePeriod}`
+      : `milesLast${filterValuePeriod}Days`;
+
+  const periodRuntimePropertyPickup =
+    filterValuePeriod === "Today"
+      ? `runtime${filterValuePeriod}`
+      : `runtimeLast${filterValuePeriod}Days`;
+
+  if (isLoading) return <Spinner />;
+
+  const kilometers = pickupMileageRuntime[periodMilesPropertyPickup];
+  const runtime = pickupMileageRuntime[periodRuntimePropertyPickup];
 
   return (
     <StyledDashboardLayout>
-      <StatsPickup trips={trips} kilometers={pastKilometers} />
-      {/* <SalesChart trips={trips} numDays={numDays} /> */}
+      <PickupImage imageUrl={pickupMileageRuntime.image} />
+      <StatsPickup
+        licensePlate={pickupMileageRuntime.licensePlate}
+        kilometers={kilometers}
+        runtime={runtime}
+      />
     </StyledDashboardLayout>
   );
 }

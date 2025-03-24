@@ -97,9 +97,6 @@ function formatTrucksDocs(trucksData) {
 }
 
 function DashboardLayout() {
-  // Placeholder
-  // const { isLoading: isLoading2, confirmedStays } = useRecentStays();
-
   // Recent trips
   const { trips, isLoading: isLoadingTrips, numDays } = useRecentTrips();
 
@@ -152,14 +149,14 @@ function DashboardLayout() {
         trucksMileageRuntime={trucksMileageRuntime}
         totalMileage={totalMileageTrucks}
         title="Actividad Hoy (Km recorridos)"
-        height={300}
+        height={400}
         period="Today"
       />
 
       <TrucksDrivenRuntimeChart
         trucksMileageRuntime={trucksMileageRuntime}
         title="Actividad de hoy (Tiempo recorrido)"
-        height={300}
+        height={400}
         period="Today"
       />
 
