@@ -143,6 +143,12 @@ function MainNav() {
             <span>Performance</span>
           </StyledNavLink>
         </li>
+        <li>
+          <StyledNavLink to="/maintenance">
+            <HiOutlineCog6Tooth />
+            <span>Maintenance</span>
+          </StyledNavLink>
+        </li>
       </NavList>
     </nav>
   );

@@ -25,6 +25,8 @@ import Pickup from "./pages/Pickup";
 import PerformanceTrucks from "./pages/PerformanceTrucks";
 import Fuel from "./pages/Fuel";
 import FuelTruckId from "./features/fuel/FuelTruckId";
+import Maintenance from "./pages/Maintenance";
+import MaintenanceTruckId from "./pages/MaintenanceTruckId";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +37,7 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {  
+function App() {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
@@ -68,6 +70,8 @@ function App() {
               <Route path="performanceTrucks" element={<PerformanceTrucks />} />
               <Route path="fuel" element={<Fuel />} />
               <Route path="fuel/:truckId" element={<FuelTruckId />} />
+              <Route path="maintenance" element={<Maintenance />} />
+              <Route path="maintenance/:truckId" element={<MaintenanceTruckId />} />
             </Route>
 
             <Route path="login" element={<Login />} />

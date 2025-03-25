@@ -28,6 +28,7 @@ function LogFuelForm({ id, licensePlate, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit)}
       type={onCloseModal ? "modal" : "regular"}
     >
+      {licensePlate}
       <FormRow label="Litros" error={errors?.litersFueled?.message}>
         <Input
           type="number"
