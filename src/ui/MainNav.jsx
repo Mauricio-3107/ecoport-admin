@@ -12,7 +12,7 @@ import {
   HiOutlineUser,
   HiOutlineUsers,
 } from "react-icons/hi2";
-import { LiaTruckPickupSolid } from "react-icons/lia";
+import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -147,6 +147,12 @@ function MainNav() {
           <StyledNavLink to="/maintenance">
             <HiOutlineCog6Tooth />
             <span>Maintenance</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/oil">
+            <LiaOilCanSolid />
+            <span>Oil</span>
           </StyledNavLink>
         </li>
       </NavList>

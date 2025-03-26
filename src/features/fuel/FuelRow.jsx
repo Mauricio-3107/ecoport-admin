@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
-import { IoColorFillOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { HiOutlinePresentationChartLine } from "react-icons/hi2";
 
 const Img = styled.img`
   display: block;
@@ -62,7 +62,7 @@ function FuelRow({ fuelTruck }) {
           <Menus.Toggle id={truckId} />
           <Menus.List id={truckId}>
             <Menus.Button
-              icon={<IoColorFillOutline />}
+              icon={<HiOutlinePresentationChartLine />}
               onClick={() => navigate(`/fuel/${truckId}`)}
             >
               See history consumption

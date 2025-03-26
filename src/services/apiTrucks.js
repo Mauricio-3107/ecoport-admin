@@ -88,6 +88,28 @@ export async function createEditTruck(newTruck, id) {
       "El camión fue creado pero no pudo ser agregado a la tabla de combustible"
     );
   }
+  
+  // 5. Automatically add the truck to the oil table
+  const { error: oilError } = await supabase.from("oil").insert([
+    {
+      truckId: truck.id, // Reference the newly created truck
+      name: "", // Default value (can be updated later)
+      odometerKm: 0, // Default value
+      lastKm: 0, // Default value
+      nextKm: 0, // Default value
+      date: "", // Default value
+    },
+  ]);
+
+  if (oilError) {
+    console.error(
+      "Error al agregar el camión a la tabla de aceite:",
+      fuelError
+    );
+    throw new Error(
+      "El camión fue creado pero no pudo ser agregado a la tabla de aceite"
+    );
+  }
 
   return truck;
 }
