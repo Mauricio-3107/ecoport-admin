@@ -62,7 +62,7 @@ const LicensePlate = styled.div`
 
 const Button = styled.button`
   background-color: ${(props) =>
-    props.primary
+    props.$primary
       ? props.$isDarkMode
         ? "#4CAF50" // 4CAF50
         : "#16d71d" // 16d71d
@@ -100,7 +100,7 @@ function TruckCard({ truck }) {
             <LicensePlate $isDarkMode={isDarkMode}>{licensePlate}</LicensePlate>
             <Modal.Open opens="add-maintenance-form">
               <Button
-                primary
+                $primary
                 $isDarkMode={isDarkMode}
                 onClick={() => console.log("Adding new repair")}
               >

@@ -14,13 +14,27 @@ function MaintenanceTable() {
   if (!maintenanceTruck.length)
     return <Empty resourceName="Truck maintenance" />;
 
+  // 1. Filtering
+  const filterValue = searchParams.get("maintenanceKind") || "all";
+
+  let filteredMaintenance;
+  if (filterValue === "all") filteredMaintenance = maintenanceTruck;
+  if (filterValue === "repair")
+    filteredMaintenance = maintenanceTruck.filter(
+      (maintenance) => maintenance.maintenanceKind === "repair"
+    );
+  if (filterValue === "spare")
+    filteredMaintenance = maintenanceTruck.filter(
+      (maintenance) => maintenance.maintenanceKind === "spare"
+    );
+
   // Sorting
-  const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";
+  const sortRaw = searchParams.get("sortBy") || "date-desc";
   const [field, direction] = sortRaw.split("-");
 
   const modifier = direction === "asc" ? 1 : -1;
   // const sortedTrucks = trucks.sort((a, b) => (a[field] - b[field]) * modifier);
-  const sortedMaintenance = maintenanceTruck.sort((a, b) => {
+  const sortedMaintenance = filteredMaintenance.sort((a, b) => {
     if (typeof a[field] === "string" && typeof b[field] === "string") {
       // Use localeCompare for strings
       return a[field].localeCompare(b[field]) * modifier;
