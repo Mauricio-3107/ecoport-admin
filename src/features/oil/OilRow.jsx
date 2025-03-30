@@ -32,21 +32,21 @@ function OilRow({ oilTruck }) {
     lastKm,
     nextKm,
     odometerKm,
-    date,
+    oilDate,
     id: oilId,
     trucks: { licensePlate, image, id: truckId },
   } = oilTruck;
-  const oilToEdit = { id: oilId, name, lastKm, nextKm, odometerKm, date };
+  const oilToEdit = { id: oilId, name, lastKm, nextKm, odometerKm, oilDate };
 
   return (
     <Table.Row role="row">
       <Img src={image} alt={truckId} />
       <LicensePlate>{licensePlate}</LicensePlate>
       <div>{name ? name : <span>&mdash;</span>}</div>
-      <div>{date ? date?.split("T")[0] : <span>&mdash;</span>}</div>
+      <div>{oilDate ? oilDate?.split("T")[0] : <span>&mdash;</span>}</div>
       <div>{lastKm ? lastKm : <span>&mdash;</span>}</div>
       <NextKm>{nextKm ? nextKm : <span>&mdash;</span>}</NextKm>
-      <div>{odometerKm ? nextKm : <span>&mdash;</span>}</div>
+      <div>{odometerKm ? odometerKm : <span>&mdash;</span>}</div>
       <div>
         <Modal>
           <Menus.Menu>
@@ -58,11 +58,7 @@ function OilRow({ oilTruck }) {
             </Menus.List>
 
             <Modal.Window name="edit-oil">
-              <EditOilForm
-                oilToEdit={oilToEdit}
-                licensePlate={licensePlate}
-                truckId={truckId}
-              />
+              <EditOilForm oilToEdit={oilToEdit} licensePlate={licensePlate} />
             </Modal.Window>
           </Menus.Menu>
         </Modal>

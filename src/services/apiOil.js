@@ -4,7 +4,7 @@ export async function getOil() {
   const { data, error } = await supabase
     .from("oil")
     .select(
-      `id, lastKm, nextKm, odometerKm, name, date, trucks!inner(id, licensePlate, image, isActive)`
+      `id, lastKm, nextKm, odometerKm, name, oilDate, trucks!inner(id, licensePlate, image, isActive)`
     )
     .eq("trucks.isActive", true);
 

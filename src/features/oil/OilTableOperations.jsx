@@ -14,8 +14,8 @@ function OilTableOperations() {
             value: "licensePlate-desc",
             label: "Sort by plate (high first)",
           },
-          { value: "date-desc", label: "Sort by date (recent first)" },
-          { value: "date-asc", label: "Sort by date (earlier first)" },
+          { value: "oilDate-desc", label: "Sort by date (recent first)" },
+          { value: "oilDate-asc", label: "Sort by date (earlier first)" },
           { value: "lastKm-desc", label: "Sort by Km (high first)" },
           { value: "lastKm-asc", label: "Sort by Km (low first)" },
         ]}

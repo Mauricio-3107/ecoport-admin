@@ -13,7 +13,7 @@ const Container = styled.div`
   gap: 3rem;
 `;
 
-function EditOilForm({ oilToEdit, licensePlate, truckId, onCloseModal }) {
+function EditOilForm({ oilToEdit, licensePlate, onCloseModal }) {
   const { isEditing, editOil } = useEditOil();
   const { id: editId, ...editValues } = oilToEdit;
   const isEditSession = Boolean(editId);
@@ -22,7 +22,6 @@ function EditOilForm({ oilToEdit, licensePlate, truckId, onCloseModal }) {
     defaultValues: isEditSession
       ? {
           ...editValues,
-          date: editValues.date.split("T")[0],
         }
       : {},
   });
@@ -30,9 +29,9 @@ function EditOilForm({ oilToEdit, licensePlate, truckId, onCloseModal }) {
 
   function onSubmit(data) {
     const nextKm = Number(data?.lastKm) + 20000;
-    console.log({ ...data, truckId, nextKm });
+    console.log({ ...data, nextKm });
     editOil(
-      { editOil: { ...data, truckId, nextKm }, id: editId },
+      { editOil: { ...data, nextKm }, id: editId },
       {
         onSuccess: () => {
           reset();
@@ -60,7 +59,7 @@ function EditOilForm({ oilToEdit, licensePlate, truckId, onCloseModal }) {
           />
         </FormRow>
 
-        <FormRow label="Km cambio" error={errors?.lastKm?.message}>
+        <FormRow label="Kilometraje cambio" error={errors?.lastKm?.message}>
           <Input
             type="number"
             disabled={isEditing}
@@ -72,12 +71,12 @@ function EditOilForm({ oilToEdit, licensePlate, truckId, onCloseModal }) {
           />
         </FormRow>
 
-        <FormRow label="Fecha" error={errors?.date?.message}>
+        <FormRow label="Fecha y hora cambio" error={errors?.oilDate?.message}>
           <Input
-            type="date"
+            type="datetime-local"
             disabled={isEditing}
-            id="date"
-            {...register("date", {
+            id="oilDate"
+            {...register("oilDate", {
               required: "This field is required",
               validate: (value) =>
                 (value && value !== "") || "Please select a date",
