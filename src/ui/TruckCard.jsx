@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { useDarkMode } from "../../context/DarkModeContext";
 import { useNavigate } from "react-router-dom";
-import Modal from "../../ui/Modal";
-import CreateMaintenanceForm from "./CreateMaintenanceForm";
+
+import { useDarkMode } from "../context/DarkModeContext";
+import Modal from "./Modal";
 
 const StyledTruckCard = styled.div`
   position: relative;
@@ -82,7 +82,7 @@ const Button = styled.button`
   }
 `;
 
-function TruckCard({ truck }) {
+function TruckCard({ truck, resourceName, labelButton, form }) {
   const { isDarkMode } = useDarkMode(); // Get the current dark mode status
   const navigate = useNavigate();
   const { id: truckId, licensePlate, image } = truck;
@@ -98,29 +98,20 @@ function TruckCard({ truck }) {
         <Modal>
           <OverlayContainer>
             <LicensePlate $isDarkMode={isDarkMode}>{licensePlate}</LicensePlate>
-            <Modal.Open opens="add-maintenance-form">
-              <Button
-                $primary
-                $isDarkMode={isDarkMode}
-                onClick={() => console.log("Adding new repair")}
-              >
-                Agregar reparación
+            <Modal.Open opens={`add-${resourceName}-form`}>
+              <Button $primary $isDarkMode={isDarkMode}>
+                {labelButton}
               </Button>
             </Modal.Open>
             <Button
               $isDarkMode={isDarkMode}
-              onClick={() => navigate(`/maintenance/${truckId}`)}
+              onClick={() => navigate(`/${resourceName}/${truckId}`)}
             >
               Ver historial
             </Button>
           </OverlayContainer>
 
-          <Modal.Window name="add-maintenance-form">
-            <CreateMaintenanceForm
-              truckId={truck.id}
-              licensePlate={truck.licensePlate}
-            />
-          </Modal.Window>
+          <Modal.Window name={`add-${resourceName}-form`}>{form}</Modal.Window>
         </Modal>
       </StyledTruckCard>
     </>

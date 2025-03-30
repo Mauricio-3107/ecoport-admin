@@ -48,18 +48,3 @@ export async function deleteMaintenance(id) {
 
   return data;
 }
-
-export async function getLicensePlate(truckId) {
-  const { data, error } = await supabase
-    .from("trucks")
-    .select("licensePlate")
-    .eq("id", truckId)
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("License plate maintenance not found");
-  }
-
-  return data;
-}

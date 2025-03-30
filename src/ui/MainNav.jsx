@@ -7,12 +7,12 @@ import {
   HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
   HiOutlineHome,
-  HiOutlineHomeModern,
   HiOutlineTruck,
   HiOutlineUser,
   HiOutlineUsers,
 } from "react-icons/hi2";
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
+import { PiTireLight } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -75,12 +75,6 @@ function MainNav() {
           <StyledNavLink to="/bookings">
             <HiOutlineCalendarDays />
             <span>Bookings</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/cabins">
-            <HiOutlineHomeModern />
-            <span>Cabins</span>
           </StyledNavLink>
         </li>
         <li>
@@ -153,6 +147,12 @@ function MainNav() {
           <StyledNavLink to="/oil">
             <LiaOilCanSolid />
             <span>Oil</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/tyres">
+            <PiTireLight />
+            <span>Tyres</span>
           </StyledNavLink>
         </li>
       </NavList>

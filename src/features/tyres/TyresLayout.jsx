@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { useDarkMode } from "../../context/DarkModeContext";
 import TruckCard from "../../ui/TruckCard";
-import CreateMaintenanceForm from "./CreateMaintenanceForm";
+import CreateTyresForm from "./CreateTyresForm";
 
 const TrucksContainer = styled.div`
   display: grid;
@@ -14,7 +14,7 @@ const TrucksContainer = styled.div`
   color: ${(props) => (props.$isDarkMode ? "#f4f4f4" : "#333")};
 `;
 
-function MaintenanceLayout({ trucks }) {
+function TyresLayout({ trucks }) {
   const [searchParams] = useSearchParams();
   const { isDarkMode } = useDarkMode();
 
@@ -40,10 +40,10 @@ function MaintenanceLayout({ trucks }) {
         <TruckCard
           truck={truck}
           key={truck.id}
-          resourceName="maintenance"
-          labelButton="Agregar reparación"
+          resourceName="tyres"
+          labelButton="Registrar nuevo neúmatico"
           form={
-            <CreateMaintenanceForm
+            <CreateTyresForm
               truckId={truck.id}
               licensePlate={truck.licensePlate}
             />
@@ -54,4 +54,4 @@ function MaintenanceLayout({ trucks }) {
   );
 }
 
-export default MaintenanceLayout;
+export default TyresLayout;
