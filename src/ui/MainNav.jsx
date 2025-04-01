@@ -150,9 +150,9 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/tyres">
+          <StyledNavLink to="/tires">
             <PiTireLight />
-            <span>Tyres</span>
+            <span>Tires</span>
           </StyledNavLink>
         </li>
       </NavList>

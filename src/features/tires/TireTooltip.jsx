@@ -1,0 +1,547 @@
+import { useState } from "react";
+import { TireButton } from "../../ui/TireButton";
+import { TireInput } from "../../ui/TireInput";
+import { format } from "date-fns";
+import styled from "styled-components";
+import Heading from "../../ui/Heading";
+import {
+  HiMiniCalendar,
+  HiOutlineCurrencyDollar,
+  HiOutlinePaperAirplane,
+  HiOutlineTag,
+  HiOutlineXMark,
+  HiPencil,
+} from "react-icons/hi2";
+// import PropTypes from "prop-types";
+
+// Styled Components
+const TooltipContainer = styled.div`
+  position: absolute;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  z-index: 1000; /* Increase this to a higher value to ensure it appears on top */
+  width: 25rem;
+  left: ${(props) => props.$left};
+  top: ${(props) => props.$top};
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StatusIndicator = styled.div`
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  background-color: ${(props) =>
+    props.$status === "critical"
+      ? "hsl(0, 84%, 60%)"
+      : props.$status === "warning"
+      ? "hsl(40, 92%, 50%)"
+      : "hsl(142, 69%, 45%)"};
+`;
+
+const CloseButton = styled.button`
+  color: #6b7280;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  &:hover {
+    color: #374151;
+  }
+`;
+
+const SectionContainer = styled.div`
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  > * + * {
+    margin-top: 0.75rem;
+  }
+`;
+
+const Section = styled.div`
+  padding-top: ${(props) => (props.$hasBorder ? "0.5rem" : "0")};
+  padding-bottom: ${(props) => (props.$hasBorder ? "0.5rem" : "0")};
+  border-top: ${(props) => (props.$hasBorder ? "1px solid #e5e7eb" : "none")};
+`;
+
+const SectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+`;
+
+const SectionIcon = styled.span`
+  margin-right: 0.5rem;
+  color: #6b7280;
+`;
+
+const SectionLabel = styled.label`
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4b5563;
+`;
+
+const BrandSizeContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const BrandName = styled.div`
+  color: #111827;
+  font-weight: 500;
+`;
+
+const SizeTag = styled.div`
+  color: #4b5563;
+  font-size: 1.5rem;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+`;
+
+const InfoLabel = styled.label`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4b5563;
+`;
+
+const InfoValue = styled.div`
+  color: #111827;
+`;
+
+const EditContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const EditButton = styled.button`
+  display: flex;
+  align-items: center;
+  color: #3b82f6;
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  &:hover {
+    color: #2563eb;
+  }
+`;
+
+const EditIcon = styled.span`
+  margin-right: 0.25rem;
+`;
+
+const ValueDisplay = styled.div`
+  color: #111827;
+  font-weight: 600;
+  font-size: 1.5rem;
+`;
+
+const InputContainer = styled.div`
+  margin-top: 0.25rem;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+`;
+
+const FormGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+`;
+
+const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
+  const [editingField, setEditingField] = useState(null);
+  const [mileageInput, setMileageInput] = useState(tire.mileage.toString());
+  const [brandInput, setBrandInput] = useState(tire.brand);
+  const [sizeInput, setSizeInput] = useState(tire.size);
+  const [dateResetInput, setDateResetInput] = useState(
+    format(new Date(tire.dateReset), "yyyy-MM-dd")
+  );
+  const [costInput, setCostInput] = useState(tire.cost?.toString() || "0");
+
+  // Format number with commas
+  const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  // Format currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(amount);
+  };
+
+  // Format date for display
+  const formatDate = (date) => {
+    return format(new Date(date), "PPP");
+  };
+
+  // Get tire status
+  const getTireStatus = () => {
+    if (tire.mileage > 40000) return "critical";
+    if (tire.mileage > 30000) return "warning";
+    return "good";
+  };
+
+  // Handle edit button click
+  const handleEditClick = (field) => {
+    setEditingField(field);
+  };
+
+  // Handle save button click
+  // Fix for the switch statement in handleSave function
+  const handleSave = () => {
+    if (!editingField) return;
+
+    const updates = {};
+
+    switch (editingField) {
+      case "mileage": {
+        const newMileage = parseInt(mileageInput);
+        if (!isNaN(newMileage) && newMileage >= 0) {
+          updates.mileage = newMileage;
+        }
+        break;
+      }
+      case "brand": {
+        if (brandInput.trim()) {
+          updates.brand = brandInput;
+        }
+        break;
+      }
+      case "size": {
+        if (sizeInput.trim()) {
+          updates.size = sizeInput;
+        }
+        break;
+      }
+      case "dateReset": {
+        const newDate = new Date(dateResetInput);
+        if (!isNaN(newDate.getTime())) {
+          updates.dateReset = newDate;
+        }
+        break;
+      }
+      case "cost": {
+        const newCost = parseFloat(costInput);
+        if (!isNaN(newCost) && newCost >= 0) {
+          updates.cost = newCost;
+        }
+        break;
+      }
+      default:
+        break;
+    }
+
+    if (Object.keys(updates).length > 0) {
+      onUpdateTire(tire.id, updates);
+    }
+    setEditingField(null);
+  };
+
+  // Handle cancel button click
+  const handleCancel = () => {
+    setMileageInput(tire.mileage.toString());
+    setBrandInput(tire.brand);
+    setSizeInput(tire.size);
+    setDateResetInput(format(new Date(tire.dateReset), "yyyy-MM-dd"));
+    setCostInput(tire.cost?.toString() || "0");
+    setEditingField(null);
+  };
+
+  // Render edit forms for different fields
+  const renderEditForm = () => {
+    switch (editingField) {
+      case "mileage":
+        return (
+          <div>
+            <InfoLabel htmlFor="mileageInput">Update Mileage (km)</InfoLabel>
+            <InputContainer>
+              <TireInput
+                id="mileageInput"
+                type="number"
+                value={mileageInput}
+                onChange={(e) => setMileageInput(e.target.value)}
+                style={{ display: "block", width: "100%" }}
+                min="0"
+              />
+            </InputContainer>
+            <ButtonContainer>
+              <TireButton variant="outline" size="lg" onClick={handleCancel}>
+                Cancel
+              </TireButton>
+              <TireButton variant="default" size="lg" onClick={handleSave}>
+                Save
+              </TireButton>
+            </ButtonContainer>
+          </div>
+        );
+      case "brand":
+      case "size":
+        return (
+          <div>
+            <FormGrid>
+              <div>
+                <InfoLabel htmlFor="brandInput">Brand</InfoLabel>
+                <TireInput
+                  id="brandInput"
+                  type="text"
+                  value={brandInput}
+                  onChange={(e) => setBrandInput(e.target.value)}
+                  style={{ display: "block", width: "100%" }}
+                />
+              </div>
+              <div>
+                <InfoLabel htmlFor="sizeInput">Size</InfoLabel>
+                <TireInput
+                  id="sizeInput"
+                  type="text"
+                  value={sizeInput}
+                  onChange={(e) => setSizeInput(e.target.value)}
+                  style={{ display: "block", width: "100%" }}
+                />
+              </div>
+            </FormGrid>
+            <ButtonContainer>
+              <TireButton variant="outline" size="lg" onClick={handleCancel}>
+                Cancel
+              </TireButton>
+              <TireButton variant="default" size="lg" onClick={handleSave}>
+                Save
+              </TireButton>
+            </ButtonContainer>
+          </div>
+        );
+      case "dateReset":
+        return (
+          <div>
+            <InfoLabel htmlFor="dateResetInput">Reset Date</InfoLabel>
+            <InputContainer>
+              <TireInput
+                id="dateResetInput"
+                type="date"
+                value={dateResetInput}
+                onChange={(e) => setDateResetInput(e.target.value)}
+                style={{ display: "block", width: "100%" }}
+              />
+            </InputContainer>
+            <ButtonContainer>
+              <TireButton variant="outline" size="lg" onClick={handleCancel}>
+                Cancel
+              </TireButton>
+              <TireButton variant="default" size="lg" onClick={handleSave}>
+                Save
+              </TireButton>
+            </ButtonContainer>
+          </div>
+        );
+      case "cost":
+        return (
+          <div>
+            <InfoLabel htmlFor="costInput">Tire Cost</InfoLabel>
+            <InputContainer>
+              <TireInput
+                id="costInput"
+                type="number"
+                value={costInput}
+                onChange={(e) => setCostInput(e.target.value)}
+                style={{ display: "block", width: "100%" }}
+                min="0"
+                step="0.01"
+              />
+            </InputContainer>
+            <ButtonContainer>
+              <TireButton variant="outline" size="lg" onClick={handleCancel}>
+                Cancel
+              </TireButton>
+              <TireButton variant="default" size="lg" onClick={handleSave}>
+                Save
+              </TireButton>
+            </ButtonContainer>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <TooltipContainer
+      className="tire-tooltip"
+      $left={`${position.x}px`}
+      $top={`${position.y}px`}
+    >
+      <Header>
+        <TitleContainer>
+          <StatusIndicator $status={getTireStatus()} />
+          <Heading as="h3">Tire {tire.tireId}</Heading>
+        </TitleContainer>
+        <CloseButton onClick={onClose}>
+          <HiOutlineXMark size={28} />
+        </CloseButton>
+      </Header>
+
+      <SectionContainer>
+        <Section>
+          {editingField === "brand" || editingField === "size" ? (
+            renderEditForm()
+          ) : (
+            <>
+              <SectionHeader>
+                <SectionIcon>
+                  <HiOutlineTag size={20} />
+                </SectionIcon>
+                <SectionLabel>Marca & Medida</SectionLabel>
+                <div style={{ marginLeft: "auto" }}>
+                  <EditButton onClick={() => handleEditClick("brand")}>
+                    <EditIcon>
+                      <HiPencil size={20} />
+                    </EditIcon>
+                    Edit
+                  </EditButton>
+                </div>
+              </SectionHeader>
+              <BrandSizeContainer>
+                <BrandName>{tire.brand}</BrandName>
+                <SizeTag>{tire.size}</SizeTag>
+              </BrandSizeContainer>
+            </>
+          )}
+        </Section>
+
+        <Section $hasBorder={true}>
+          <div>
+            <InfoLabel>Position</InfoLabel>
+            <InfoValue>{tire.position}</InfoValue>
+          </div>
+
+          <div style={{ marginTop: "0.5rem" }}>
+            <InfoLabel>Axle</InfoLabel>
+            <InfoValue>#{tire.axle}</InfoValue>
+          </div>
+        </Section>
+
+        <Section $hasBorder={true}>
+          {editingField === "dateReset" ? (
+            renderEditForm()
+          ) : (
+            <>
+              <SectionHeader>
+                <SectionIcon>
+                  <HiMiniCalendar size={20} />
+                </SectionIcon>
+                <SectionLabel>Reset Date</SectionLabel>
+                <div style={{ marginLeft: "auto" }}>
+                  <EditButton onClick={() => handleEditClick("dateReset")}>
+                    <EditIcon>
+                      <HiPencil size={20} />
+                    </EditIcon>
+                    Edit
+                  </EditButton>
+                </div>
+              </SectionHeader>
+              <InfoValue>{formatDate(tire.dateReset)}</InfoValue>
+            </>
+          )}
+        </Section>
+
+        <Section $hasBorder={true}>
+          {editingField === "mileage" ? (
+            renderEditForm()
+          ) : (
+            <div>
+              <EditContainer>
+                <SectionHeader>
+                  <SectionIcon>
+                    <HiOutlinePaperAirplane size={20} />
+                  </SectionIcon>
+                  <SectionLabel>Current Mileage</SectionLabel>
+                </SectionHeader>
+                <EditButton onClick={() => handleEditClick("mileage")}>
+                  <EditIcon>
+                    <HiPencil size={20} />
+                  </EditIcon>
+                  Edit
+                </EditButton>
+              </EditContainer>
+              <ValueDisplay>{formatNumber(tire.mileage)} km</ValueDisplay>
+            </div>
+          )}
+        </Section>
+
+        <Section $hasBorder={true}>
+          {editingField === "cost" ? (
+            renderEditForm()
+          ) : (
+            <div>
+              <EditContainer>
+                <SectionHeader>
+                  <SectionIcon>
+                    <HiOutlineCurrencyDollar size={20} />
+                  </SectionIcon>
+                  <SectionLabel>Tire Cost</SectionLabel>
+                </SectionHeader>
+                <EditButton onClick={() => handleEditClick("cost")}>
+                  <EditIcon>
+                    <HiPencil size={20} />
+                  </EditIcon>
+                  Edit
+                </EditButton>
+              </EditContainer>
+              <ValueDisplay>{formatCurrency(tire.cost || 0)}</ValueDisplay>
+            </div>
+          )}
+        </Section>
+      </SectionContainer>
+    </TooltipContainer>
+  );
+};
+
+// PropTypes for component validation
+// TireTooltip.propTypes = {
+//   tire: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     tireId: PropTypes.string.isRequired,
+//     position: PropTypes.string.isRequired,
+//     axle: PropTypes.number.isRequired,
+//     mileage: PropTypes.number.isRequired,
+//     brand: PropTypes.string.isRequired,
+//     size: PropTypes.string.isRequired,
+//     dateReset: PropTypes.instanceOf(Date).isRequired,
+//     cost: PropTypes.number,
+//   }).isRequired,
+//   position: PropTypes.shape({
+//     x: PropTypes.number.isRequired,
+//     y: PropTypes.number.isRequired,
+//   }).isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   onUpdateTire: PropTypes.func.isRequired,
+// };
+
+export default TireTooltip;

@@ -1,7 +1,7 @@
 import SortBy from "../../ui/SortBy";
 import TableOperations from "../../ui/TableOperations";
 
-function TyresTableOperations() {
+function TiresTableOperations() {
   return (
     <TableOperations>
       <SortBy
@@ -20,4 +20,4 @@ function TyresTableOperations() {
   );
 }
 
-export default TyresTableOperations;
+export default TiresTableOperations;

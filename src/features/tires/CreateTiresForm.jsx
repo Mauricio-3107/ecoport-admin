@@ -16,7 +16,7 @@ const Container = styled.div`
   gap: 3rem;
 `;
 
-function CreateTyresForm({
+function CreateTiresForm({
   truckId,
   licensePlate,
   onCloseModal,
@@ -72,7 +72,7 @@ function CreateTyresForm({
 
   return (
     <Container>
-      <Heading as="h2">Placa: {licensePlate} tyres</Heading>
+      <Heading as="h2">Placa: {licensePlate} tires</Heading>
       <Form
         onSubmit={handleSubmit(onSubmit)}
         type={onCloseModal ? "modal" : "regular"}
@@ -159,4 +159,4 @@ function CreateTyresForm({
   );
 }
 
-export default CreateTyresForm;
+export default CreateTiresForm;

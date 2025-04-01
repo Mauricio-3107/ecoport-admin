@@ -1,0 +1,302 @@
+import { useState } from "react";
+import TruckSvg from "./TruckSvg";
+import TireTooltip from "./TireTooltip";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import Heading from "../../ui/Heading";
+import {
+  HiOutlineCheckCircle,
+  HiOutlineExclamationTriangle,
+  HiOutlineInformationCircle,
+} from "react-icons/hi2";
+
+// Styled Components
+const Container = styled.div`
+  width: 100%;
+`;
+
+const StatusSummary = styled.div`
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderSection = styled.div``;
+
+const BadgesContainer = styled.div`
+  display: flex;
+  gap: 0.75rem;
+`;
+
+const CustomBadge = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 1.5rem;
+`;
+
+const TruckContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: visible;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+`;
+
+const LegendContainer = styled.div`
+  margin-top: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+`;
+
+const LegendGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const LegendItem = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+`;
+
+const StatusIndicator = styled.div`
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  background-color: ${(props) => props.color};
+`;
+
+const LegendItemContent = styled.div``;
+
+const LegendItemSubtitle = styled.div`
+  font-size: 1.5rem;
+  color: #6b7280;
+`;
+
+const LegendNote = styled.div`
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #6b7280;
+  font-style: italic;
+`;
+
+const TruckTireVisualization = ({ initialTires }) => {
+  const [tires, setTires] = useState(initialTires);
+  const [selectedTire, setSelectedTire] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+
+  // Function to get color based on mileage
+  const getTireStatusColor = (mileage) => {
+    if (mileage > 40000) return "hsl(0, 84%, 60%)"; // danger/critical
+    if (mileage > 30000) return "hsl(40, 92%, 50%)"; // warning
+    return "hsl(142, 69%, 45%)"; // success/good
+  };
+
+  // Calculate tire status counts for summary
+  const statusCounts = {
+    good: tires.filter((tire) => tire.mileage <= 30000).length,
+    warning: tires.filter(
+      (tire) => tire.mileage > 30000 && tire.mileage <= 40000
+    ).length,
+    critical: tires.filter((tire) => tire.mileage > 40000).length,
+  };
+
+  // Handle tire click to show tooltip
+  // const handleTireClick = (tire, event) => {
+  //   event.stopPropagation();
+
+  //   // Get position for the tooltip
+  //   const rect = event.currentTarget.getBoundingClientRect();
+  //   const svgContainerRect = document
+  //     .getElementById("truckVisualization")
+  //     ?.getBoundingClientRect() || { left: 0, top: 0 };
+
+  //   // Adjust tooltip position based on where the tire is on the screen
+  //   // For tires on the right side, position tooltip to the left
+  //   const isRightSide = tire.tireId.includes("R");
+  //   const x = isRightSide
+  //     ? rect.left - svgContainerRect.left - 280
+  //     : rect.right - svgContainerRect.left + 10;
+
+  //   const y = rect.top - svgContainerRect.top;
+
+  //   setTooltipPosition({ x, y });
+  //   setSelectedTire(tire);
+  //   setIsTooltipVisible(true);
+  // };
+  // Modify the handleTireClick function in TruckTireVisualization.jsx
+  const handleTireClick = (tire, event) => {
+    event.stopPropagation();
+
+    // Get position for the tooltip
+    const rect = event.currentTarget.getBoundingClientRect();
+    const svgContainerRect = document
+      .getElementById("truckVisualization")
+      ?.getBoundingClientRect() || { left: 0, top: 0 };
+    // Adjust tooltip position based on where the tire is on the screen
+    const isRightSide = tire.tireId.includes("R");
+
+    // UPDATED CALCULATION: Adjust positioning for right side tires
+    let x, y;
+
+    if (isRightSide) {
+      // For right side tires, position tooltip slightly to the left of the tire
+      // but not as far as before, using a smaller offset
+      x = rect.left - svgContainerRect.left - 270; // Less offset
+    } else {
+      // For left side tires, keep the current positioning
+      x = rect.right - svgContainerRect.left + 10;
+    }
+
+    y = rect.top - svgContainerRect.top;
+
+    setTooltipPosition({ x, y });
+    setSelectedTire(tire);
+    setIsTooltipVisible(true);
+  };
+  // Handle closing the tooltip
+  const handleCloseTooltip = () => {
+    setIsTooltipVisible(false);
+    setSelectedTire(null);
+  };
+
+  // Handle updating tire properties
+  const handleUpdateTire = (id, updates) => {
+    setTires((prevTires) =>
+      prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
+    );
+  };
+
+  // Handle click outside to close tooltip
+  const handleContainerClick = (event) => {
+    if (
+      !event.target.closest(".tire-element") &&
+      !event.target.closest(".tire-tooltip")
+    ) {
+      handleCloseTooltip();
+    }
+  };
+
+  return (
+    <Container onClick={handleContainerClick}>
+      {/* Status Summary */}
+      <StatusSummary>
+        <HeaderSection>
+          <Heading as="h3">
+            Click on any tire to view details and update information
+          </Heading>
+        </HeaderSection>
+
+        <BadgesContainer>
+          <CustomBadge>
+            <HiOutlineCheckCircle size={22} color="#22c55e" />
+            <span>{statusCounts.good} Good</span>
+          </CustomBadge>
+          <CustomBadge>
+            <HiOutlineExclamationTriangle size={22} color="#f59e0b" />
+            <span>{statusCounts.warning} Warning</span>
+          </CustomBadge>
+          <CustomBadge>
+            <HiOutlineInformationCircle size={22} color="#ef4444" />
+            <span>{statusCounts.critical} Critical</span>
+          </CustomBadge>
+        </BadgesContainer>
+      </StatusSummary>
+
+      <TruckContainer id="truckVisualization">
+        <TruckSvg
+          tires={tires}
+          getTireStatusColor={getTireStatusColor}
+          onTireClick={handleTireClick}
+        />
+
+        {isTooltipVisible && selectedTire && (
+          <TireTooltip
+            tire={selectedTire}
+            position={tooltipPosition}
+            onClose={handleCloseTooltip}
+            onUpdateTire={handleUpdateTire}
+          />
+        )}
+      </TruckContainer>
+
+      {/* Legend */}
+      <LegendContainer>
+        <Heading as="h5">Mileage Status Legend</Heading>
+        <LegendGrid>
+          <LegendItem>
+            <StatusIndicator color="hsl(142,69%,45%)" />
+            <LegendItemContent>
+              <Heading as="h2">Good Condition</Heading>
+              <LegendItemSubtitle>Less than 30,000 km</LegendItemSubtitle>
+            </LegendItemContent>
+          </LegendItem>
+          <LegendItem>
+            <StatusIndicator color="hsl(40,92%,50%)" />
+            <LegendItemContent>
+              <Heading as="h2">Warning</Heading>
+              <LegendItemSubtitle>30,000 - 40,000 km</LegendItemSubtitle>
+            </LegendItemContent>
+          </LegendItem>
+          <LegendItem>
+            <StatusIndicator color="hsl(0,84%,60%)" />
+            <LegendItemContent>
+              <Heading as="h2">Critical</Heading>
+              <LegendItemSubtitle>More than 40,000 km</LegendItemSubtitle>
+            </LegendItemContent>
+          </LegendItem>
+        </LegendGrid>
+
+        <LegendNote>
+          Note: Tire colors indicate the mileage status. Click on any tire to
+          view details and update information.
+        </LegendNote>
+      </LegendContainer>
+    </Container>
+  );
+};
+
+// PropTypes for component validation
+TruckTireVisualization.propTypes = {
+  initialTires: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      tireId: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+      axle: PropTypes.number.isRequired,
+      mileage: PropTypes.number.isRequired,
+      brand: PropTypes.string.isRequired,
+      size: PropTypes.string.isRequired,
+      dateReset: PropTypes.instanceOf(Date).isRequired,
+      cost: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
+
+export default TruckTireVisualization;
