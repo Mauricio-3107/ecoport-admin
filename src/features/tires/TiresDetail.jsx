@@ -6,7 +6,7 @@ import Empty from "../../ui/Empty";
 // Styled Components
 const PageContainer = styled.div`
   width: 100%;
-  background-color: #f8fafc;
+  background-color: var(--color-grey-0, white);
   padding: 1.5rem;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@ const CardContainer = styled.div`
   /* max-width: 56rem; */
   min-width: 56rem;
 
-  background-color: white;
+  background-color: var(--color-grey-0, white);
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);

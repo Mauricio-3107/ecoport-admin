@@ -7,19 +7,19 @@ const TruckSvgContainer = styled.svg`
 
 const TireCircle = styled.circle`
   fill: ${(props) => props.color};
-  stroke: #64748b;
+  stroke: var(--color-grey-500);
   stroke-width: 2;
   transition: all 0.3s;
   cursor: pointer;
 
   &:hover {
-    stroke: #206fee;
+    stroke: var(--color-indigo-700);
   }
 `;
 
 const TireText = styled.text`
   font-size: 12px;
-  fill: #1e293b;
+  fill: var(--color-grey-800);
   text-anchor: middle;
   font-weight: bold;
   pointer-events: none;
@@ -27,13 +27,13 @@ const TireText = styled.text`
 
 const AxleLabel = styled.text`
   font-size: 14px;
-  fill: #64748b;
+  fill: var(--color-grey-500);
   font-weight: 500;
 `;
 
 const SectionLabel = styled.text`
   font-size: 16px;
-  fill: #334155;
+  fill: var(--color-grey-700);
   font-weight: 600;
   text-anchor: middle;
 `;
@@ -41,12 +41,12 @@ const SectionLabel = styled.text`
 const LegendTitle = styled.text`
   font-size: 12px;
   font-weight: 500;
-  fill: #475569;
+  fill: var(--color-grey-500);
 `;
 
 const LegendItem = styled.text`
   font-size: 11px;
-  fill: #64748b;
+  fill: var(--color-grey-500);
 `;
 
 const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
@@ -54,7 +54,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
   const pxOffset = is6axle ? 75 : 0;
   const pxOffset3Axle = is6axle ? 60 : 0;
   // Map of tire positions to coordinates
-  const tirePositions5Axle = {
+  const tirePositions = {
     // Front axle (tractor) - 2 tires
     FL1: { x: 350, y: 100 },
     FR1: { x: 450, y: 100 },
@@ -102,7 +102,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
           y="50"
           width="200"
           height={`${170 + pxOffset}`}
-          fill="#F1F5F9"
+          fill="var(--color-silver-100)"
           stroke="#94A3B8"
           strokeWidth="2"
           rx="10"
@@ -114,7 +114,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
           y={`${270 + pxOffset}`}
           width="300"
           height="230"
-          fill="#F1F5F9"
+          fill="var(--color-silver-100)"
           stroke="#94A3B8"
           strokeWidth="2"
         />
@@ -220,7 +220,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
 
       {/* Tires */}
       {tires.map((tire) => {
-        const position = tirePositions5Axle[tire.tireId];
+        const position = tirePositions[tire.tireId];
         if (!position) return null;
 
         return (

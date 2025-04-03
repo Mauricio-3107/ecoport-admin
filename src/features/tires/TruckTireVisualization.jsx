@@ -9,6 +9,7 @@ import {
   HiOutlineInformationCircle,
 } from "react-icons/hi2";
 import { useEditTires } from "./useEditTires";
+// import { DarkModeContext } from "../../context/DarkModeContext";
 
 // Styled Components
 const Container = styled.div`
@@ -48,7 +49,7 @@ const TruckContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: var(--color-grey-0, white);
   border-radius: 0.5rem;
   overflow: visible;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
@@ -57,7 +58,7 @@ const TruckContainer = styled.div`
 
 const LegendContainer = styled.div`
   margin-top: 1.5rem;
-  background-color: #f9fafb;
+  background-color: var(--color-grey-0, white);
   border-radius: 0.5rem;
   padding: 1rem;
   border: 1px solid #e5e7eb;
@@ -76,7 +77,7 @@ const LegendGrid = styled.div`
 const LegendItem = styled.div`
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: var(--color-grey-0, white);
   padding: 0.5rem;
   border-radius: 0.375rem;
   border: 1px solid #e5e7eb;
@@ -95,13 +96,13 @@ const LegendItemContent = styled.div``;
 
 const LegendItemSubtitle = styled.div`
   font-size: 1.5rem;
-  color: #6b7280;
+  color: var(--color-grey-600);
 `;
 
 const LegendNote = styled.div`
   margin-top: 1rem;
   font-size: 1.5rem;
-  color: #6b7280;
+  color: var(--color-grey-600);
   font-style: italic;
 `;
 
@@ -114,9 +115,9 @@ const TruckTireVisualization = ({ initialTires }) => {
 
   // Function to get color based on mileage
   const getTireStatusColor = (mileage) => {
-    if (mileage > 40000) return "hsl(0, 84%, 60%)"; // danger/critical
-    if (mileage > 30000) return "hsl(40, 92%, 50%)"; // warning
-    return "hsl(142, 69%, 45%)"; // success/good
+    if (mileage > 40000) return "var(--color-red-300)"; // danger/critical
+    if (mileage > 30000) return "var(--color-yellow-300)"; // warning
+    return "var(--color-green-300)"; // success/good
   };
 
   // Calculate tire status counts for summary
@@ -164,17 +165,6 @@ const TruckTireVisualization = ({ initialTires }) => {
     setSelectedTire(null);
   };
 
-  // Handle updating tire properties
-  // const handleUpdateTire = (id, updates) => {
-  //   // setTires((prevTires) =>
-  //   //   prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
-  //   // );
-  //   // Hereeee
-  //   editTires({ newTiresData: updates, id: id });
-  //   setTires((prevTires) =>
-  //     prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
-  //   );
-  // };
   const handleUpdateTire = (id, updates) => {
     editTires({ newTiresData: updates, id: id });
 
@@ -211,15 +201,21 @@ const TruckTireVisualization = ({ initialTires }) => {
 
         <BadgesContainer>
           <CustomBadge>
-            <HiOutlineCheckCircle size={22} color="#22c55e" />
+            <HiOutlineCheckCircle size={22} color="var(--color-green-300)" />
             <span>{statusCounts.good} Good</span>
           </CustomBadge>
           <CustomBadge>
-            <HiOutlineExclamationTriangle size={22} color="#f59e0b" />
+            <HiOutlineExclamationTriangle
+              size={22}
+              color="var(--color-yellow-300)"
+            />
             <span>{statusCounts.warning} Warning</span>
           </CustomBadge>
           <CustomBadge>
-            <HiOutlineInformationCircle size={22} color="#ef4444" />
+            <HiOutlineInformationCircle
+              size={22}
+              color="var(--color-red-300)"
+            />
             <span>{statusCounts.critical} Critical</span>
           </CustomBadge>
         </BadgesContainer>
@@ -248,21 +244,21 @@ const TruckTireVisualization = ({ initialTires }) => {
         <Heading as="h5">Mileage Status Legend</Heading>
         <LegendGrid>
           <LegendItem>
-            <StatusIndicator color="hsl(142,69%,45%)" />
+            <StatusIndicator color="var(--color-green-300)" />
             <LegendItemContent>
               <Heading as="h2">Good Condition</Heading>
               <LegendItemSubtitle>Less than 30,000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
-            <StatusIndicator color="hsl(40,92%,50%)" />
+            <StatusIndicator color="var(--color-yellow-300)" />
             <LegendItemContent>
               <Heading as="h2">Warning</Heading>
               <LegendItemSubtitle>30,000 - 40,000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
-            <StatusIndicator color="hsl(0,84%,60%)" />
+            <StatusIndicator color="var(--color-red-300)" />
             <LegendItemContent>
               <Heading as="h2">Critical</Heading>
               <LegendItemSubtitle>More than 40,000 km</LegendItemSubtitle>

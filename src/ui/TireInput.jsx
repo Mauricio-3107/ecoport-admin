@@ -6,12 +6,13 @@ const InputElement = styled.input`
   padding: 0.5rem;
   border-radius: 0.375rem;
   border: 1px solid #d1d5db;
+  background-color: var(--color-grey-100);
   font-size: 1.5rem;
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    border-color: var(--color-blue-200);
+    box-shadow: 0 0 0 2px var(--color-blue-800);
   }
 `;
 

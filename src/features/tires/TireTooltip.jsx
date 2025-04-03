@@ -17,7 +17,7 @@ import { PiTireThin } from "react-icons/pi";
 // Styled Components
 const TooltipContainer = styled.div`
   position: absolute;
-  background-color: white;
+  background-color: var(--color-grey-0, white);
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
@@ -48,19 +48,19 @@ const StatusIndicator = styled.div`
   margin-right: 0.5rem;
   background-color: ${(props) =>
     props.$status === "critical"
-      ? "hsl(0, 84%, 60%)"
+      ? "var(--color-red-300)"
       : props.$status === "warning"
-      ? "hsl(40, 92%, 50%)"
-      : "hsl(142, 69%, 45%)"};
+      ? "var(--color-yellow-300)"
+      : "var(--color-green-300)"};
 `;
 
 const CloseButton = styled.button`
-  color: #6b7280;
+  /* color: #6b7280; */
   border: none;
   border-radius: 50%;
   background-color: transparent;
   &:hover {
-    color: #374151;
+    color: var(--color-grey-500);
   }
 `;
 
@@ -88,13 +88,12 @@ const SectionHeader = styled.div`
 
 const SectionIcon = styled.span`
   margin-right: 0.5rem;
-  color: #6b7280;
+  /* color: #6b7280; */
 `;
 
 const SectionLabel = styled.label`
   font-size: 1.3rem;
   font-weight: 500;
-  color: #4b5563;
 `;
 
 const BrandSizeContainer = styled.div`
@@ -104,14 +103,12 @@ const BrandSizeContainer = styled.div`
 `;
 
 const BrandName = styled.div`
-  color: #111827;
   font-weight: 500;
 `;
 
 const SizeTag = styled.div`
-  color: #4b5563;
   font-size: 1.5rem;
-  background-color: #f3f4f6;
+  background-color: var(--color-grey-100);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 `;
@@ -120,11 +117,9 @@ const InfoLabel = styled.label`
   display: block;
   font-size: 1.2rem;
   font-weight: 500;
-  color: #4b5563;
 `;
 
 const InfoValue = styled.div`
-  color: #111827;
 `;
 
 const EditContainer = styled.div`
@@ -136,12 +131,14 @@ const EditContainer = styled.div`
 const EditButton = styled.button`
   display: flex;
   align-items: center;
-  color: #3b82f6;
+  color: var(--color-blue-300);
+  background-color: var(--color-blue-100);
+  border: 0.5px solid var(--color-blue-300);
   font-size: 1.5rem;
   font-weight: 500;
 
   &:hover {
-    color: #2563eb;
+    color: var(--color-blue-400);
   }
 `;
 
@@ -150,7 +147,7 @@ const EditIcon = styled.span`
 `;
 
 const ValueDisplay = styled.div`
-  color: #111827;
+  /* color: #111827; */
   font-weight: 600;
   font-size: 1.5rem;
 `;
