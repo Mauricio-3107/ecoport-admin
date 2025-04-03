@@ -12,7 +12,7 @@ import {
   HiOutlineXMark,
   HiPencil,
 } from "react-icons/hi2";
-// import PropTypes from "prop-types";
+import { PiTireThin } from "react-icons/pi";
 
 // Styled Components
 const TooltipContainer = styled.div`
@@ -33,7 +33,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 2rem;
 `;
 
 const TitleContainer = styled.div`
@@ -92,7 +92,7 @@ const SectionIcon = styled.span`
 `;
 
 const SectionLabel = styled.label`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: #4b5563;
 `;
@@ -173,15 +173,16 @@ const FormGrid = styled.div`
   margin-top: 0.25rem;
 `;
 
-const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
+const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
   const [editingField, setEditingField] = useState(null);
-  const [mileageInput, setMileageInput] = useState(tire.mileage.toString());
+  const [mileageInput, setMileageInput] = useState(tire.odometerKm.toString());
   const [brandInput, setBrandInput] = useState(tire.brand);
   const [sizeInput, setSizeInput] = useState(tire.size);
   const [dateResetInput, setDateResetInput] = useState(
     format(new Date(tire.dateReset), "yyyy-MM-dd")
   );
   const [costInput, setCostInput] = useState(tire.cost?.toString() || "0");
+  const [typeInput, setTypeInput] = useState(tire.type);
 
   // Format number with commas
   const formatNumber = (num) => {
@@ -204,8 +205,8 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
 
   // Get tire status
   const getTireStatus = () => {
-    if (tire.mileage > 40000) return "critical";
-    if (tire.mileage > 30000) return "warning";
+    if (tire.odometerKm > 40000) return "critical";
+    if (tire.odometerKm > 30000) return "warning";
     return "good";
   };
 
@@ -255,6 +256,12 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
         }
         break;
       }
+      case "type": {
+        if (typeInput === "new" || typeInput === "retread") {
+          updates.type = typeInput;
+        }
+        break;
+      }
       default:
         break;
     }
@@ -267,9 +274,10 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
 
   // Handle cancel button click
   const handleCancel = () => {
-    setMileageInput(tire.mileage.toString());
+    setMileageInput(tire.odometerKm.toString());
     setBrandInput(tire.brand);
     setSizeInput(tire.size);
+    setTypeInput(tire.type);
     setDateResetInput(format(new Date(tire.dateReset), "yyyy-MM-dd"));
     setCostInput(tire.cost?.toString() || "0");
     setEditingField(null);
@@ -332,7 +340,12 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
                 Cancel
               </TireButton>
-              <TireButton variant="default" size="lg" onClick={handleSave}>
+              <TireButton
+                variant="default"
+                size="lg"
+                onClick={handleSave}
+                disabled={isEditing}
+              >
                 Save
               </TireButton>
             </ButtonContainer>
@@ -375,6 +388,36 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
                 min="0"
                 step="0.01"
               />
+            </InputContainer>
+            <ButtonContainer>
+              <TireButton variant="outline" size="lg" onClick={handleCancel}>
+                Cancel
+              </TireButton>
+              <TireButton variant="default" size="lg" onClick={handleSave}>
+                Save
+              </TireButton>
+            </ButtonContainer>
+          </div>
+        );
+      case "type":
+        return (
+          <div>
+            <InfoLabel htmlFor="typeSelect">Tire Type</InfoLabel>
+            <InputContainer>
+              <select
+                id="typeSelect"
+                value={typeInput}
+                onChange={(e) => setTypeInput(e.target.value)}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  padding: "0.5rem",
+                  fontSize: "1.2rem",
+                }}
+              >
+                <option value="new">New</option>
+                <option value="retread">Retread</option>
+              </select>
             </InputContainer>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
@@ -436,6 +479,32 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
         </Section>
 
         <Section $hasBorder={true}>
+          {editingField === "type" ? (
+            renderEditForm()
+          ) : (
+            <div>
+              <EditContainer>
+                <SectionHeader>
+                  <SectionIcon>
+                    <PiTireThin size={20} />
+                  </SectionIcon>
+                  <SectionLabel>Tire Type</SectionLabel>
+                </SectionHeader>
+                <EditButton onClick={() => handleEditClick("type")}>
+                  <EditIcon>
+                    <HiPencil size={20} />
+                  </EditIcon>
+                  Edit
+                </EditButton>
+              </EditContainer>
+              <ValueDisplay>
+                {tire.type.charAt(0).toUpperCase() + tire.type.slice(1)}
+              </ValueDisplay>
+            </div>
+          )}
+        </Section>
+
+        <Section $hasBorder={true}>
           <div>
             <InfoLabel>Position</InfoLabel>
             <InfoValue>{tire.position}</InfoValue>
@@ -446,7 +515,6 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
             <InfoValue>#{tire.axle}</InfoValue>
           </div>
         </Section>
-
         <Section $hasBorder={true}>
           {editingField === "dateReset" ? (
             renderEditForm()
@@ -470,7 +538,6 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
             </>
           )}
         </Section>
-
         <Section $hasBorder={true}>
           {editingField === "mileage" ? (
             renderEditForm()
@@ -490,11 +557,10 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
                   Edit
                 </EditButton>
               </EditContainer>
-              <ValueDisplay>{formatNumber(tire.mileage)} km</ValueDisplay>
+              <ValueDisplay>{formatNumber(tire.odometerKm)} km</ValueDisplay>
             </div>
           )}
         </Section>
-
         <Section $hasBorder={true}>
           {editingField === "cost" ? (
             renderEditForm()
@@ -522,26 +588,5 @@ const TireTooltip = ({ tire, position, onClose, onUpdateTire }) => {
     </TooltipContainer>
   );
 };
-
-// PropTypes for component validation
-// TireTooltip.propTypes = {
-//   tire: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     tireId: PropTypes.string.isRequired,
-//     position: PropTypes.string.isRequired,
-//     axle: PropTypes.number.isRequired,
-//     mileage: PropTypes.number.isRequired,
-//     brand: PropTypes.string.isRequired,
-//     size: PropTypes.string.isRequired,
-//     dateReset: PropTypes.instanceOf(Date).isRequired,
-//     cost: PropTypes.number,
-//   }).isRequired,
-//   position: PropTypes.shape({
-//     x: PropTypes.number.isRequired,
-//     y: PropTypes.number.isRequired,
-//   }).isRequired,
-//   onClose: PropTypes.func.isRequired,
-//   onUpdateTire: PropTypes.func.isRequired,
-// };
 
 export default TireTooltip;

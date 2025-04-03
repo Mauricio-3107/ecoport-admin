@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDarkMode } from "../../context/DarkModeContext";
 import TruckCard from "../../ui/TruckCard";
 import CreateTiresForm from "./CreateTiresForm";
+import AddTires from "./AddTires";
 
 const TrucksContainer = styled.div`
   display: grid;
@@ -35,22 +36,25 @@ function TiresLayout({ trucks }) {
   });
 
   return (
-    <TrucksContainer $isDarkMode={isDarkMode}>
-      {sortedTrucks.map((truck) => (
-        <TruckCard
-          truck={truck}
-          key={truck.id}
-          resourceName="tires"
-          labelButton="Registrar nuevo neúmatico"
-          form={
-            <CreateTiresForm
-              truckId={truck.id}
-              licensePlate={truck.licensePlate}
-            />
-          }
-        />
-      ))}
-    </TrucksContainer>
+    <>
+      <TrucksContainer $isDarkMode={isDarkMode}>
+        {sortedTrucks.map((truck) => (
+          <TruckCard
+            truck={truck}
+            key={truck.id}
+            resourceName="tires"
+            labelButton="Registrar nuevo neúmatico"
+            form={
+              <CreateTiresForm
+                truckId={truck.id}
+                licensePlate={truck.licensePlate}
+              />
+            }
+          />
+        ))}
+      </TrucksContainer>
+      <AddTires />
+    </>
   );
 }
 

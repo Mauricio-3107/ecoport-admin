@@ -39,10 +39,16 @@ export const TireButton = ({
   variant = "default",
   size = "md",
   onClick,
+  disabled,
   children,
 }) => {
   return (
-    <ButtonElement $variant={variant} $size={size} onClick={onClick}>
+    <ButtonElement
+      $variant={variant}
+      $size={size}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </ButtonElement>
   );

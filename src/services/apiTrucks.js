@@ -68,6 +68,10 @@ export async function createEditTruck(newTruck, id) {
     );
   }
 
+  //If it is an edit session, you already udpdated the values
+  if (id) return truck;
+
+  // From now on, you create the related tables to each truck, which cannot be edited or updated
   // 4. Automatically add the truck to the fuelConsumption table
   const { error: fuelError } = await supabase.from("fuelConsumption").insert([
     {
@@ -88,7 +92,7 @@ export async function createEditTruck(newTruck, id) {
       "El camión fue creado pero no pudo ser agregado a la tabla de combustible"
     );
   }
-  
+
   // 5. Automatically add the truck to the oil table
   const { error: oilError } = await supabase.from("oil").insert([
     {
@@ -108,6 +112,248 @@ export async function createEditTruck(newTruck, id) {
     );
     throw new Error(
       "El camión fue creado pero no pudo ser agregado a la tabla de aceite"
+    );
+  }
+
+  // 6. Automatically add the truck to the tires table
+  const totalTires = truck.tires + 12; // Truck tires + trailer tires
+  const truckAxles = truck.tires === 6 ? 2 : 3; // 6 tires = 2 axles, 8 or 10 tires = 3 axles
+  const totalAxles = truckAxles + 3; // Truck axles + trailer axles
+
+  const tiresData = [];
+
+  // Truck Tires
+  for (let axle = 1; axle <= truckAxles; axle++) {
+    if (axle === 1) {
+      // Front Axle - 2 Tires
+      tiresData.push(
+        {
+          truckId: truck.id,
+          tireId: `FL${axle}`,
+          position: "Front Left",
+          axle,
+          odometerKm: 0,
+          brand: "",
+          size: "",
+          dateReset: "",
+          cort: "",
+          type: "Truck",
+        },
+        {
+          truckId: truck.id,
+          tireId: `FR${axle}`,
+          position: "Front Right",
+          axle,
+          odometerKm: 0,
+          brand: "",
+          size: "",
+          dateReset: "",
+          cort: "",
+          type: "Truck",
+        }
+      );
+    } else {
+      if (totalTires === 20) {
+        if (axle === 2) {
+          tiresData.push(
+            {
+              truckId: truck.id,
+              tireId: `${axle}L1`,
+              position: `Axle ${axle} Left Inner`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            },
+            {
+              truckId: truck.id,
+              tireId: `${axle}L2`,
+              position: `Axle ${axle} Left Outer`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            },
+            {
+              truckId: truck.id,
+              tireId: `${axle}R1`,
+              position: `Axle ${axle} Right Inner`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            },
+            {
+              truckId: truck.id,
+              tireId: `${axle}R2`,
+              position: `Axle ${axle} Right Outer`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            }
+          );
+        }
+        if (axle === 3) {
+          tiresData.push(
+            {
+              truckId: truck.id,
+              tireId: `${axle}L1`,
+              position: `Axle ${axle} Left Inner`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            },
+            {
+              truckId: truck.id,
+              tireId: `${axle}R1`,
+              position: `Axle ${axle} Right Inner`,
+              axle,
+              odometerKm: 0,
+              brand: "",
+              size: "",
+              dateReset: "",
+              cort: "",
+              type: "Truck",
+            }
+          );
+        }
+      } else {
+        // Drive Axles - 4 Tires each
+        tiresData.push(
+          {
+            truckId: truck.id,
+            tireId: `${axle}L1`,
+            position: `Axle ${axle} Left Inner`,
+            axle,
+            odometerKm: 0,
+            brand: "",
+            size: "",
+            dateReset: "",
+            cort: "",
+            type: "Truck",
+          },
+          {
+            truckId: truck.id,
+            tireId: `${axle}L2`,
+            position: `Axle ${axle} Left Outer`,
+            axle,
+            odometerKm: 0,
+            brand: "",
+            size: "",
+            dateReset: "",
+            cort: "",
+            type: "Truck",
+          },
+          {
+            truckId: truck.id,
+            tireId: `${axle}R1`,
+            position: `Axle ${axle} Right Inner`,
+            axle,
+            odometerKm: 0,
+            brand: "",
+            size: "",
+            dateReset: "",
+            cort: "",
+            type: "Truck",
+          },
+          {
+            truckId: truck.id,
+            tireId: `${axle}R2`,
+            position: `Axle ${axle} Right Outer`,
+            axle,
+            odometerKm: 0,
+            brand: "",
+            size: "",
+            dateReset: "",
+            cort: "",
+            type: "Truck",
+          }
+        );
+      }
+    }
+  }
+
+  // Trailer Tires (Axles 3||4 to 6)
+  for (let axle = truckAxles + 1; axle <= totalAxles; axle++) {
+    tiresData.push(
+      {
+        truckId: truck.id,
+        tireId: `${axle}L1`,
+        position: `Axle ${axle} Left Inner`,
+        axle,
+        odometerKm: 0,
+        brand: "",
+        size: "",
+        dateReset: "",
+        cort: "",
+        type: "Trailer",
+      },
+      {
+        truckId: truck.id,
+        tireId: `${axle}L2`,
+        position: `Axle ${axle} Left Outer`,
+        axle,
+        odometerKm: 0,
+        brand: "",
+        size: "",
+        dateReset: "",
+        cort: "",
+        type: "Trailer",
+      },
+      {
+        truckId: truck.id,
+        tireId: `${axle}R1`,
+        position: `Axle ${axle} Right Inner`,
+        axle,
+        odometerKm: 0,
+        brand: "",
+        size: "",
+        dateReset: "",
+        cort: "",
+        type: "Trailer",
+      },
+      {
+        truckId: truck.id,
+        tireId: `${axle}R2`,
+        position: `Axle ${axle} Right Outer`,
+        axle,
+        odometerKm: 0,
+        brand: "",
+        size: "",
+        dateReset: "",
+        cort: "",
+        type: "Trailer",
+      }
+    );
+  }
+
+  // Insert Tires
+  const { error: tiresError } = await supabase.from("tires").insert(tiresData);
+
+  if (tiresError) {
+    console.error(
+      "Error al agregar el camión a la tabla de gomas:",
+      tiresError
+    );
+    throw new Error(
+      "El camión fue creado pero no pudo ser agregado a la tabla de gomas"
     );
   }
 

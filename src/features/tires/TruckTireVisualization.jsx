@@ -2,13 +2,13 @@ import { useState } from "react";
 import TruckSvg from "./TruckSvg";
 import TireTooltip from "./TireTooltip";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import Heading from "../../ui/Heading";
 import {
   HiOutlineCheckCircle,
   HiOutlineExclamationTriangle,
   HiOutlineInformationCircle,
 } from "react-icons/hi2";
+import { useEditTires } from "./useEditTires";
 
 // Styled Components
 const Container = styled.div`
@@ -110,6 +110,7 @@ const TruckTireVisualization = ({ initialTires }) => {
   const [selectedTire, setSelectedTire] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const { isEditing, editTires } = useEditTires();
 
   // Function to get color based on mileage
   const getTireStatusColor = (mileage) => {
@@ -120,37 +121,14 @@ const TruckTireVisualization = ({ initialTires }) => {
 
   // Calculate tire status counts for summary
   const statusCounts = {
-    good: tires.filter((tire) => tire.mileage <= 30000).length,
+    good: tires.filter((tire) => tire.odometerKm <= 30000).length,
     warning: tires.filter(
-      (tire) => tire.mileage > 30000 && tire.mileage <= 40000
+      (tire) => tire.odometerKm > 30000 && tire.odometerKm <= 40000
     ).length,
-    critical: tires.filter((tire) => tire.mileage > 40000).length,
+    critical: tires.filter((tire) => tire.odometerKm > 40000).length,
   };
 
   // Handle tire click to show tooltip
-  // const handleTireClick = (tire, event) => {
-  //   event.stopPropagation();
-
-  //   // Get position for the tooltip
-  //   const rect = event.currentTarget.getBoundingClientRect();
-  //   const svgContainerRect = document
-  //     .getElementById("truckVisualization")
-  //     ?.getBoundingClientRect() || { left: 0, top: 0 };
-
-  //   // Adjust tooltip position based on where the tire is on the screen
-  //   // For tires on the right side, position tooltip to the left
-  //   const isRightSide = tire.tireId.includes("R");
-  //   const x = isRightSide
-  //     ? rect.left - svgContainerRect.left - 280
-  //     : rect.right - svgContainerRect.left + 10;
-
-  //   const y = rect.top - svgContainerRect.top;
-
-  //   setTooltipPosition({ x, y });
-  //   setSelectedTire(tire);
-  //   setIsTooltipVisible(true);
-  // };
-  // Modify the handleTireClick function in TruckTireVisualization.jsx
   const handleTireClick = (tire, event) => {
     event.stopPropagation();
 
@@ -187,10 +165,28 @@ const TruckTireVisualization = ({ initialTires }) => {
   };
 
   // Handle updating tire properties
+  // const handleUpdateTire = (id, updates) => {
+  //   // setTires((prevTires) =>
+  //   //   prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
+  //   // );
+  //   // Hereeee
+  //   editTires({ newTiresData: updates, id: id });
+  //   setTires((prevTires) =>
+  //     prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
+  //   );
+  // };
   const handleUpdateTire = (id, updates) => {
+    editTires({ newTiresData: updates, id: id });
+
     setTires((prevTires) =>
       prevTires.map((tire) => (tire.id === id ? { ...tire, ...updates } : tire))
     );
+
+    // Ensure tooltip shows updated values
+    setSelectedTire((prevTire) => ({
+      ...prevTire,
+      ...updates,
+    }));
   };
 
   // Handle click outside to close tooltip
@@ -239,6 +235,7 @@ const TruckTireVisualization = ({ initialTires }) => {
         {isTooltipVisible && selectedTire && (
           <TireTooltip
             tire={selectedTire}
+            isEditing={isEditing}
             position={tooltipPosition}
             onClose={handleCloseTooltip}
             onUpdateTire={handleUpdateTire}
@@ -280,23 +277,6 @@ const TruckTireVisualization = ({ initialTires }) => {
       </LegendContainer>
     </Container>
   );
-};
-
-// PropTypes for component validation
-TruckTireVisualization.propTypes = {
-  initialTires: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      tireId: PropTypes.string.isRequired,
-      position: PropTypes.string.isRequired,
-      axle: PropTypes.number.isRequired,
-      mileage: PropTypes.number.isRequired,
-      brand: PropTypes.string.isRequired,
-      size: PropTypes.string.isRequired,
-      dateReset: PropTypes.instanceOf(Date).isRequired,
-      cost: PropTypes.number.isRequired,
-    })
-  ).isRequired,
 };
 
 export default TruckTireVisualization;

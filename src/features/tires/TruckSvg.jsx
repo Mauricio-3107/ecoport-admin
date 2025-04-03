@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import PropTypes from "prop-types";
 
 const TruckSvgContainer = styled.svg`
   width: 100%;
@@ -51,8 +50,11 @@ const LegendItem = styled.text`
 `;
 
 const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
+  const is6axle = tires.length > 18;
+  const pxOffset = is6axle ? 75 : 0;
+  const pxOffset3Axle = is6axle ? 60 : 0;
   // Map of tire positions to coordinates
-  const tirePositions = {
+  const tirePositions5Axle = {
     // Front axle (tractor) - 2 tires
     FL1: { x: 350, y: 100 },
     FR1: { x: 450, y: 100 },
@@ -66,10 +68,10 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
     // Gap between tractor and trailer
 
     // Third axle (trailer) - 4 tires
-    "3L1": { x: 320, y: 320 },
-    "3L2": { x: 270, y: 320 },
-    "3R1": { x: 480, y: 320 },
-    "3R2": { x: 530, y: 320 },
+    "3L1": { x: 320, y: 320 - pxOffset3Axle },
+    "3L2": { x: 270, y: 320 - pxOffset3Axle },
+    "3R1": { x: 480, y: 320 - pxOffset3Axle },
+    "3R2": { x: 530, y: 320 - pxOffset3Axle },
 
     // Fourth axle (trailer) - 4 tires
     "4L1": { x: 320, y: 390 },
@@ -82,10 +84,16 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
     "5L2": { x: 270, y: 460 },
     "5R1": { x: 480, y: 460 },
     "5R2": { x: 530, y: 460 },
+
+    // Sixth axle (trailer) - 4 tires
+    "6L1": { x: 320, y: 530 },
+    "6L2": { x: 270, y: 530 },
+    "6R1": { x: 480, y: 530 },
+    "6R2": { x: 530, y: 530 },
   };
 
   return (
-    <TruckSvgContainer viewBox="0 0 800 550">
+    <TruckSvgContainer viewBox={`0 0 800 ${550 + pxOffset}`}>
       {/* Truck chassis */}
       <g id="truckChassis">
         {/* Tractor body */}
@@ -93,7 +101,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
           x="300"
           y="50"
           width="200"
-          height="170"
+          height={`${170 + pxOffset}`}
           fill="#F1F5F9"
           stroke="#94A3B8"
           strokeWidth="2"
@@ -103,7 +111,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         {/* Trailer body */}
         <rect
           x="250"
-          y="270"
+          y={`${270 + pxOffset}`}
           width="300"
           height="230"
           fill="#F1F5F9"
@@ -114,9 +122,9 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         {/* Connection between tractor and trailer */}
         <line
           x1="400"
-          y1="220"
+          y1={`${220 + pxOffset}`}
           x2="400"
-          y2="270"
+          y2={`${270 + pxOffset}`}
           stroke="#94A3B8"
           strokeWidth="4"
         />
@@ -140,14 +148,16 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         />
 
         {/* Axle lines - Trailer */}
+        {/* 3rd Axle */}
         <line
           x1="250"
-          y1="320"
+          y1={`${320 - pxOffset3Axle}`}
           x2="550"
-          y2="320"
+          y2={`${320 - pxOffset3Axle}`}
           stroke="#94A3B8"
           strokeWidth="4"
         />
+        {/* 4th Axle */}
         <line
           x1="250"
           y1="390"
@@ -156,6 +166,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
           stroke="#94A3B8"
           strokeWidth="4"
         />
+        {/* 5th Axle */}
         <line
           x1="250"
           y1="460"
@@ -164,6 +175,17 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
           stroke="#94A3B8"
           strokeWidth="4"
         />
+        {/* 6th Axle */}
+        {is6axle && (
+          <line
+            x1="250"
+            y1="530"
+            x2="550"
+            y2="530"
+            stroke="#94A3B8"
+            strokeWidth="4"
+          />
+        )}
 
         {/* Axle labels */}
         <AxleLabel x="570" y="105">
@@ -172,7 +194,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         <AxleLabel x="570" y="185">
           2nd Axle
         </AxleLabel>
-        <AxleLabel x="570" y="325">
+        <AxleLabel x="570" y={`${325 - pxOffset3Axle}`}>
           3rd Axle
         </AxleLabel>
         <AxleLabel x="570" y="395">
@@ -181,19 +203,24 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         <AxleLabel x="570" y="465">
           5th Axle
         </AxleLabel>
+        {is6axle && (
+          <AxleLabel x="570" y="535">
+            6th Axle
+          </AxleLabel>
+        )}
 
         {/* Section labels */}
         <SectionLabel x="400" y="30">
           Tracto
         </SectionLabel>
-        <SectionLabel x="400" y="250">
+        <SectionLabel x="400" y={`${250 + pxOffset}`}>
           Semirremolque
         </SectionLabel>
       </g>
 
       {/* Tires */}
       {tires.map((tire) => {
-        const position = tirePositions[tire.tireId];
+        const position = tirePositions5Axle[tire.tireId];
         if (!position) return null;
 
         return (
@@ -208,7 +235,7 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
               cx="0"
               cy="0"
               r="22"
-              color={getTireStatusColor(tire.mileage)}
+              color={getTireStatusColor(tire.odometerKm)}
             />
             <TireText x="0" y="5">
               {tire.tireId}
@@ -229,24 +256,5 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
     </TruckSvgContainer>
   );
 };
-
-// PropTypes for component validation
-// TruckSvg.propTypes = {
-//   tires: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       tireId: PropTypes.string.isRequired,
-//       position: PropTypes.string.isRequired,
-//       axle: PropTypes.number.isRequired,
-//       mileage: PropTypes.number.isRequired,
-//       brand: PropTypes.string.isRequired,
-//       size: PropTypes.string.isRequired,
-//       dateReset: PropTypes.instanceOf(Date).isRequired,
-//       cost: PropTypes.number.isRequired,
-//     })
-//   ).isRequired,
-//   getTireStatusColor: PropTypes.func.isRequired,
-//   onTireClick: PropTypes.func.isRequired,
-// };
 
 export default TruckSvg;
