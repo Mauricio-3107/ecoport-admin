@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import PropTypes from "prop-types";
 
 const InputElement = styled.input`
   width: 100%;
@@ -19,13 +18,3 @@ const InputElement = styled.input`
 export const TireInput = (props) => {
   return <InputElement {...props} />;
 };
-
-// TireInput.propTypes = {
-//   type: PropTypes.string,
-//   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//   onChange: PropTypes.func,
-//   min: PropTypes.string,
-//   max: PropTypes.string,
-//   step: PropTypes.string,
-//   style: PropTypes.object,
-// };

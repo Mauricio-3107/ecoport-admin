@@ -8,9 +8,9 @@ import {
   HiMiniCalendar,
   HiOutlineCurrencyDollar,
   HiOutlinePaperAirplane,
+  HiOutlinePencil,
   HiOutlineTag,
   HiOutlineXMark,
-  HiPencil,
 } from "react-icons/hi2";
 import { PiTireThin } from "react-icons/pi";
 
@@ -119,8 +119,7 @@ const InfoLabel = styled.label`
   font-weight: 500;
 `;
 
-const InfoValue = styled.div`
-`;
+const InfoValue = styled.div``;
 
 const EditContainer = styled.div`
   display: flex;
@@ -131,14 +130,14 @@ const EditContainer = styled.div`
 const EditButton = styled.button`
   display: flex;
   align-items: center;
-  color: var(--color-blue-300);
-  background-color: var(--color-blue-100);
-  border: 0.5px solid var(--color-blue-300);
+  color: var(--color-indigo-300);
+  background-color: var(--color-indigo-100);
+  border: 0.5px solid var(--color-indigo-300);
   font-size: 1.5rem;
   font-weight: 500;
 
   &:hover {
-    color: var(--color-blue-400);
+    color: var(--color-indigo-400);
   }
 `;
 
@@ -176,7 +175,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
   const [brandInput, setBrandInput] = useState(tire.brand);
   const [sizeInput, setSizeInput] = useState(tire.size);
   const [dateResetInput, setDateResetInput] = useState(
-    format(new Date(tire.dateReset), "yyyy-MM-dd")
+    format(new Date(tire.dateReset), "dd-MM-yyyy")
   );
   const [costInput, setCostInput] = useState(tire.cost?.toString() || "0");
   const [typeInput, setTypeInput] = useState(tire.type);
@@ -223,7 +222,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       case "mileage": {
         const newMileage = parseInt(mileageInput);
         if (!isNaN(newMileage) && newMileage >= 0) {
-          updates.mileage = newMileage;
+          updates.odometerKm = newMileage;
         }
         break;
       }
@@ -410,6 +409,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                   width: "100%",
                   padding: "0.5rem",
                   fontSize: "1.2rem",
+                  backgroundColor: "var(--color-grey-0)",
                 }}
               >
                 <option value="new">New</option>
@@ -461,7 +461,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 <div style={{ marginLeft: "auto" }}>
                   <EditButton onClick={() => handleEditClick("brand")}>
                     <EditIcon>
-                      <HiPencil size={20} />
+                      <HiOutlinePencil size={20} />
                     </EditIcon>
                     Edit
                   </EditButton>
@@ -489,7 +489,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("type")}>
                   <EditIcon>
-                    <HiPencil size={20} />
+                    <HiOutlinePencil size={20} />
                   </EditIcon>
                   Edit
                 </EditButton>
@@ -525,7 +525,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 <div style={{ marginLeft: "auto" }}>
                   <EditButton onClick={() => handleEditClick("dateReset")}>
                     <EditIcon>
-                      <HiPencil size={20} />
+                      <HiOutlinePencil size={20} />
                     </EditIcon>
                     Edit
                   </EditButton>
@@ -549,7 +549,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("mileage")}>
                   <EditIcon>
-                    <HiPencil size={20} />
+                    <HiOutlinePencil size={20} />
                   </EditIcon>
                   Edit
                 </EditButton>
@@ -572,7 +572,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("cost")}>
                   <EditIcon>
-                    <HiPencil size={20} />
+                    <HiOutlinePencil size={20} />
                   </EditIcon>
                   Edit
                 </EditButton>
