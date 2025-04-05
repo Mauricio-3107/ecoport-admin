@@ -104,16 +104,18 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Número de ruedas" error={errors?.tires?.message}>
-        <Input
-          type="number"
-          disabled={isWorking}
-          id="tires"
-          {...register("tires", {
-            required: "This field is required",
-          })}
-        />
-      </FormRow>
+      {!isEditSession && (
+        <FormRow label="Número de ruedas" error={errors?.tires?.message}>
+          <Input
+            type="number"
+            disabled={isWorking}
+            id="tires"
+            {...register("tires", {
+              required: "This field is required",
+            })}
+          />
+        </FormRow>
+      )}
 
       <FormRow label="Tara" error={errors?.tare?.message}>
         <Input

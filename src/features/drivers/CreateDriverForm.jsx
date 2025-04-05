@@ -79,6 +79,20 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           })}
         />
       </FormRow>
+      <FormRow label="Sueldo (Bs)" error={errors?.salary?.message}>
+        <Input
+          type="number"
+          disabled={isWorking}
+          id="salary"
+          {...register("salary", {
+            required: "This field is required",
+            min: {
+              value: 1,
+              message: "Salario debe ser un número positivo",
+            },
+          })}
+        />
+      </FormRow>
 
       <FormRow>
         {/* type is an HTML attribute! */}

@@ -6,12 +6,10 @@ import {
   HiArchiveBoxArrowDown,
   HiArchiveBoxXMark,
   HiPencil,
-  HiSquare2Stack,
   HiTrash,
 } from "react-icons/hi2";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import CreateDriverForm from "./CreateDriverForm";
-import { useCreateDriver } from "./useCreateDriver";
 import { useDeleteDriver } from "./useDeleteDriver";
 import AssignTruckForm from "../truckDriverAssignments/AssignTruckForm";
 import { useUnassignTruckDriver } from "../truckDriverAssignments/useUnassignTruckDriver";
@@ -48,7 +46,6 @@ const LicensePlate = styled.div`
 `;
 
 function DriverRow({ driver, availableTrucks }) {
-  const { isCreating, createDriver } = useCreateDriver();
   const { isDeleting, deleteDriver } = useDeleteDriver();
   const { isUnassigning, unassignTruck } = useUnassignTruckDriver();
 
@@ -59,6 +56,7 @@ function DriverRow({ driver, availableTrucks }) {
     phoneNumber,
     licensePlate,
     assignmentId,
+    salary,
   } = driver;
 
   const driverToEdit = {
@@ -66,18 +64,11 @@ function DriverRow({ driver, availableTrucks }) {
     fullName,
     licenseNumber,
     phoneNumber,
+    salary,
   };
 
   const itHasTruck = Boolean(licensePlate && assignmentId);
   console.log(itHasTruck, fullName);
-
-  function handleDuplicate() {
-    createDriver({
-      fullName: `copy of ${fullName}`,
-      licenseNumber,
-      phoneNumber,
-    });
-  }
 
   function fromToday(numDays, withTime = false) {
     const date = add(new Date(), { days: numDays });
@@ -99,19 +90,13 @@ function DriverRow({ driver, availableTrucks }) {
       </PhoneNumberWhatssapLink>
 
       <LicensePlate>{licensePlate || <span>&mdash;</span>}</LicensePlate>
+      <div>{salary || <span>&mdash;</span>}</div>
       <div>
         <Modal>
           <Menus.Menu>
             <Menus.Toggle id={driverId} />
 
             <Menus.List id={driverId}>
-              <Menus.Button
-                icon={<HiSquare2Stack />}
-                onClick={handleDuplicate}
-                disabled={isCreating}
-              >
-                Duplicate
-              </Menus.Button>
               <Modal.Open opens="edit-driver-form">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>

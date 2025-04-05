@@ -81,13 +81,14 @@ function DriverTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 2.2fr 1fr 1fr 1fr 1fr">
+      <Table columns="0.6fr 2.2fr 1fr 1fr 1fr 1fr 1fr">
         <Table.Header role="row">
           <div></div>
           <div>Nombre</div>
           <div>Licencia</div>
           <div>Celular</div>
           <div>Placa</div>
+          <div>Sueldo (Bs)</div>
           <div></div>
         </Table.Header>
         <Table.Body
