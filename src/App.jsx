@@ -22,7 +22,7 @@ import Checkin from "./pages/Checkin";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Pickup from "./pages/Pickup";
-import PerformanceTrucks from "./pages/PerformanceTrucks";
+import Activity from "./pages/Activity";
 import Fuel from "./pages/Fuel";
 import FuelTruckId from "./features/fuel/FuelTruckId";
 import Maintenance from "./pages/Maintenance";
@@ -70,7 +70,7 @@ function App() {
               <Route path="company" element={<Company />} />
               <Route path="account" element={<Account />} />
               <Route path="pickup" element={<Pickup />} />
-              <Route path="performanceTrucks" element={<PerformanceTrucks />} />
+              <Route path="activity" element={<Activity />} />
               <Route path="fuel" element={<Fuel />} />
               <Route path="fuel/:truckId" element={<FuelTruckId />} />
               <Route path="maintenance" element={<Maintenance />} />

@@ -17,7 +17,7 @@ const ChartBox = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
   padding: 2.4rem 3.2rem;
-  grid-column: 1 / span 2;
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -69,27 +69,26 @@ function TripsChart({
             Total: {totalTrips} viajes
           </TotalTrips>
           <ResponsiveContainer width="100%" height={height}>
-            <BarChart layout="vertical" data={trips}>
+            <BarChart data={trips}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
-                type="number"
-                allowDecimals={false} // Ensures only whole numbers
-                tickFormatter={(tick) => Math.round(tick)} // Extra safety measure
-                tick={{ fill: colors.text, fontSize: 12 }}
-                domain={[0, "auto"]} // Keeps it dynamic but whole numbers only
-              />
-              <YAxis
                 dataKey="licensePlate"
                 type="category"
-                width={100}
                 tick={{ fill: colors.text, fontSize: 12 }}
                 interval={0}
+              />
+              <YAxis
+                type="number"
+                allowDecimals={false}
+                tickFormatter={(tick) => Math.round(tick)}
+                tick={{ fill: colors.text, fontSize: 12 }}
+                domain={[0, "auto"]}
               />
               <Tooltip contentStyle={{ backgroundColor: colors.background }} />
               <Bar
                 dataKey="trips"
                 fill={colors.barFill}
-                barSize={20}
+                barSize={40}
                 name="Número de Viajes"
               />
             </BarChart>

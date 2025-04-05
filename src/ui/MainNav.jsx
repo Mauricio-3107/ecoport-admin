@@ -1,4 +1,5 @@
 import { BsFuelPump } from "react-icons/bs";
+import { GiMovementSensor } from "react-icons/gi";
 import {
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
@@ -10,6 +11,7 @@ import {
   HiOutlineTruck,
   HiOutlineUser,
   HiOutlineUsers,
+  HiOutlineWrench,
 } from "react-icons/hi2";
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
 import { PiTireLight } from "react-icons/pi";
@@ -132,14 +134,14 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/performanceTrucks">
-            <HiOutlineChartBar />
-            <span>Performance</span>
+          <StyledNavLink to="/activity">
+            <GiMovementSensor />
+            <span>Activity</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/maintenance">
-            <HiOutlineCog6Tooth />
+            <HiOutlineWrench />
             <span>Maintenance</span>
           </StyledNavLink>
         </li>

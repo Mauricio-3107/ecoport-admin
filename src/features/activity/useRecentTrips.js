@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { getToday } from "../../utils/helpers";
 import { subDays } from "date-fns";
 
-export function useRecentTripsPerformance() {
+export function useRecentTrips() {
   const [searchParams] = useSearchParams();
 
   // Filter

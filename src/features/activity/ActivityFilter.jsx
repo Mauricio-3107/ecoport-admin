@@ -1,6 +1,6 @@
 import Filter from "../../ui/Filter";
 
-function PerformanceTrucksFilter() {
+function ActivityFilter() {
   return (
     <Filter
       filterField="last"
@@ -13,4 +13,4 @@ function PerformanceTrucksFilter() {
   );
 }
 
-export default PerformanceTrucksFilter;
+export default ActivityFilter;

@@ -5,12 +5,11 @@ import TrucksDrivenRuntimeChart from "../../ui/TrucksDrivenRuntimeChart";
 import { useTotalMileageTrucks } from "../dashboard/useTotalMileageTrucks";
 import Spinner from "../../ui/Spinner";
 import { useTrucksMileageRuntime } from "../dashboard/useTrucksMileageRuntime";
-import { useRecentTripsPerformance } from "./useRecentTripsPerformance";
+import { useRecentTrips } from "./useRecentTrips";
 import TripsChart from "./TripsChart";
-import IncomeChart from "./IncomeChart";
 import LoadUtilizationChart from "./LoadUtilizationChart";
 
-const StyledPerformanceTrucksLayout = styled.div`
+const StyledActivityLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   /* grid-template-rows: auto auto 34rem; */
@@ -18,7 +17,7 @@ const StyledPerformanceTrucksLayout = styled.div`
   gap: 2.4rem;
 `;
 
-function PerformanceTrucksLayout() {
+function ActivityLayout() {
   // searchParams
   const [searchParams] = useSearchParams();
 
@@ -40,7 +39,7 @@ function PerformanceTrucksLayout() {
     isLoading: isLoadingTrips,
     trips,
     count,
-  } = useRecentTripsPerformance();
+  } = useRecentTrips();
 
   if (isLoadingTotalMileage || isLoadingTrucksMileageRuntime || isLoadingTrips)
     return <Spinner />;
@@ -62,18 +61,19 @@ function PerformanceTrucksLayout() {
       trips: tripsIncomeByTruck[licensePlate].trips,
     })
   );
-
-  const trucksIncomeData = Object.keys(tripsIncomeByTruck).map(
-    (licensePlate) => ({
-      licensePlate,
-      income: tripsIncomeByTruck[licensePlate].income,
-    })
-  );
+  
+  // Income Chart
+  // const trucksIncomeData = Object.keys(tripsIncomeByTruck).map(
+  //   (licensePlate) => ({
+  //     licensePlate,
+  //     income: tripsIncomeByTruck[licensePlate].income,
+  //   })
+  // );
 
   // Load utilization
   const truckCapacities = {
     6: 45000, // 6-axle trucks
-    4: 42000, // 5-axle trucks
+    4: 43000, // 5-axle trucks
   };
 
   // Calculate Load Utilization (%) for each truck
@@ -116,7 +116,7 @@ function PerformanceTrucksLayout() {
     filterValuePeriod === "Today" ? "hoy" : `últimos ${filterValuePeriod} días`;
 
   return (
-    <StyledPerformanceTrucksLayout>
+    <StyledActivityLayout>
       <TrucksDrivenMileageChart
         trucksMileageRuntime={trucksMileageRuntime}
         totalMileage={totalMileageTrucks}
@@ -142,21 +142,14 @@ function PerformanceTrucksLayout() {
         periodEmptyMessageData={periodMessage}
       />
 
-      <IncomeChart
-        incomeData={trucksIncomeData}
-        height={450}
-        title={`Ingresos por unidad ${periodMessage}`}
-        periodEmptyMessageData={periodMessage}
-      />
-
       <LoadUtilizationChart
         trucksLoadData={trucksLoadData}
         height={450}
         title={`Capacidad Utilizada (%) ${periodMessage}`}
         periodEmptyMessageData={periodMessage}
       />
-    </StyledPerformanceTrucksLayout>
+    </StyledActivityLayout>
   );
 }
 
-export default PerformanceTrucksLayout;
+export default ActivityLayout;
