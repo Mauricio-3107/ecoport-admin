@@ -11,7 +11,7 @@ export async function getDrivers() {
 }
 
 export async function createEditDriver(newDriver, id) {
-  // 1. Create/Edit Truck
+  // 1. Create/Edit Driver
   let query = supabase.from("drivers");
 
   // a) create

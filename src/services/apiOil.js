@@ -16,16 +16,44 @@ export async function getOil() {
   return data;
 }
 
-export async function editOil(newOil, id) {
+export async function createEditOil(newOil, id) {
+  // a) Create
+  if (!id) {
+    const { error: deleteError } = await supabase
+      .from("oil")
+      .delete()
+      .eq("truckId", newOil?.truckId);
+
+    if (deleteError) {
+      console.error(deleteError);
+      throw new Error("Oil row could not be deleted");
+    }
+
+    const { data, error } = await supabase
+      .from("oil")
+      .insert([{ ...newOil }])
+      .select()
+      .single();
+
+    if (error) {
+      console.error(error);
+      throw new Error("Oil row could not be created");
+    }
+
+    return data;
+  }
+
+  // b) Edit
   const { data, error } = await supabase
     .from("oil")
     .update({ ...newOil })
     .eq("id", id)
     .select()
+    .single();
 
   if (error) {
     console.error(error);
-    throw new Error("Oil could not be edited");
+    throw new Error("Oil could not be created or edited");
   }
 
   return data;

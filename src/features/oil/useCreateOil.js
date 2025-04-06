@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { createEditOil as editOilApi } from "../../services/apiOil";
+import { createEditOil as createOilApi } from "../../services/apiOil";
 
-export function useEditOil() {
+export function useCreateOil() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isEditing, mutate: editOil } = useMutation({
-    mutationFn: ({ editOil, id }) => editOilApi(editOil, id),
+  const { isLoading: isCreating, mutate: createOil } = useMutation({
+    mutationFn: (newOil) => createOilApi(newOil),
     onSuccess: () => {
-      toast.success("Oil successfully edited");
+      toast.success("Oil successfully logged");
       queryClient.invalidateQueries({
         queryKey: ["oil"],
       });
@@ -16,5 +16,5 @@ export function useEditOil() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isEditing, editOil };
+  return { isCreating, createOil };
 }

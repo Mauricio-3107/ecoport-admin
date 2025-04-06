@@ -3,7 +3,8 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
 import { HiPencil } from "react-icons/hi2";
-import EditOilForm from "./EditOilForm";
+import CreateEditOilForm from "./CreateEditOilForm";
+import { IoLogInSharp } from "react-icons/io5";
 
 const Img = styled.img`
   display: block;
@@ -46,19 +47,35 @@ function OilRow({ oilTruck }) {
       <div>{oilDate ? oilDate?.split("T")[0] : <span>&mdash;</span>}</div>
       <div>{lastKm ? lastKm : <span>&mdash;</span>}</div>
       <NextKm>{nextKm ? nextKm : <span>&mdash;</span>}</NextKm>
-      <div>{odometerKm ? odometerKm : <span>&mdash;</span>}</div>
+      <div>{odometerKm != null ? odometerKm : <span>&mdash;</span>}</div>
       <div>
         <Modal>
           <Menus.Menu>
             <Menus.Toggle id={oilId} />
             <Menus.List id={oilId}>
+              <Modal.Open opens="log-oil">
+                <Menus.Button icon={<IoLogInSharp />}>
+                  Registrar nuevo cambio
+                </Menus.Button>
+              </Modal.Open>
               <Modal.Open opens="edit-oil">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>
+                  Editar actual cambio
+                </Menus.Button>
               </Modal.Open>
             </Menus.List>
 
+            <Modal.Window name="log-oil">
+              <CreateEditOilForm
+                licensePlate={licensePlate}
+                truckId={truckId}
+              />
+            </Modal.Window>
             <Modal.Window name="edit-oil">
-              <EditOilForm oilToEdit={oilToEdit} licensePlate={licensePlate} />
+              <CreateEditOilForm
+                oilToEdit={oilToEdit}
+                licensePlate={licensePlate}
+              />
             </Modal.Window>
           </Menus.Menu>
         </Modal>
