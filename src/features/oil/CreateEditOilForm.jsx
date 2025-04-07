@@ -94,7 +94,7 @@ function CreateEditOilForm({
           />
         </FormRow>
 
-        <FormRow label="Costo aceite" error={errors?.oilCost?.message}>
+        <FormRow label="Costo aceite (Bs)" error={errors?.oilCost?.message}>
           <Input
             id="oilCost"
             type="number"
@@ -107,7 +107,7 @@ function CreateEditOilForm({
           />
         </FormRow>
 
-        <FormRow label="Costo filtro" error={errors?.filterCost?.message}>
+        <FormRow label="Costo filtro (Bs)" error={errors?.filterCost?.message}>
           <Input
             id="filterCost"
             type="number"
@@ -123,7 +123,10 @@ function CreateEditOilForm({
           />
         </FormRow>
 
-        <FormRow label="Costo mano de obra" error={errors?.laborCost?.message}>
+        <FormRow
+          label="Costo mano de obra (Bs)"
+          error={errors?.laborCost?.message}
+        >
           <Input
             id="laborCost"
             type="number"
@@ -158,7 +161,9 @@ function CreateEditOilForm({
           >
             Cancelar
           </Button>
-          <Button disabled={isWorking}>Log Maintenance</Button>
+          <Button disabled={isWorking}>
+            {isEditSession ? "Edit oil change" : "Log oil change"}
+          </Button>
         </FormRow>
       </Form>
     </Container>

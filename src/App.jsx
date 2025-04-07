@@ -30,6 +30,7 @@ import MaintenanceTruckId from "./pages/MaintenanceTruckId";
 import Oil from "./pages/Oil";
 import Tires from "./pages/Tires";
 import TiresTruckId from "./pages/TiresTruckId";
+import TripCosts from "./pages/TripCosts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -81,6 +82,7 @@ function App() {
               <Route path="oil" element={<Oil />} />
               <Route path="tires" element={<Tires />} />
               <Route path="tires/:truckId" element={<TiresTruckId />} />
+              <Route path="tripCosts" element={<TripCosts />} />
             </Route>
 
             <Route path="login" element={<Login />} />

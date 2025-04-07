@@ -14,7 +14,7 @@ import {
   HiOutlineWrench,
 } from "react-icons/hi2";
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
-import { PiTireLight } from "react-icons/pi";
+import { PiMoneyLight, PiTireLight } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -74,21 +74,9 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/bookings">
-            <HiOutlineCalendarDays />
-            <span>Bookings</span>
-          </StyledNavLink>
-        </li>
-        <li>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
             <span>Users</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/settings">
-            <HiOutlineCog6Tooth />
-            <span>Settings</span>
           </StyledNavLink>
         </li>
         <li>
@@ -155,6 +143,12 @@ function MainNav() {
           <StyledNavLink to="/tires">
             <PiTireLight />
             <span>Tires</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/tripCosts">
+            <PiMoneyLight />
+            <span>Trip costs</span>
           </StyledNavLink>
         </li>
       </NavList>

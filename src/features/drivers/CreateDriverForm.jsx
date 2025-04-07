@@ -18,7 +18,6 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
-  // New
 
   function onSubmit(data) {
     console.log(data);

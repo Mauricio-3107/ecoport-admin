@@ -115,7 +115,27 @@ export async function createEditTruck(newTruck, id) {
     );
   }
 
-  // 6. Automatically add the truck to the tires table
+  // 6. Create tripCosts table
+  const { error: costsError } = await supabase.from("tripCosts").insert([
+    {
+      truckId: truck.id, // Reference the newly created truck
+      agent: 0, // Default value
+      expenses: 0, // Default value
+      extraFuel: 0, // Default value
+    },
+  ]);
+
+  if (costsError) {
+    console.error(
+      "Error al agregar el camión a la tabla de costos de viaje:",
+      fuelError
+    );
+    throw new Error(
+      "El camión fue creado pero no pudo ser agregado a la tabla de costos de viaje"
+    );
+  }
+
+  // 7. Automatically add the truck to the tires table
   const totalTires = truck.tires + 12; // Truck tires + trailer tires
   const truckAxles = truck.tires === 6 ? 2 : 3; // 6 tires = 2 axles, 8 or 10 tires = 3 axles
   const totalAxles = truckAxles + 3; // Truck axles + trailer axles
