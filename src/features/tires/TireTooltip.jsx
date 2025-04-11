@@ -174,9 +174,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
   const [mileageInput, setMileageInput] = useState(tire.odometerKm.toString());
   const [brandInput, setBrandInput] = useState(tire.brand);
   const [sizeInput, setSizeInput] = useState(tire.size);
-  const [dateResetInput, setDateResetInput] = useState(
-    format(new Date(tire.dateReset), "dd-MM-yyyy")
-  );
+  const [dateResetInput, setDateResetInput] = useState(tire.dateReset);
   const [costInput, setCostInput] = useState(tire.cost?.toString() || "0");
   const [typeInput, setTypeInput] = useState(tire.type);
 
@@ -239,9 +237,8 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
         break;
       }
       case "dateReset": {
-        const newDate = new Date(dateResetInput);
-        if (!isNaN(newDate.getTime())) {
-          updates.dateReset = newDate;
+        if (dateResetInput && typeof dateResetInput === "string") {
+          updates.dateReset = dateResetInput; // send as-is
         }
         break;
       }
@@ -274,7 +271,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
     setBrandInput(tire.brand);
     setSizeInput(tire.size);
     setTypeInput(tire.type);
-    setDateResetInput(format(new Date(tire.dateReset), "yyyy-MM-dd"));
+    setDateResetInput(tire.dateReset);
     setCostInput(tire.cost?.toString() || "0");
     setEditingField(null);
   };
@@ -354,7 +351,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
             <InputContainer>
               <TireInput
                 id="dateResetInput"
-                type="date"
+                type="datetime-local"
                 value={dateResetInput}
                 onChange={(e) => setDateResetInput(e.target.value)}
                 style={{ display: "block", width: "100%" }}

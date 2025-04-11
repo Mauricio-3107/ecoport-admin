@@ -162,7 +162,7 @@ function CreateTripForm({
           id="cargoWeight"
           {...register("cargoWeight", {
             required: "This field is required",
-            min: { value: 1, message: "Debe ser positivo" },
+            min: { value: 0, message: "Debe ser positivo" },
           })}
         />
       </FormRow>
@@ -201,7 +201,7 @@ function CreateTripForm({
           {...register("price", {
             required: "This field is required",
             min: {
-              value: 1,
+              value: 0,
               message: "Flete debe ser positivo",
             },
           })}

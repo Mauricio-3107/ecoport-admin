@@ -9,16 +9,18 @@ function ClientTable() {
   const { isLoading, clients } = useClients();
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
-
+  // Take out the 2 edge cases
+  const realClients = clients.filter((client) => !client.hidden);
+  
   // Filter
   const filterValue = searchParams.get("type") || "all";
 
   let filteredClients;
-  if (filterValue === "all") filteredClients = clients;
+  if (filterValue === "all") filteredClients = realClients;
   if (filterValue === "export")
-    filteredClients = clients.filter((client) => client.type === "export");
+    filteredClients = realClients.filter((client) => client.type === "export");
   if (filterValue === "import")
-    filteredClients = clients.filter((client) => client.type === "import");
+    filteredClients = realClients.filter((client) => client.type === "import");
 
   // Sorting
   const sortBy = searchParams.get("sortBy") || "name-asc";

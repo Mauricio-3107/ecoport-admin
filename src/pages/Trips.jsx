@@ -14,11 +14,17 @@ function Trips() {
 
   if (isLoadingTda || isLoadingClients) return <Spinner />;
 
-  const clientsObject = clients.map((client) => ({
-    id: client.id,
-    name: client.name,
-    type: client.type,
-  }));
+  const clientsObject = clients
+    .map((client) => ({
+      id: client.id,
+      name: client.name,
+      type: client.type,
+      hidden: client.hidden,
+    }))
+    .sort((a, b) => {
+      // Show non-hidden clients first, hidden ones (edge cases) last
+      return a.hidden === b.hidden ? 0 : a.hidden ? 1 : -1;
+    });
 
   const tdaForm = truckDriverAssignments.map((assignment) => ({
     id: assignment.id,
