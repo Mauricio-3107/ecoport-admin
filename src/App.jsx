@@ -31,6 +31,8 @@ import Oil from "./pages/Oil";
 import Tires from "./pages/Tires";
 import TiresTruckId from "./pages/TiresTruckId";
 import TripCosts from "./pages/TripCosts";
+import Finance from "./pages/Finance";
+import FinanceMonth from "./pages/FinanceMonth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -83,6 +85,8 @@ function App() {
               <Route path="tires" element={<Tires />} />
               <Route path="tires/:truckId" element={<TiresTruckId />} />
               <Route path="tripCosts" element={<TripCosts />} />
+              <Route path="finance" element={<Finance />} />
+              <Route path="finance/:month" element={<FinanceMonth />} />
             </Route>
 
             <Route path="login" element={<Login />} />

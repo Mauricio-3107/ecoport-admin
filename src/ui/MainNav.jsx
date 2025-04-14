@@ -2,9 +2,6 @@ import { BsFuelPump } from "react-icons/bs";
 import { GiMovementSensor } from "react-icons/gi";
 import {
   HiOutlineBriefcase,
-  HiOutlineCalendarDays,
-  HiOutlineChartBar,
-  HiOutlineCog6Tooth,
   HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
   HiOutlineHome,
@@ -14,6 +11,7 @@ import {
   HiOutlineWrench,
 } from "react-icons/hi2";
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
+import { MdAccountBalance } from "react-icons/md";
 import { PiMoneyLight, PiTireLight } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -149,6 +147,12 @@ function MainNav() {
           <StyledNavLink to="/tripCosts">
             <PiMoneyLight />
             <span>Trip costs</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/finance">
+            <MdAccountBalance />
+            <span>Finanzas</span>
           </StyledNavLink>
         </li>
       </NavList>
