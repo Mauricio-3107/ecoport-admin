@@ -106,7 +106,7 @@ function TrucksDrivenMileageChart({
                 dataKey="licensePlate"
                 type="category"
                 width={100}
-                tick={{ fill: colors.text, fontSize: 12 }}
+                tick={{ fill: colors.text, fontSize: 13 }}
                 interval={0} // Forces all labels to be displayed
               />
               <Tooltip contentStyle={{ backgroundColor: colors.background }} />

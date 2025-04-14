@@ -69,12 +69,137 @@ function VerticalBarChartBox({
             interval={0}
             angle={-35}
             textAnchor="end"
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
           />
-          <YAxis tick={{ fontSize: 12 }} />
-          <Tooltip
-            formatter={(value) => `Bs ${Number(value).toLocaleString()}`}
-          />
+          <YAxis tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }} />
+          {dataKey === "totalCost" ? (
+            <Tooltip
+              content={({ active, payload }) => {
+                if (active && payload && payload.length) {
+                  const {
+                    oilCost,
+                    salaryCost,
+                    fuelConsumptionCost,
+                    dailyExpensesCost,
+                    maintenanceCost,
+                    tiresCost,
+                    travelCost,
+                    totalCost,
+                    licensePlate,
+                  } = payload[0].payload;
+
+                  return (
+                    <div
+                      style={{
+                        backgroundColor: isDarkMode ? "#1f2937" : "#fff",
+                        color: isDarkMode ? "#fff" : "#111",
+                        borderRadius: "10px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                        padding: "1.2rem",
+                        fontSize: "1.5rem",
+                        maxWidth: "320px",
+                        maxHeight: "300px",
+                        overflowY: "auto",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      <strong
+                        style={{
+                          fontSize: "1.6rem",
+                          display: "block",
+                          marginBottom: "0.8rem",
+                        }}
+                      >
+                        {licensePlate} - Total: Bs{" "}
+                        {totalCost.toLocaleString("es-BO", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </strong>
+                      <ul style={{ paddingLeft: "1.6rem", margin: 0 }}>
+                        <li>
+                          🛢️ Aceite: Bs{" "}
+                          {oilCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          👨‍🔧 Sueldo: Bs{" "}
+                          {salaryCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          ⛽ Combustible: Bs{" "}
+                          {fuelConsumptionCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          🍴 Gastos diarios: Bs{" "}
+                          {dailyExpensesCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          🔧 Mantenimiento: Bs{" "}
+                          {maintenanceCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          🛞 Llantas: Bs{" "}
+                          {tiresCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                        <li>
+                          🚚 Viajes: Bs{" "}
+                          {travelCost.toLocaleString("es-BO", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                        </li>
+                      </ul>
+                    </div>
+                  );
+                }
+                return null;
+              }}
+            />
+          ) : (
+            <Tooltip
+              formatter={(value) =>
+                `Bs ${Number(value).toLocaleString("es-BO", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`
+              }
+              labelFormatter={(label) =>
+                dataKey === "totalRevenue"
+                  ? `${label}`
+                  : dataKey === "profit"
+                  ? `${label}`
+                  : label
+              }
+              contentStyle={{
+                backgroundColor: isDarkMode ? "#1f2937" : "#fff",
+                color: isDarkMode ? "#fff" : "#111",
+                borderRadius: "10px",
+                padding: "1rem",
+                fontSize: "1.5rem",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+              }}
+              labelStyle={{ fontSize: "1.6rem", fontWeight: "bold" }}
+            />
+          )}
+
           <Bar dataKey={dataKey} fill={color} name={barName} barSize={40} />
         </BarChart>
       </ResponsiveContainer>
