@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import { useDarkMode } from "../../context/DarkModeContext";
 import TruckCard from "../../ui/TruckCard";
 import CreateTiresForm from "./CreateTiresForm";
-import AddTires from "./AddTires";
 
 const TrucksContainer = styled.div`
   display: grid;
@@ -50,10 +49,10 @@ function TiresLayout({ trucks }) {
                 licensePlate={truck.licensePlate}
               />
             }
+            hideFormModal={true}
           />
         ))}
       </TrucksContainer>
-      <AddTires />
     </>
   );
 }

@@ -82,7 +82,13 @@ const Button = styled.button`
   }
 `;
 
-function TruckCard({ truck, resourceName, labelButton, form }) {
+function TruckCard({
+  truck,
+  resourceName,
+  labelButton,
+  form,
+  hideFormModal = false,
+}) {
   const { isDarkMode } = useDarkMode(); // Get the current dark mode status
   const navigate = useNavigate();
   const { id: truckId, licensePlate, image } = truck;
@@ -98,11 +104,17 @@ function TruckCard({ truck, resourceName, labelButton, form }) {
         <Modal>
           <OverlayContainer>
             <LicensePlate $isDarkMode={isDarkMode}>{licensePlate}</LicensePlate>
-            <Modal.Open opens={`add-${resourceName}-form`}>
-              <Button $primary $isDarkMode={isDarkMode}>
-                {labelButton}
-              </Button>
-            </Modal.Open>
+
+            {!hideFormModal && (
+              <>
+                <Modal.Open opens={`add-${resourceName}-form`}>
+                  <Button $primary $isDarkMode={isDarkMode}>
+                    {labelButton}
+                  </Button>
+                </Modal.Open>
+              </>
+            )}
+
             <Button
               $isDarkMode={isDarkMode}
               onClick={() => navigate(`/${resourceName}/${truckId}`)}
@@ -111,7 +123,11 @@ function TruckCard({ truck, resourceName, labelButton, form }) {
             </Button>
           </OverlayContainer>
 
-          <Modal.Window name={`add-${resourceName}-form`}>{form}</Modal.Window>
+          {!hideFormModal && (
+            <Modal.Window name={`add-${resourceName}-form`}>
+              {form}
+            </Modal.Window>
+          )}
         </Modal>
       </StyledTruckCard>
     </>
