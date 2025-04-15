@@ -13,6 +13,7 @@ import {
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";
 import { MdAccountBalance } from "react-icons/md";
 import { PiMoneyLight, PiTireLight } from "react-icons/pi";
+import { SiRedbull } from "react-icons/si";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -67,7 +68,7 @@ function MainNav() {
       <NavList>
         <li>
           <StyledNavLink to="/dashboard">
-            <HiOutlineHome />
+            <SiRedbull />
             <span>Home</span>
           </StyledNavLink>
         </li>

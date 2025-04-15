@@ -19,7 +19,7 @@ function FinanceLayout({ monthlyData }) {
         <MonthCard
           key={month.month}
           month={month.month}
-          backgroundImage={month.backgroundImage}
+          backgroundImage={month.imageUrl}
           resourcePath={"finance"}
           isDarkMode={isDarkMode}
         />

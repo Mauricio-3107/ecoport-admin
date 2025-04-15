@@ -74,3 +74,17 @@ export async function getFinanceMonth(month) {
 
   return merged;
 }
+
+export async function getMonthImages() {
+  const { data, error } = await supabase
+    .from("monthImages")
+    .select("month, imageUrl")
+    .order("month");
+
+  if (error) {
+    console.error("❌ Error fetching monthly backgrounds:", error);
+    throw new Error("Could not load month background images");
+  }
+
+  return data;
+}
