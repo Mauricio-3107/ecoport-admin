@@ -38,32 +38,3 @@ export async function getFuelTruckId(truckId) {
   return data;
 }
 
-
-
-export async function logFuel(newLogFuel, id, licensePlate) {
-  // 1. Get the latest mileage data for this truck
-  const { error: mileageError } = await supabase
-    .from("trucksMileageRuntime")
-    .select("milesToday")
-    .eq("licensePlate", licensePlate)
-    .single();
-
-  if (mileageError) {
-    console.error(mileageError);
-    throw new Error("Error fetching latest mileage data");
-  }
-
-  const { data, error } = await supabase
-    .from("fuelConsumption")
-    .update({ ...newLogFuel })
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Combustible no pudo ser registrado");
-  }
-
-  return data;
-}

@@ -54,14 +54,14 @@ function OilRow({ oilTruck }) {
           <Menus.Menu>
             <Menus.Toggle id={oilId} />
             <Menus.List id={oilId}>
-              <Modal.Open opens="log-oil">
-                <Menus.Button icon={<IoLogInSharp />}>
-                  Registrar nuevo cambio
-                </Menus.Button>
-              </Modal.Open>
               <Modal.Open opens="edit-oil">
                 <Menus.Button icon={<HiPencil />}>
                   Editar actual cambio
+                </Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="log-oil">
+                <Menus.Button icon={<IoLogInSharp />}>
+                  Registrar nuevo cambio
                 </Menus.Button>
               </Modal.Open>
             </Menus.List>

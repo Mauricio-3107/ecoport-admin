@@ -6,7 +6,6 @@ import {
   HiOutlineGlobeAmericas,
   HiOutlineTruck,
   HiOutlineUser,
-  HiOutlineUsers,
   HiOutlineWrench,
 } from "react-icons/hi2";
 import { LiaOilCanSolid, LiaTruckPickupSolid } from "react-icons/lia";

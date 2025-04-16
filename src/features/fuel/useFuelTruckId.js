@@ -15,8 +15,7 @@ export function useFuelTruckId() {
     queryFn: () => getFuelTruckId(truckId),
     retry: false,
   });
-  console.log(data);
-  console.log(error);
+
   // Case 3: Truck ID does not exist
   if (error) return { isLoading, fuelTruckId: null, error };
 
