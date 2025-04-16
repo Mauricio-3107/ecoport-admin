@@ -13,7 +13,7 @@ function Finance() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Finances</Heading>
+        <Heading as="h1">Finanzas</Heading>
       </Row>
       <FinanceLayout monthlyData={monthlyData} resourcePath="finance" />
     </>

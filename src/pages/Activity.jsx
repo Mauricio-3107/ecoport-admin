@@ -7,7 +7,7 @@ function Activity() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Activity</Heading>
+        <Heading as="h1">Actividad</Heading>
         <ActivityFilter />
       </Row>
 

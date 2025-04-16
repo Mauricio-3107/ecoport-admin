@@ -174,7 +174,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           Cancelar
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit truck" : "Create new truck"}
+          {isEditSession ? "Editar camión" : "Create nuevo camión"}
         </Button>
       </FormRow>
     </Form>

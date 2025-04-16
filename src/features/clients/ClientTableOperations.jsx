@@ -10,7 +10,7 @@ function ClientTableOperations() {
         options={[
           {
             value: "all",
-            label: "All",
+            label: "Todos",
           },
           {
             value: "export",
@@ -26,11 +26,11 @@ function ClientTableOperations() {
         options={[
           {
             value: "name-asc",
-            label: "Sort by name (A-Z)",
+            label: "Ordenar por nombre (A-Z)",
           },
           {
             value: "name-desc",
-            label: "Sort by name (Z-A)",
+            label: "Ordenar por nombre (Z-A)",
           },
         ]}
       />

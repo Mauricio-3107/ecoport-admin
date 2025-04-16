@@ -11,8 +11,7 @@ function MaintenanceTable() {
   const { isLoading, maintenanceTruck } = useMaintenance();
   if (isLoading) return <Spinner />;
 
-  if (!maintenanceTruck.length)
-    return <Empty resourceName="Truck maintenance" />;
+  if (!maintenanceTruck.length) return <Empty resourceName="mantenimiento para este camión" />;
 
   // 1. Filtering
   const filterValue = searchParams.get("maintenanceKind") || "all";

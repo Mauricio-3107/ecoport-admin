@@ -194,7 +194,7 @@ function CreateTripForm({
         />
       </FormRow>
 
-      <FormRow label="Flete" error={errors?.price?.message}>
+      <FormRow label="Flete (Bs)" error={errors?.price?.message}>
         <Input
           type="number"
           id="price"
@@ -218,7 +218,7 @@ function CreateTripForm({
           Cancelar
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit trip" : "Create new trip"}
+          {isEditSession ? "Editar viaje" : "Crear nuevo viaje"}
         </Button>
       </FormRow>
     </Form>

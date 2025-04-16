@@ -26,19 +26,19 @@ function DriverTableOperations() {
         options={[
           {
             value: "licensePlate-asc",
-            label: "Sort by plate (low first)",
+            label: "Ordenar por placa (menor a mayor)",
           },
           {
             value: "licensePlate-desc",
-            label: "Sort by plate (high first)",
+            label: "Ordenar por placa (mayor a menor)",
           },
           {
             value: "fullName-asc",
-            label: "Sort by name (A - Z)",
+            label: "Ordenar por name (A - Z)",
           },
           {
             value: "fullName-desc",
-            label: "Sort by name (Z - A)",
+            label: "Ordenar por name (Z - A)",
           },
         ]}
       />

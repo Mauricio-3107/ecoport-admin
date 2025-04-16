@@ -240,8 +240,8 @@ const CardContent = styled.div`
 function TiresDetail({ licensePlate, tires }) {
   return (
     <>
-      <Heading as="h1">Tires: {licensePlate}</Heading>
-      {!tires.length && <Empty resourceName="tires" />}
+      <Heading as="h1">Neumáticos: {licensePlate}</Heading>
+      {!tires.length && <Empty resourceName="neumático" />}
       {tires.length > 0 && (
         <PageContainer>
           <CardContainer>

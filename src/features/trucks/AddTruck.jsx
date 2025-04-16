@@ -7,7 +7,7 @@ function AddTruck() {
     <div>
       <Modal>
         <Modal.Open opens="truck-form">
-          <Button>Add a new truck</Button>
+          <Button>Añadir nuevo camión</Button>
         </Modal.Open>
         <Modal.Window name="truck-form">
           <CreateTruckForm />

@@ -35,7 +35,7 @@ function Trips() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Trips</Heading>
+        <Heading as="h1">Viajes</Heading>
         <CreateTripOperations />
       </Row>
       <Row>

@@ -70,7 +70,7 @@ function LogFuelForm({ id, licensePlate, onCloseModal }) {
         >
           Cancelar
         </Button>
-        <Button disabled={isLoggingFuel}>Log fuel</Button>
+        <Button disabled={isLoggingFuel}>Registrar combustible</Button>
       </FormRow>
     </Form>
   );

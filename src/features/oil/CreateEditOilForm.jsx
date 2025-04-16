@@ -162,7 +162,9 @@ function CreateEditOilForm({
             Cancelar
           </Button>
           <Button disabled={isWorking}>
-            {isEditSession ? "Edit oil change" : "Log oil change"}
+            {isEditSession
+              ? "Editar cambio de aceite"
+              : "Registrar cambio de aceite"}
           </Button>
         </FormRow>
       </Form>

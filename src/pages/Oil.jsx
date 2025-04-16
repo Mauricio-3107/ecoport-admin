@@ -7,7 +7,7 @@ function Oil() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Oil engine</Heading>
+        <Heading as="h1">Aceite de motor</Heading>
         <OilTableOperations />
       </Row>
       <Row>

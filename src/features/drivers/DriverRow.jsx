@@ -98,13 +98,13 @@ function DriverRow({ driver, availableTrucks }) {
 
             <Menus.List id={driverId}>
               <Modal.Open opens="edit-driver-form">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
 
               {!itHasTruck && (
                 <Modal.Open opens="assign-truck-form">
                   <Menus.Button icon={<HiArchiveBoxArrowDown />}>
-                    Assign truck
+                    Asignar camión
                   </Menus.Button>
                 </Modal.Open>
               )}
@@ -112,12 +112,12 @@ function DriverRow({ driver, availableTrucks }) {
               {itHasTruck && (
                 <Modal.Open opens="unassign-truck-form">
                   <Menus.Button icon={<HiArchiveBoxXMark />}>
-                    Unassign truck
+                    Desasignar camión
                   </Menus.Button>
                 </Modal.Open>
               )}
               <Modal.Open opens="delete-driver-form">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -145,7 +145,7 @@ function DriverRow({ driver, availableTrucks }) {
                     })
                   }
                   disabled={isUnassigning}
-                  resourceName="assignment"
+                  resourceName="asignación"
                 />
               </Modal.Window>
             )}
@@ -154,7 +154,7 @@ function DriverRow({ driver, availableTrucks }) {
               <ConfirmDelete
                 onConfirm={() => deleteDriver(driverId)}
                 disabled={isDeleting}
-                resourceName="driver"
+                resourceName="conductor"
               />
             </Modal.Window>
           </Menus.Menu>

@@ -7,7 +7,7 @@ function AddDriver() {
     <div>
       <Modal>
         <Modal.Open opens="driver-form">
-          <Button>Add a new driver</Button>
+          <Button>Añadir nuevo conductor</Button>
         </Modal.Open>
         <Modal.Window name="driver-form">
           <CreateDriverForm />

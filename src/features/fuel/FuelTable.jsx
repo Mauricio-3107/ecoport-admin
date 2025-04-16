@@ -11,7 +11,7 @@ function FuelTable() {
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!fuelConsumptionTrucks.length) return <Empty resourceName="fuel consumption" />;
+  if (!fuelConsumptionTrucks.length) return <Empty resourceName="consumo de combustible" />;
 
   // Sorting
   const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";

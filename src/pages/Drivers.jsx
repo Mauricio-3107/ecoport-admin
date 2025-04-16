@@ -8,7 +8,7 @@ function Drivers() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Drivers</Heading>
+        <Heading as="h1">Conductores</Heading>
         <DriverTableOperations />
       </Row>
       <Row>

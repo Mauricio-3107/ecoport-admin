@@ -7,7 +7,7 @@ function AddTrip({ tripType, truckDriverAssignments, clientsObject }) {
     <div>
       <Modal>
         <Modal.Open opens="trip-form">
-          <Button>{`Add a new trip ${tripType}`}</Button>
+          <Button>{`Añadir viaje ${tripType}`}</Button>
         </Modal.Open>
         <Modal.Window name="trip-form">
           <CreateTripForm

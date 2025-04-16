@@ -11,7 +11,7 @@ function TruckTable() {
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!trucks.length) return <Empty resourceName="trucks" />;
+  if (!trucks.length) return <Empty resourceName="camión" />;
 
   // Sorting
   const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";

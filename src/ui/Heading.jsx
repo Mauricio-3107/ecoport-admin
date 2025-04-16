@@ -37,6 +37,14 @@ const Heading = styled.h1`
       font-weight: 500;
       font-style: italic;
     `}
+
+    ${(props) =>
+    props.as === "h6" &&
+    css`
+      font-size: 1.5rem;
+      font-weight: 500;
+      font-style: italic;
+    `}
     
   line-height: 1.4;
 `;

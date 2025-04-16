@@ -74,7 +74,7 @@ function AssignTruckForm({ driverId, onCloseModal, availableTrucks }) {
         >
           Cancelar
         </Button>
-        <Button disabled={isCreating}>Assign truck</Button>
+        <Button disabled={isCreating}>Asignar camión</Button>
       </FormRow>
     </Form>
   );

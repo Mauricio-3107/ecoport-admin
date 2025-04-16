@@ -5,7 +5,7 @@ import {
   HiOutlineGlobeAlt,
 } from "react-icons/hi2";
 import Stat from "./Stat";
-import { formatCurrency, formatKilometers, formatRate } from "../../utils/helpers";
+import { formatCurrency, formatMileage, formatRate } from "../../utils/helpers";
 
 function Stats({ trips, kilometers }) {
   // 1.
@@ -35,7 +35,7 @@ function Stats({ trips, kilometers }) {
         title="Kilometros"
         color="indigo"
         icon={<HiOutlineGlobeAlt />}
-        value={formatKilometers(kilometers)}
+        value={formatMileage(kilometers)}
       />
       <Stat
         title="Tasa ventas / Km"

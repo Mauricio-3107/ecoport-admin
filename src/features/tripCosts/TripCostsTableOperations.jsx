@@ -8,14 +8,20 @@ function TripCostsTableOperations() {
         options={[
           {
             value: "licensePlate-asc",
-            label: "Sort by plate (low first)",
+            label: "Ordenar por placa (menor a mayor)",
           },
           {
             value: "licensePlate-desc",
-            label: "Sort by plate (high first)",
+            label: "Ordenar por placa (mayor a menor)",
           },
-          { value: "totalCost-desc", label: "Sort by total cost (high first)" },
-          { value: "totalCost-asc", label: "Sort by total cost (low first)" },
+          {
+            value: "totalCost-desc",
+            label: "Ordenar por costo total (mayor a menor)",
+          },
+          {
+            value: "totalCost-asc",
+            label: "Ordenar por costo total (menor a mayor)",
+          },
         ]}
       />
     </TableOperations>

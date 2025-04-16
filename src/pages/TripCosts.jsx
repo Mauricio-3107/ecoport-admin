@@ -8,7 +8,7 @@ function TripCosts() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Trip costs (Bs)</Heading>
+        <Heading as="h1">Gastos viaje (Bs)</Heading>
         <TripCostsTableOperations />
       </Row>
       <Row>

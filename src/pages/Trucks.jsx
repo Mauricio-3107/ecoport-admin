@@ -8,7 +8,7 @@ function Trucks() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Trucks</Heading>
+        <Heading as="h1">Camiones</Heading>
         <TruckTableOperations />
       </Row>
       <Row>

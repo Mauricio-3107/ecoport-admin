@@ -55,7 +55,7 @@ function SalesChart({ trips, numDays }) {
   return (
     <StyledSalesChart>
       <Heading as="h2">
-        Sales from {format(allDates.at(0), "MMM dd yyyy")} &mdash;{" "}
+        Ventas desde {format(allDates.at(0), "MMM dd yyyy")} &mdash;{" "}
         {format(allDates.at(-1), "MMM dd yyyy")}{" "}
       </Heading>
 
@@ -67,20 +67,57 @@ function SalesChart({ trips, numDays }) {
             tickLine={{ stroke: colors.text }}
           />
           <YAxis
-            unit="$"
             tick={{ fill: colors.text }}
             tickLine={{ stroke: colors.text }}
           />
           <CartesianGrid strokeDasharray="4" />
-          <Tooltip contentStyle={{ backgroundColor: colors.background }} />
+          <Tooltip
+            content={({ active, payload, label }) => {
+              if (active && payload && payload.length) {
+                const { totalSales } = payload[0].payload;
+                return (
+                  <div
+                    style={{
+                      backgroundColor: colors.background,
+                      color: colors.text,
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                      padding: "1.6rem",
+                      fontSize: "1.6rem",
+                      maxWidth: "240px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "1.6rem",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {label}
+                    </div>
+                    <p>
+                      <strong>Ventas:</strong> Bs{" "}
+                      {totalSales.toLocaleString("es-BO", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </p>
+                  </div>
+                );
+              }
+              return null;
+            }}
+          />
+
           <Area
             dataKey="totalSales"
             type="monotone"
             stroke={colors.totalSales.stroke}
             fill={colors.totalSales.fill}
             strokeWidth={2}
-            name="Total sales"
-            unit="$"
+            name="Total de ventas"
           />
         </AreaChart>
       </ResponsiveContainer>

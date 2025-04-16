@@ -10,7 +10,7 @@ function CreateTripOperations() {
         options={[
           {
             value: "all",
-            label: "All",
+            label: "Todos",
           },
           {
             value: "export",
@@ -24,8 +24,14 @@ function CreateTripOperations() {
       />
       <SortBy
         options={[
-          { value: "startDate-desc", label: "Sort by date (recent first)" },
-          { value: "startDate-asc", label: "Sort by date (earlier first)" },
+          {
+            value: "startDate-desc",
+            label: "Ordenar por fecha (más reciente primero)",
+          },
+          {
+            value: "startDate-asc",
+            label: "Ordenar por fecha (más antigua primero)",
+          },
         ]}
       />
     </TableOperations>

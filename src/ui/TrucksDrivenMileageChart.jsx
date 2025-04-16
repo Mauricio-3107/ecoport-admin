@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Heading from "./Heading";
 import { useDarkMode } from "../context/DarkModeContext";
+import { formatMileage } from "../utils/helpers";
 
 const ChartBox = styled.div`
   background-color: ${(props) =>
@@ -81,7 +82,7 @@ function TrucksDrivenMileageChart({
     : { barFill: "#f97316", text: "#374151", background: "#fff" };
 
   return (
-    <ChartBox $isDarkMode={isDarkMode} >
+    <ChartBox $isDarkMode={isDarkMode}>
       <Heading as="h2">{title}</Heading>
       {trucksMileageRuntime.length === 0 ? (
         <NoDataMessage $isDarkMode={isDarkMode}>
@@ -90,8 +91,7 @@ function TrucksDrivenMileageChart({
       ) : (
         <>
           <TotalMileage $isDarkMode={isDarkMode}>
-            Total: {totalMileage[periodPropertyTotalMileage].toLocaleString()}{" "}
-            km
+            Total: {formatMileage(totalMileage[periodPropertyTotalMileage])}
           </TotalMileage>
 
           <ResponsiveContainer width="100%" height={height}>

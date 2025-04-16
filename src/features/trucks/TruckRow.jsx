@@ -6,7 +6,7 @@ import Modal from "../../ui/Modal";
 import Menus from "../../ui/Menus";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
-import { getStatusDate } from "../../utils/helpers";
+import { formatDateBolivia, getStatusDate } from "../../utils/helpers";
 
 const Img = styled.img`
   display: block;
@@ -56,10 +56,10 @@ function TruckRow({ truck }) {
       <Img src={image} alt={licensePlate} />
       <LicensePlate>{licensePlate}</LicensePlate>
       <OperationsCardInsurance status={getStatusDate(operationsCard)}>
-        {operationsCard.split("T")[0]}
+        {formatDateBolivia(operationsCard)}
       </OperationsCardInsurance>
       <OperationsCardInsurance status={getStatusDate(insurance)}>
-        {insurance.split("T")[0]}
+        {formatDateBolivia(insurance)}
       </OperationsCardInsurance>
       <Tare>{tare}</Tare>
       <div>{traction}</div>
@@ -72,11 +72,11 @@ function TruckRow({ truck }) {
 
             <Menus.List id={truckId}>
               <Modal.Open opens="edit-truck-form">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete-truck-form">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -88,7 +88,7 @@ function TruckRow({ truck }) {
               <ConfirmDelete
                 onConfirm={() => deleteTruck(truckId)}
                 disabled={isDeleting}
-                resourceName="truck"
+                resourceName="camión"
               />
             </Modal.Window>
           </Menus.Menu>

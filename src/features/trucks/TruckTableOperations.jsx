@@ -8,27 +8,27 @@ function TruckTableOperations() {
         options={[
           {
             value: "licensePlate-asc",
-            label: "Sort by plate (low first)",
+            label: "Ordenar por placa (menor a mayor)",
           },
           {
             value: "licensePlate-desc",
-            label: "Sort by plate (high first)",
+            label: "Ordenar por placa (mayor a menor)",
           },
           {
             value: "year-asc",
-            label: "Sort by year (low first)",
+            label: "Ordenar por año (más antiguo primero)",
           },
           {
             value: "year-desc",
-            label: "Sort by year (high first)",
+            label: "Ordenar por año (más reciente primero)",
           },
           {
             value: "hp-asc",
-            label: "Sort by HP (low first)",
+            label: "Ordenar por potencia (menor a mayor)",
           },
           {
             value: "hp-desc",
-            label: "Sort by HP (high first)",
+            label: "Ordenar por potencia (mayor a menor)",
           },
         ]}
       />

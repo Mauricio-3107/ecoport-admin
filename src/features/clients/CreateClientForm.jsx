@@ -136,10 +136,10 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           type="reset"
           onClick={() => onCloseModal?.()}
         >
-          Cancel
+          Cancelar
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit client" : "Create new client"}
+          {isEditSession ? "Editar cliente" : "Crear nuevo cliente"}
         </Button>
       </FormRow>
     </Form>

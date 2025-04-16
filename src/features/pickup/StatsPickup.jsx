@@ -5,7 +5,7 @@ import {
   HiOutlineGlobeAlt,
   HiOutlineMapPin,
 } from "react-icons/hi2";
-import { formatKilometers, formatRuntime } from "../../utils/helpers";
+import { formatMileage, formatRuntime } from "../../utils/helpers";
 import StatPickup from "./StatPickup";
 
 const StatsBox = styled.div`
@@ -22,7 +22,7 @@ function StatsPickup({ licensePlate, kilometers, runtime }) {
         title="Kilómetros"
         color="indigo"
         icon={<HiOutlineGlobeAlt />}
-        value={formatKilometers(kilometers)}
+        value={formatMileage(kilometers)}
       />
       <StatPickup
         title="Tiempo manejado"

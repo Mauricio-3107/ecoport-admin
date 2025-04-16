@@ -95,11 +95,11 @@ function StackedCostRevenueChart({ data }) {
             }}
           />
 
-          <Bar dataKey="totalCost" stackId="a" fill="#e74c3c" name="Costos" />
+          <Bar dataKey="totalCost" stackId="a" fill="#c0392b" name="Costos" />
           <Bar
             dataKey="totalRevenue"
             stackId="a"
-            fill="#2ecc71"
+            fill="#27ae60"
             name="Ingresos"
           />
         </BarChart>

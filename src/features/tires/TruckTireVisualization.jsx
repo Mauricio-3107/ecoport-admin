@@ -194,29 +194,30 @@ const TruckTireVisualization = ({ initialTires }) => {
       {/* Status Summary */}
       <StatusSummary>
         <HeaderSection>
-          <Heading as="h3">
-            Click on any tire to view details and update information
+          <Heading as="h6">
+            Haz click en cualquier neumático para ver los detalles y actualizar
+            la información
           </Heading>
         </HeaderSection>
 
         <BadgesContainer>
           <CustomBadge>
             <HiOutlineCheckCircle size={22} color="var(--color-green-300)" />
-            <span>{statusCounts.good} Good</span>
+            <span>{statusCounts.good} Óptimo</span>
           </CustomBadge>
           <CustomBadge>
             <HiOutlineExclamationTriangle
               size={22}
               color="var(--color-yellow-300)"
             />
-            <span>{statusCounts.warning} Warning</span>
+            <span>{statusCounts.warning} Precaución</span>
           </CustomBadge>
           <CustomBadge>
             <HiOutlineInformationCircle
               size={22}
               color="var(--color-red-300)"
             />
-            <span>{statusCounts.critical} Critical</span>
+            <span>{statusCounts.critical} Crítico</span>
           </CustomBadge>
         </BadgesContainer>
       </StatusSummary>
@@ -241,34 +242,34 @@ const TruckTireVisualization = ({ initialTires }) => {
 
       {/* Legend */}
       <LegendContainer>
-        <Heading as="h5">Mileage Status Legend</Heading>
+        <Heading as="h5">Estado del kilometraje</Heading>
         <LegendGrid>
           <LegendItem>
             <StatusIndicator color="var(--color-green-300)" />
             <LegendItemContent>
-              <Heading as="h2">Good Condition</Heading>
-              <LegendItemSubtitle>Less than 30,000 km</LegendItemSubtitle>
+              <Heading as="h2">Óptima Condición</Heading>
+              <LegendItemSubtitle>Menos de 30.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
             <StatusIndicator color="var(--color-yellow-300)" />
             <LegendItemContent>
-              <Heading as="h2">Warning</Heading>
-              <LegendItemSubtitle>30,000 - 40,000 km</LegendItemSubtitle>
+              <Heading as="h2">Precaución</Heading>
+              <LegendItemSubtitle>30.000 - 40.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
             <StatusIndicator color="var(--color-red-300)" />
             <LegendItemContent>
-              <Heading as="h2">Critical</Heading>
-              <LegendItemSubtitle>More than 40,000 km</LegendItemSubtitle>
+              <Heading as="h2">Crítico</Heading>
+              <LegendItemSubtitle>Más de 40.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
         </LegendGrid>
 
         <LegendNote>
-          Note: Tire colors indicate the mileage status. Click on any tire to
-          view details and update information.
+          Nota: Los colores de los neumáticos indican el kilometraje. Haga click
+          en cualquier neumático para ver detalles y actualizar la información.
         </LegendNote>
       </LegendContainer>
     </Container>

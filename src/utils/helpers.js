@@ -32,9 +32,12 @@ export const getToday = function (options = {}) {
 };
 
 export const formatCurrency = (value) =>
-  new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(
-    value
-  );
+  new Intl.NumberFormat("es-BO", {
+    style: "currency",
+    currency: "BOB",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 
 export function fromToday(numDays, withTime = false) {
   const date = add(new Date(), { days: numDays });
@@ -59,18 +62,20 @@ export function getStatusDate(expirationDate) {
 
 export function formatRate(rate) {
   return (
-    new Intl.NumberFormat("en-US", {
+    new Intl.NumberFormat("es-BO", {
       style: "currency",
-      currency: "USD",
+      currency: "BOB",
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(rate) + "/km"
   );
 }
 
-export const formatKilometers = (value) =>
-  new Intl.NumberFormat("de", { maximumFractionDigits: 2 }).format(value) +
-  " km";
+export function formatMileage(km) {
+  return `${new Intl.NumberFormat("es-BO", { maximumFractionDigits: 2 }).format(
+    km
+  )} km`;
+}
 
 export function formatRuntime(seconds) {
   const hours = Math.floor(seconds / 3600);
@@ -78,4 +83,17 @@ export function formatRuntime(seconds) {
 
   if (hours === 0) return `${minutes} min`; // Show only minutes if < 1 hour
   return `${hours}h ${minutes}m`; // Show hours and minutes normally
+}
+
+export function formatDateBolivia(dateStr) {
+  if (!dateStr) return "";
+
+  const date = new Date(dateStr);
+  if (isNaN(date)) return dateStr;
+
+  return date.toLocaleDateString("es-BO", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 }

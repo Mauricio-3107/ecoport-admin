@@ -2,17 +2,18 @@ import { useState } from "react";
 import { TireButton } from "../../ui/TireButton";
 import { TireInput } from "../../ui/TireInput";
 import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import {
   HiMiniCalendar,
-  HiOutlineCurrencyDollar,
   HiOutlinePaperAirplane,
   HiOutlinePencil,
   HiOutlineTag,
   HiOutlineXMark,
 } from "react-icons/hi2";
 import { PiTireThin } from "react-icons/pi";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 // Styled Components
 const TooltipContainer = styled.div`
@@ -184,17 +185,17 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
   };
 
   // Format currency
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("es-BO", {
       style: "currency",
-      currency: "USD",
+      currency: "BOB",
       minimumFractionDigits: 2,
-    }).format(amount);
-  };
+      maximumFractionDigits: 2,
+    }).format(value);
 
   // Format date for display
   const formatDate = (date) => {
-    return format(new Date(date), "PPP");
+    return format(new Date(date), "PPP", { locale: es });
   };
 
   // Get tire status
@@ -282,7 +283,9 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       case "mileage":
         return (
           <div>
-            <InfoLabel htmlFor="mileageInput">Update Mileage (km)</InfoLabel>
+            <InfoLabel htmlFor="mileageInput">
+              Actualizar Kilometraje (km)
+            </InfoLabel>
             <InputContainer>
               <TireInput
                 id="mileageInput"
@@ -295,10 +298,10 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
             </InputContainer>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
-                Cancel
+                Cancelar
               </TireButton>
               <TireButton variant="default" size="lg" onClick={handleSave}>
-                Save
+                Guardar
               </TireButton>
             </ButtonContainer>
           </div>
@@ -309,7 +312,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
           <div>
             <FormGrid>
               <div>
-                <InfoLabel htmlFor="brandInput">Brand</InfoLabel>
+                <InfoLabel htmlFor="brandInput">Marca</InfoLabel>
                 <TireInput
                   id="brandInput"
                   type="text"
@@ -319,7 +322,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 />
               </div>
               <div>
-                <InfoLabel htmlFor="sizeInput">Size</InfoLabel>
+                <InfoLabel htmlFor="sizeInput">Medida</InfoLabel>
                 <TireInput
                   id="sizeInput"
                   type="text"
@@ -331,7 +334,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
             </FormGrid>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
-                Cancel
+                Cancelar
               </TireButton>
               <TireButton
                 variant="default"
@@ -339,7 +342,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 onClick={handleSave}
                 disabled={isEditing}
               >
-                Save
+                Guardar
               </TireButton>
             </ButtonContainer>
           </div>
@@ -347,7 +350,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       case "dateReset":
         return (
           <div>
-            <InfoLabel htmlFor="dateResetInput">Reset Date</InfoLabel>
+            <InfoLabel htmlFor="dateResetInput">Fecha de cambio</InfoLabel>
             <InputContainer>
               <TireInput
                 id="dateResetInput"
@@ -359,10 +362,10 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
             </InputContainer>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
-                Cancel
+                Cancelar
               </TireButton>
               <TireButton variant="default" size="lg" onClick={handleSave}>
-                Save
+                Guardar
               </TireButton>
             </ButtonContainer>
           </div>
@@ -370,7 +373,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       case "cost":
         return (
           <div>
-            <InfoLabel htmlFor="costInput">Tire Cost</InfoLabel>
+            <InfoLabel htmlFor="costInput">Costo del Neumático</InfoLabel>
             <InputContainer>
               <TireInput
                 id="costInput"
@@ -384,10 +387,10 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
             </InputContainer>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
-                Cancel
+                Cancelar
               </TireButton>
               <TireButton variant="default" size="lg" onClick={handleSave}>
-                Save
+                Guardar
               </TireButton>
             </ButtonContainer>
           </div>
@@ -395,7 +398,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       case "type":
         return (
           <div>
-            <InfoLabel htmlFor="typeSelect">Tire Type</InfoLabel>
+            <InfoLabel htmlFor="typeSelect">Tipo de Neumático</InfoLabel>
             <InputContainer>
               <select
                 id="typeSelect"
@@ -409,16 +412,16 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                   backgroundColor: "var(--color-grey-0)",
                 }}
               >
-                <option value="new">New</option>
-                <option value="retread">Retread</option>
+                <option value="new">Nuevo</option>
+                <option value="retread">Reencauchado</option>
               </select>
             </InputContainer>
             <ButtonContainer>
               <TireButton variant="outline" size="lg" onClick={handleCancel}>
-                Cancel
+                Cancelar
               </TireButton>
               <TireButton variant="default" size="lg" onClick={handleSave}>
-                Save
+                Guardar
               </TireButton>
             </ButtonContainer>
           </div>
@@ -437,7 +440,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
       <Header>
         <TitleContainer>
           <StatusIndicator $status={getTireStatus()} />
-          <Heading as="h3">Tire {tire.tireId}</Heading>
+          <Heading as="h3">Neumático {tire.tireId}</Heading>
         </TitleContainer>
         <CloseButton onClick={onClose}>
           <HiOutlineXMark size={28} />
@@ -454,13 +457,13 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 <SectionIcon>
                   <HiOutlineTag size={20} />
                 </SectionIcon>
-                <SectionLabel>Marca & Medida</SectionLabel>
+                <SectionLabel>Marca y Medida</SectionLabel>
                 <div style={{ marginLeft: "auto" }}>
                   <EditButton onClick={() => handleEditClick("brand")}>
                     <EditIcon>
                       <HiOutlinePencil size={20} />
                     </EditIcon>
-                    Edit
+                    Editar
                   </EditButton>
                 </div>
               </SectionHeader>
@@ -482,13 +485,13 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                   <SectionIcon>
                     <PiTireThin size={20} />
                   </SectionIcon>
-                  <SectionLabel>Tire Type</SectionLabel>
+                  <SectionLabel>Tipo de Neumático</SectionLabel>
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("type")}>
                   <EditIcon>
                     <HiOutlinePencil size={20} />
                   </EditIcon>
-                  Edit
+                  Editar
                 </EditButton>
               </EditContainer>
               <ValueDisplay>
@@ -500,12 +503,12 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
 
         <Section $hasBorder={true}>
           <div>
-            <InfoLabel>Position</InfoLabel>
+            <InfoLabel>Posición</InfoLabel>
             <InfoValue>{tire.position}</InfoValue>
           </div>
 
           <div style={{ marginTop: "0.5rem" }}>
-            <InfoLabel>Axle</InfoLabel>
+            <InfoLabel>Eje</InfoLabel>
             <InfoValue>#{tire.axle}</InfoValue>
           </div>
         </Section>
@@ -518,13 +521,13 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 <SectionIcon>
                   <HiMiniCalendar size={20} />
                 </SectionIcon>
-                <SectionLabel>Reset Date</SectionLabel>
+                <SectionLabel>Fecha de cambio</SectionLabel>
                 <div style={{ marginLeft: "auto" }}>
                   <EditButton onClick={() => handleEditClick("dateReset")}>
                     <EditIcon>
                       <HiOutlinePencil size={20} />
                     </EditIcon>
-                    Edit
+                    Editar
                   </EditButton>
                 </div>
               </SectionHeader>
@@ -542,13 +545,13 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                   <SectionIcon>
                     <HiOutlinePaperAirplane size={20} />
                   </SectionIcon>
-                  <SectionLabel>Current Mileage</SectionLabel>
+                  <SectionLabel>Kilometraje Actual</SectionLabel>
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("mileage")}>
                   <EditIcon>
                     <HiOutlinePencil size={20} />
                   </EditIcon>
-                  Edit
+                  Editar
                 </EditButton>
               </EditContainer>
               <ValueDisplay>{formatNumber(tire.odometerKm)} km</ValueDisplay>
@@ -563,15 +566,15 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
               <EditContainer>
                 <SectionHeader>
                   <SectionIcon>
-                    <HiOutlineCurrencyDollar size={20} />
+                    <LiaMoneyBillWaveSolid size={20} />
                   </SectionIcon>
-                  <SectionLabel>Tire Cost</SectionLabel>
+                  <SectionLabel>Costo del Neumático</SectionLabel>
                 </SectionHeader>
                 <EditButton onClick={() => handleEditClick("cost")}>
                   <EditIcon>
                     <HiOutlinePencil size={20} />
                   </EditIcon>
-                  Edit
+                  Editar
                 </EditButton>
               </EditContainer>
               <ValueDisplay>{formatCurrency(tire.cost || 0)}</ValueDisplay>

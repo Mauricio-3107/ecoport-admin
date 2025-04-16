@@ -4,7 +4,6 @@ import {
   HiOutlineBriefcase,
   HiOutlineDocumentText,
   HiOutlineGlobeAmericas,
-  HiOutlineHome,
   HiOutlineTruck,
   HiOutlineUser,
   HiOutlineUsers,
@@ -69,85 +68,79 @@ function MainNav() {
         <li>
           <StyledNavLink to="/dashboard">
             <SiRedbull />
-            <span>Home</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/users">
-            <HiOutlineUsers />
-            <span>Users</span>
+            <span>Inicio</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/trucks">
             <HiOutlineTruck />
-            <span>Trucks</span>
+            <span>Camiones</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/drivers">
             <HiOutlineUser />
-            <span>Drivers</span>
+            <span>Conductores</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/trips">
             <HiOutlineGlobeAmericas />
-            <span>Trips</span>
+            <span>Viajes</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/clients">
             <HiOutlineBriefcase />
-            <span>Clients</span>
+            <span>Clientes</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/company">
             <HiOutlineDocumentText />
-            <span>Company</span>
+            <span>Empresa</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/pickup">
             <LiaTruckPickupSolid />
-            <span>Pickup</span>
+            <span>Camioneta</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/fuel">
             <BsFuelPump />
-            <span>Fuel</span>
+            <span>Combustible</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/activity">
             <GiMovementSensor />
-            <span>Activity</span>
+            <span>Actividad</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/maintenance">
             <HiOutlineWrench />
-            <span>Maintenance</span>
+            <span>Mantenimiento</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/oil">
             <LiaOilCanSolid />
-            <span>Oil</span>
+            <span>Aceite</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/tires">
             <PiTireLight />
-            <span>Tires</span>
+            <span>Neumáticos</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/tripCosts">
             <PiMoneyLight />
-            <span>Trip costs</span>
+            <span>Gastos viaje</span>
           </StyledNavLink>
         </li>
         <li>

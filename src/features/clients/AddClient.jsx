@@ -7,7 +7,7 @@ function AddClient({ type }) {
     <div>
       <Modal>
         <Modal.Open opens="client-form">
-          <Button>{`Add new client ${type}`}</Button>
+          <Button>{`Añadir nuevo cliente ${type}`}</Button>
         </Modal.Open>
         <Modal.Window name="client-form">
           <CreateClientForm type={type} />

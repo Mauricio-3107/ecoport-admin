@@ -9,7 +9,7 @@ function MaintenanceTruckIdTableOperations() {
         filterField="maintenanceKind"
         options={[
           {
-            label: "All",
+            label: "Todos",
             value: "all",
           },
           {
@@ -25,23 +25,29 @@ function MaintenanceTruckIdTableOperations() {
 
       <SortBy
         options={[
-          { value: "date-desc", label: "Sort by date (recent first)" },
-          { value: "date-asc", label: "Sort by date (earlier first)" },
+          {
+            value: "date-desc",
+            label: "Ordenar por fecha (más reciente primero)",
+          },
+          {
+            value: "date-asc",
+            label: "Ordenar por fecha (más antigua primero)",
+          },
           {
             value: "cost-asc",
-            label: "Sort by cost (low first)",
+            label: "Ordenar por costo (menor a mayor)",
           },
           {
             value: "cost-desc",
-            label: "Sort by cost (high first)",
+            label: "Ordenar por costo (mayor a menor)",
           },
           {
             value: "name-asc",
-            label: "Sort by name (A-Z)",
+            label: "Ordenar por nombre (A-Z)",
           },
           {
             value: "name-desc",
-            label: "Sort by name (Z-A)",
+            label: "Ordenar por nombre (Z-A)",
           },
         ]}
       />

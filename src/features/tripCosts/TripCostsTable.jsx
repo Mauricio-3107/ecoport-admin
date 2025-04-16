@@ -13,7 +13,7 @@ function TripCostsTable() {
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!tripCosts.length) return <Empty resourceName="Trip costs" />;
+  if (!tripCosts.length) return <Empty resourceName="costo de viaje" />;
 
   // Sorting
   const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";
@@ -52,7 +52,7 @@ function TripCostsTable() {
           <div>Placa</div>
           <div>Representante</div>
           <div>Gastos</div>
-          <div>Diésel</div>
+          <div>Combustible</div>
           <div>Total</div>
           <div></div>
         </Table.Header>

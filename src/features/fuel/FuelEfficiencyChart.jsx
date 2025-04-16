@@ -45,7 +45,7 @@ function FuelEfficiencyChart({ fuelTruckId }) {
 
   return (
     <StyledFuelChart>
-      <Heading as="h2">Fuel Efficiency Over Time</Heading>
+      <Heading as="h2">Eficiencia de Combustible en el Tiempo</Heading>
 
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
@@ -67,7 +67,7 @@ function FuelEfficiencyChart({ fuelTruckId }) {
             stroke={colors.fuelEfficiency.stroke}
             fill={colors.fuelEfficiency.fill}
             strokeWidth={2}
-            name="Fuel Efficiency"
+            name="Eficiencia combustible"
             unit=" Km/L"
           />
         </AreaChart>

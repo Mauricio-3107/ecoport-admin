@@ -3,6 +3,7 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useNavigate } from "react-router-dom";
 import { HiOutlinePresentationChartLine } from "react-icons/hi2";
+import { formatDateBolivia } from "../../utils/helpers";
 
 const Img = styled.img`
   display: block;
@@ -49,7 +50,7 @@ function FuelRow({ fuelTruck }) {
     <Table.Row role="row">
       <Img src={image} alt={truckId} />
       <LicensePlate>{licensePlate}</LicensePlate>
-      <div>{fuelDate ? fuelDate?.split("T")[0] : <span>&mdash;</span>}</div>
+      <div>{fuelDate ? formatDateBolivia(fuelDate) : <span>&mdash;</span>}</div>
       <div>{location ? location : <span>&mdash;</span>}</div>
       <div>{odometerKm}</div>
       <div>{litersFueled}</div>

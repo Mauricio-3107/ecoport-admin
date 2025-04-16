@@ -8,16 +8,22 @@ function OilTableOperations() {
         options={[
           {
             value: "licensePlate-asc",
-            label: "Sort by plate (low first)",
+            label: "Ordenar por placa (menor a mayor)",
           },
           {
             value: "licensePlate-desc",
-            label: "Sort by plate (high first)",
+            label: "Ordenar por placa (mayor a menor)",
           },
-          { value: "oilDate-desc", label: "Sort by date (recent first)" },
-          { value: "oilDate-asc", label: "Sort by date (earlier first)" },
-          { value: "lastKm-desc", label: "Sort by Km (high first)" },
-          { value: "lastKm-asc", label: "Sort by Km (low first)" },
+          {
+            value: "oilDate-desc",
+            label: "Ordenar por fecha (más reciente primero)",
+          },
+          {
+            value: "oilDate-asc",
+            label: "Ordenar por fecha (más antigua primero)",
+          },
+          { value: "lastKm-desc", label: "Ordenar por Km (mayor a menor)" },
+          { value: "lastKm-asc", label: "Ordenar por Km (menor a mayor)" },
         ]}
       />
     </TableOperations>

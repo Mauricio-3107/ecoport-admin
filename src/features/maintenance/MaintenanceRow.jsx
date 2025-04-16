@@ -7,6 +7,7 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteMaintenance } from "./useDeleteMaintenance";
 import CreateMaintenanceForm from "./CreateMaintenanceForm";
+import { formatDateBolivia } from "../../utils/helpers";
 
 const Name = styled.div`
   font-size: 1.6rem;
@@ -43,7 +44,7 @@ function MaintenanceRow({ maintenance }) {
       </Tag>
       <Name>{name}</Name>
       <Cost>{cost}</Cost>
-      <div>{date.split("T")[0]}</div>
+      <div>{formatDateBolivia(date)}</div>
       <div>{notes || "-"}</div>
       <div>
         <Modal>
@@ -52,11 +53,11 @@ function MaintenanceRow({ maintenance }) {
 
             <Menus.List id={maintenanceId}>
               <Modal.Open opens="edit-maintenance-form">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete-maintenance-form">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -69,7 +70,7 @@ function MaintenanceRow({ maintenance }) {
                 // invalidate the query here
                 onConfirm={() => deleteMaintenance(maintenanceId)}
                 disabled={isDeleting}
-                resourceName="maintenance"
+                resourceName="mantenimiento"
               />
             </Modal.Window>
           </Menus.Menu>

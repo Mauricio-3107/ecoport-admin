@@ -7,7 +7,7 @@ function Fuel() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Fuel Consumption</Heading>
+        <Heading as="h1">Consumo de Combustible</Heading>
         <FuelTableOperations />
       </Row>
       <Row>

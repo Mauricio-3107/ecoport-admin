@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 
 import { useDarkMode } from "../../context/DarkModeContext";
 import TruckCard from "../../ui/TruckCard";
-import CreateTiresForm from "./CreateTiresForm";
 
 const TrucksContainer = styled.div`
   display: grid;
@@ -43,12 +42,6 @@ function TiresLayout({ trucks }) {
             key={truck.id}
             resourceName="tires"
             labelButton="Registrar nuevo neúmatico"
-            form={
-              <CreateTiresForm
-                truckId={truck.id}
-                licensePlate={truck.licensePlate}
-              />
-            }
             hideFormModal={true}
           />
         ))}

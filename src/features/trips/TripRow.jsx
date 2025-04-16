@@ -6,6 +6,7 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import CreateTripForm from "./CreateTripForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteTrip } from "./useDeleteTrip";
+import { formatDateBolivia } from "../../utils/helpers";
 
 const Stacked = styled.div`
   display: flex;
@@ -68,7 +69,7 @@ function TripRow({ trip, truckDriverAssignments, clientsObject }) {
       <div>{tripType}</div>
       <div>{origin}</div>
       <div>{destination}</div>
-      <div>{startDate.split("T")[0]}</div>
+      <div>{formatDateBolivia(startDate)}</div>
       <Stacked>
         <span>{licensePlate}</span>
         <span>{fullName.split(" ").slice(0, 2).join(" ")}</span>
@@ -81,10 +82,10 @@ function TripRow({ trip, truckDriverAssignments, clientsObject }) {
 
             <Menus.List id={tripId}>
               <Modal.Open opens="edit-trip">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
               <Modal.Open opens="delete-trip">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -99,7 +100,7 @@ function TripRow({ trip, truckDriverAssignments, clientsObject }) {
 
             <Modal.Window name="delete-trip">
               <ConfirmDelete
-                resourceName="trip"
+                resourceName="viaje"
                 onConfirm={() => deleteTrip(tripId)}
                 disabled={isDeleting}
               />

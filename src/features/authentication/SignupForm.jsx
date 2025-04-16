@@ -81,9 +81,9 @@ function SignupForm() {
           onClick={reset}
           disabled={isLoading}
         >
-          Cancel
+          Cancelar
         </Button>
-        <Button disabled={isLoading}>Create new user</Button>
+        <Button disabled={isLoading}>Crear nuevo usuario</Button>
       </FormRow>
     </Form>
   );

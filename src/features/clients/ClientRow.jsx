@@ -93,10 +93,10 @@ function ClientRow({ client }) {
 
             <Menus.List id={clientId}>
               <Modal.Open opens="edit-client">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
               <Modal.Open opens="delete-client">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
@@ -105,7 +105,7 @@ function ClientRow({ client }) {
             </Modal.Window>
             <Modal.Window name="delete-client">
               <ConfirmDelete
-                resourceName="client"
+                resourceName="cliente"
                 onConfirm={() => deleteClient(clientId)}
                 disabled={isDeleting}
               />

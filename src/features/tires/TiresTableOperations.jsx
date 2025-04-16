@@ -8,11 +8,11 @@ function TiresTableOperations() {
         options={[
           {
             value: "licensePlate-asc",
-            label: "Sort by plate (low first)",
+            label: "Ordenar por placa (menor a mayor)",
           },
           {
             value: "licensePlate-desc",
-            label: "Sort by plate (high first)",
+            label: "Ordenar por placa (mayor a menor)",
           },
         ]}
       />

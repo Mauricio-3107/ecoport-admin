@@ -103,7 +103,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           Cancelar
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit driver" : "Create new driver"}
+          {isEditSession ? "Editar conductor" : "Crear nuevo conductor"}
         </Button>
       </FormRow>
     </Form>

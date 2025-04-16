@@ -11,7 +11,7 @@ function OilTable() {
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!oil.length) return <Empty resourceName="Oil" />;
+  if (!oil.length) return <Empty resourceName="aceite" />;
 
   // Sorting
   const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";
