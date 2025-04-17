@@ -14,6 +14,7 @@ import {
 } from "react-icons/hi2";
 import { PiTireThin } from "react-icons/pi";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import { formatMileage } from "../../utils/helpers";
 
 // Styled Components
 const TooltipContainer = styled.div`
@@ -554,7 +555,7 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                   Editar
                 </EditButton>
               </EditContainer>
-              <ValueDisplay>{formatNumber(tire.odometerKm)} km</ValueDisplay>
+              <ValueDisplay>{formatMileage(tire.odometerKm)}</ValueDisplay>
             </div>
           )}
         </Section>
