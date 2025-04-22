@@ -180,11 +180,6 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
   const [costInput, setCostInput] = useState(tire.cost?.toString() || "0");
   const [typeInput, setTypeInput] = useState(tire.type);
 
-  // Format number with commas
-  const formatNumber = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   // Format currency
   const formatCurrency = (value) =>
     new Intl.NumberFormat("es-BO", {
