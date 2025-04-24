@@ -6,7 +6,7 @@ const Overlay = styled.div`
   display: none;
 
   @media screen and (max-width: 768px) {
-    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+    display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
     position: fixed;
     top: 0;
     left: 0;
@@ -52,8 +52,10 @@ const NavContainer = styled.div`
   justify-content: space-between;
   padding-bottom: 3rem;
 
-  // Guarantees enough space for all items to show
-  max-height: calc(100vh - 30rem); // adjust if needed
+  @media screen and (max-width: 768px) {
+    // Guarantees enough space for all items to show
+    max-height: calc(100vh - 30rem); // adjust if needed
+  }
 `;
 
 const BottomLine = styled.div`
@@ -66,7 +68,7 @@ const BottomLine = styled.div`
 function Sidebar({ isOpen, onClose }) {
   return (
     <>
-      <Overlay isOpen={isOpen} onClick={onClose} />
+      <Overlay $isOpen={isOpen} onClick={onClose} />
       <StyledSidebar className={isOpen ? "active" : ""}>
         <Logo />
         <NavContainer>
