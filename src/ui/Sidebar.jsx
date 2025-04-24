@@ -34,12 +34,12 @@ const StyledSidebar = styled.aside`
   transform: translateX(0);
   transition: transform 0.3s ease-in-out;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   @media screen and (max-width: 768px) {
     transform: translateX(-100%);
     &.active {
       transform: translateX(0);
-      padding-bottom: 5rem;
     }
   }
 `;
