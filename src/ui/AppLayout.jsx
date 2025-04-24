@@ -2,19 +2,35 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
   height: 100vh;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
 `;
 
 const Main = styled.main`
+  grid-area: main;
   background-color: var(--color-grey-50);
   padding: 4rem 4.8rem 6.4rem;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @media screen and (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 
 const Container = styled.div`
@@ -25,11 +41,39 @@ const Container = styled.div`
   gap: 3.2rem;
 `;
 
+const ToggleButton = styled.button`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0.5rem;
+    left: 2rem;
+    z-index: 1100;
+    background: none;
+    border: none;
+    font-size: 3rem;
+    color: var(--color-grey-700);
+  }
+`;
+
+const HeaderWrapper = styled.div`
+  grid-area: header;
+  z-index: 900; // So it stays above Sidebar if needed
+`;
+
 function AppLayout() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <StyledAppLayout>
-      <Header />
-      <Sidebar />
+      <ToggleButton onClick={() => setIsSidebarOpen((prev) => !prev)}>
+        ☰
+      </ToggleButton>
+      <HeaderWrapper>
+        <Header />
+      </HeaderWrapper>
+      <Sidebar isOpen={isSidebarOpen} />
       <Main>
         <Container>
           <Outlet />
