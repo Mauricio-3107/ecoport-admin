@@ -73,7 +73,7 @@ function AppLayout() {
       <HeaderWrapper>
         <Header />
       </HeaderWrapper>
-      <Sidebar isOpen={isSidebarOpen} />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <Main>
         <Container>
           <Outlet />
