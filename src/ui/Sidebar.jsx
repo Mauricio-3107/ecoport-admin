@@ -50,6 +50,10 @@ const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 3rem;
+
+  // Guarantees enough space for all items to show
+  max-height: calc(100vh - 12rem); // adjust if needed
 `;
 
 const BottomLine = styled.div`
