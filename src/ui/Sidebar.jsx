@@ -53,7 +53,7 @@ const NavContainer = styled.div`
   padding-bottom: 3rem;
 
   // Guarantees enough space for all items to show
-  max-height: calc(100vh - 20rem); // adjust if needed
+  max-height: calc(100vh - 30rem); // adjust if needed
 `;
 
 const BottomLine = styled.div`
