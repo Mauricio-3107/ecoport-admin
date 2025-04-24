@@ -43,6 +43,21 @@ const StyledSidebar = styled.aside`
     }
   }
 `;
+const NavContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const BottomLine = styled.div`
+  height: 1px;
+  width: 80%;
+  background-color: var(--color-grey-200);
+  margin: 2rem auto 1rem auto;
+`;
 
 function Sidebar({ isOpen, onClose }) {
   return (
@@ -50,7 +65,10 @@ function Sidebar({ isOpen, onClose }) {
       <Overlay isOpen={isOpen} onClick={onClose} />
       <StyledSidebar className={isOpen ? "active" : ""}>
         <Logo />
-        <MainNav />
+        <NavContainer>
+          <MainNav />
+          <BottomLine />
+        </NavContainer>
       </StyledSidebar>
     </>
   );
