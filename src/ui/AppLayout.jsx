@@ -3,8 +3,8 @@ import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
 import { useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import { RiMenu2Fill } from "react-icons/ri";
 
 const StyledAppLayout = styled.div`
   display: grid;
@@ -49,7 +49,7 @@ const ToggleButton = styled.button`
   @media screen and (max-width: 768px) {
     display: block;
     position: fixed;
-    top: 0.5rem;
+    top: 1.8rem;
     left: 2rem;
     z-index: 1100;
     background: none;
@@ -66,15 +66,11 @@ const HeaderWrapper = styled.div`
 
 function AppLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  // ☰
   return (
     <StyledAppLayout>
       <ToggleButton onClick={() => setIsSidebarOpen((prev) => !prev)}>
-        {isSidebarOpen ? (
-          <IoMdClose size={25} />
-        ) : (
-          <RxHamburgerMenu size={25} />
-        )}
+        {isSidebarOpen ? <IoMdClose size={25} /> : <RiMenu2Fill size={25} />}
       </ToggleButton>
       <HeaderWrapper>
         <Header />

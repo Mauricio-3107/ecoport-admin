@@ -37,19 +37,9 @@ const StyledSidebar = styled.aside`
 
   @media screen and (max-width: 768px) {
     transform: translateX(-100%);
-    /* box-shadow: none; */
     &.active {
       transform: translateX(0);
-      /* box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3); */
-    }
-
-    &::after {
-      content: "";
-      display: block;
-      margin: 2rem auto 1rem;
-      height: 1px;
-      width: 80%;
-      background-color: var(--color-grey-200);
+      padding-bottom: 5rem;
     }
   }
 `;
