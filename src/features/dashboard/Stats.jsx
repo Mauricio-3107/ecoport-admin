@@ -6,7 +6,21 @@ import {
 } from "react-icons/hi2";
 import Stat from "./Stat";
 import { formatCurrency, formatMileage, formatRate } from "../../utils/helpers";
+import styled from "styled-components";
+const StatsGrid = styled.div`
+  display: grid;
+  gap: 1.6rem;
 
+  // Desktop: 4 columns
+  @media screen and (min-width: 769px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  // Mobile: 1 column
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
 function Stats({ trips, kilometers }) {
   // 1.
   const numTrips = trips.length;
@@ -18,7 +32,7 @@ function Stats({ trips, kilometers }) {
   const priceKmRate = formatRate(sales / kilometers);
 
   return (
-    <>
+    <StatsGrid>
       <Stat
         title="Viajes"
         color="blue"
@@ -43,7 +57,7 @@ function Stats({ trips, kilometers }) {
         icon={<HiOutlineChartBar />}
         value={priceKmRate}
       />
-    </>
+    </StatsGrid>
   );
 }
 

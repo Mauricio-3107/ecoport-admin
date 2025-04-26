@@ -8,6 +8,10 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    overflow-x: auto;
+  }
 `;
 
 const CommonRow = styled.div`

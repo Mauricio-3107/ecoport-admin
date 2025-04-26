@@ -29,6 +29,11 @@ const ChartBox = styled.div`
   & .recharts-cartesian-grid line {
     stroke: var(--color-grey-200);
   }
+
+  @media screen and (max-width: 768px) {
+    grid-column: 1 / -1; /* <— This forces full width on mobile */
+    padding: 1.6rem;
+  }
 `;
 
 const TotalMileage = styled.div`
