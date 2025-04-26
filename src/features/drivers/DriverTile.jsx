@@ -38,6 +38,16 @@ const PhoneNumberWhatssapLink = styled.a`
   }
 `;
 
+const NoTelSpan = styled.span`
+  a[x-apple-data-detectors],
+  a[href^="tel"] {
+    color: inherit !important;
+    text-decoration: none !important;
+    pointer-events: none;
+    cursor: default;
+  }
+`;
+
 export default function DriverTile({ driver }) {
   const { fullName, licenseNumber, phoneNumber, licensePlate, salary } = driver;
 
@@ -48,8 +58,7 @@ export default function DriverTile({ driver }) {
       </Header>
 
       <Field>
-        <strong>Licencia:</strong>{" "}
-        <span className="no-tel">{licenseNumber}</span>
+        <strong>Licencia:</strong> <NoTelSpan>{licenseNumber}</NoTelSpan>
       </Field>
       <Field>
         <strong>Celular:</strong>{" "}
