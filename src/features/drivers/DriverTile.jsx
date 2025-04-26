@@ -48,7 +48,8 @@ export default function DriverTile({ driver }) {
       </Header>
 
       <Field>
-        <strong>Licencia:</strong> {licenseNumber}
+        <strong>Licencia:</strong>{" "}
+        <span className="no-tel">{licenseNumber}</span>
       </Field>
       <Field>
         <strong>Celular:</strong>{" "}
