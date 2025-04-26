@@ -9,16 +9,16 @@ function DriverTableOperations() {
         filterField="licensePlate"
         options={[
           {
-            label: "Todos",
-            value: "all",
-          },
-          {
             label: "Con Placa",
             value: "with-licensePlate",
           },
           {
             label: "Sin Placa",
             value: "no-licensePlate",
+          },
+          {
+            label: "Todos",
+            value: "all",
           },
         ]}
       />

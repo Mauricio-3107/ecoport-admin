@@ -6,6 +6,9 @@ import { useTruckDriverAssignments } from "../truckDriverAssignments/useTruckDri
 import { useTrucks } from "../trucks/useTrucks";
 import DriverRow from "./DriverRow";
 import { useDrivers } from "./useDrivers";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import DriverTile from "./DriverTile";
 
 function enrichDriversWithAssignments(drivers, truckDriverAssignments) {
   // 1. Create a hash map of assignments
@@ -30,6 +33,8 @@ function enrichDriversWithAssignments(drivers, truckDriverAssignments) {
 }
 
 function DriverTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { isLoading: isLoadingDrivers, drivers } = useDrivers();
   const { isLoading: isLoadingTda, truckDriverAssignments } =
     useTruckDriverAssignments();
@@ -61,7 +66,7 @@ function DriverTable() {
   );
 
   // Filtering
-  const filterValue = searchParams.get("licensePlate") || "all";
+  const filterValue = searchParams.get("licensePlate") || "with-licensePlate";
   let filterDrivers;
   if (filterValue === "all") filterDrivers = enrichedDrivers;
   if (filterValue === "with-licensePlate")
@@ -78,6 +83,23 @@ function DriverTable() {
     const bVal = b[field] ?? "";
     return aVal.localeCompare(bVal) * modifier;
   });
+
+  if (isMobile)
+    return (
+      // Menus is there if I add the modal buttons
+      <Menus>
+        <TilesGrid>
+          {sortedDrivers.map((driver) => (
+            <DriverTile
+              key={driver.id}
+              driver={driver}
+              truckDriverAssignments={truckDriverAssignments}
+              availableTrucks={availableTrucks}
+            />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
 
   return (
     <Menus>

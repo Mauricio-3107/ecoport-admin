@@ -3,11 +3,8 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import AddTruck from "../features/trucks/AddTruck";
 import TruckTableOperations from "../features/trucks/TruckTableOperations";
-import useMediaQuery from "../hooks/useMediaQuery";
-import TruckTiles from "../features/trucks/TruckTiles";
 
 function Trucks() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <>
       <Row type="horizontal">
@@ -15,7 +12,7 @@ function Trucks() {
         <TruckTableOperations />
       </Row>
       <Row>
-        {isMobile ? <TruckTiles /> : <TruckTable />}
+        <TruckTable />
         <AddTruck />
       </Row>
     </>

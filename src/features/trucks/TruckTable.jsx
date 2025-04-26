@@ -5,8 +5,12 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TruckTile from "./TruckTile";
+import TilesGrid from "../../ui/TilesGrid";
 
 function TruckTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const { isLoading, trucks } = useTrucks();
   const [searchParams] = useSearchParams();
 
@@ -28,6 +32,18 @@ function TruckTable() {
       return (a[field] - b[field]) * modifier;
     }
   });
+
+  if (isMobile)
+    return (
+      // Menus is there if I add the modal buttons
+      <Menus>
+        <TilesGrid>
+          {sortedTrucks.map((t) => (
+            <TruckTile key={t.id} truck={t} />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
 
   return (
     <Menus>

@@ -68,7 +68,6 @@ function DriverRow({ driver, availableTrucks }) {
   };
 
   const itHasTruck = Boolean(licensePlate && assignmentId);
-  console.log(itHasTruck, fullName);
 
   function fromToday(numDays, withTime = false) {
     const date = add(new Date(), { days: numDays });
