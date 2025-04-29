@@ -4,14 +4,18 @@ import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import ClientRow from "./ClientRow";
 import { useClients } from "./useClients";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import ClientTile from "./ClientTile";
 
 function ClientTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const { isLoading, clients } = useClients();
   const [searchParams] = useSearchParams();
   if (isLoading) return <Spinner />;
   // Take out the 2 edge cases
   const realClients = clients.filter((client) => !client.hidden);
-  
+
   // Filter
   const filterValue = searchParams.get("type") || "all";
 
@@ -29,6 +33,16 @@ function ClientTable() {
   const sortedClients = filteredClients.sort(
     (a, b) => a[field].localeCompare(b[field]) * modifier
   );
+
+  if (isMobile) {
+    return (
+      <TilesGrid>
+        {sortedClients.map((client) => (
+          <ClientTile key={client.id} client={client} />
+        ))}
+      </TilesGrid>
+    );
+  }
 
   return (
     <Menus>

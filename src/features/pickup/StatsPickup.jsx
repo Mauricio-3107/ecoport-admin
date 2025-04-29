@@ -13,6 +13,11 @@ const StatsBox = styled.div`
   display: grid;
   gap: 1.6rem;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    grid-column: 1 / -1; /* <— This forces full width on mobile */
+    padding: 1.6rem;
+  }
 `;
 
 function StatsPickup({ licensePlate, kilometers, runtime }) {

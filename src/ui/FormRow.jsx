@@ -25,6 +25,22 @@ const StyledFormRow = styled.div`
     justify-content: flex-end;
     gap: 1.2rem;
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+    gap: 0.8rem;
+    align-items: start;
+  }
+`;
+
+const InputIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  @media (min-width: 769px) {
+    display: contents; /* On desktop, behave as if it doesn't exist */
+  }
 `;
 
 const Label = styled.label`
@@ -37,6 +53,9 @@ const Error = styled.span`
 `;
 
 const IconSvg = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: start;
   & svg {
     width: 2.4rem;
     height: 2.4rem;
@@ -49,9 +68,12 @@ function FormRow({ label, error, children, icon = null, color }) {
   return (
     <StyledFormRow>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
-      {children}
-      {error && <Error>{error}</Error>}
-      {icon && <IconSvg color={color}>{icon}</IconSvg>}
+
+      <InputIconWrapper>
+        {children}
+        {error && <Error>{error}</Error>}
+        {icon && <IconSvg color={color}>{icon}</IconSvg>}
+      </InputIconWrapper>
     </StyledFormRow>
   );
 }

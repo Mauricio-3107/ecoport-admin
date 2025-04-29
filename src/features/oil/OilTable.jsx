@@ -5,8 +5,12 @@ import Table from "../../ui/Table";
 import OilRow from "./OilRow";
 import { useOil } from "./useOil";
 import Empty from "../../ui/Empty";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import OilTile from "./OilTile";
 
 function OilTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const { isLoading, oil } = useOil();
   const [searchParams] = useSearchParams();
 
@@ -32,10 +36,7 @@ function OilTable() {
         return (a[field] - b[field]) * modifier;
       }
     } else {
-      if (
-        typeof a[field] === "string" &&
-        typeof b[field] === "string"
-      ) {
+      if (typeof a[field] === "string" && typeof b[field] === "string") {
         // Use localeCompare for strings
         return a[field].localeCompare(b[field]) * modifier;
       } else {
@@ -44,6 +45,18 @@ function OilTable() {
       }
     }
   });
+
+  if (isMobile) {
+    return (
+      <Menus>
+        <TilesGrid>
+          {sortedTrucks.map((oilTruck) => (
+            <OilTile key={oilTruck.id} oilTruck={oilTruck} />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
+  }
 
   return (
     <Menus>

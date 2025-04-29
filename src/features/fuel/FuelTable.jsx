@@ -5,13 +5,19 @@ import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import FuelRow from "./FuelRow";
 import { useFuel } from "./useFuel";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import FuelTile from "./FuelTile";
 
 function FuelTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { isLoading, fuelConsumptionTrucks } = useFuel();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!fuelConsumptionTrucks.length) return <Empty resourceName="consumo de combustible" />;
+  if (!fuelConsumptionTrucks.length)
+    return <Empty resourceName="consumo de combustible" />;
 
   // Sorting
   const sortRaw = searchParams.get("sortBy") || "licensePlate-asc";
@@ -31,6 +37,18 @@ function FuelTable() {
       return (a[field] - b[field]) * modifier;
     }
   });
+
+  if (isMobile) {
+    return (
+      <Menus>
+        <TilesGrid>
+          {sortedTrucks.map((fuelTruck) => (
+            <FuelTile key={fuelTruck.id} fuelTruck={fuelTruck} />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
+  }
 
   return (
     <Menus>

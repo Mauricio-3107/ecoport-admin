@@ -5,7 +5,7 @@ import Row from "../ui/Row";
 function Company() {
   return (
     <Row>
-      <Heading as="h1">Documentos de la Empresa</Heading>
+      <Heading as="h1">Documentos Empresa</Heading>
       <UpdateCompanyForm />
     </Row>
   );

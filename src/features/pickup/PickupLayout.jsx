@@ -12,6 +12,13 @@ const StyledDashboardLayout = styled.div`
   /* grid-template-rows: auto auto 34rem; */
   grid-template-rows: auto;
   gap: 2.4rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    /* grid-template-rows: 1fr; */
+    row-gap: 2.4rem;
+    overflow-x: auto;
+  }
 `;
 
 function PickupLayout() {

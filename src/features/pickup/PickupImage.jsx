@@ -15,6 +15,11 @@ const ImageBox = styled.div`
   align-items: center;
   justify-content: center;
   min-height: ${(props) => props.$height}px;
+
+  @media screen and (max-width: 768px) {
+    grid-column: 1 / -1; /* <— This forces full width on mobile */
+    padding: 1.6rem;
+  }
 `;
 
 const PickupImg = styled.img`
@@ -29,7 +34,7 @@ function PickupImage({ height, imageUrl }) {
   return (
     <ImageBox $isDarkMode={isDarkMode} $height={height}>
       <Heading as="h2">SUZUKI - CARRY</Heading>
-      <PickupImg src={imageUrl} alt="Pickup Truck" height={height}/>
+      <PickupImg src={imageUrl} alt="Pickup Truck" height={height} />
     </ImageBox>
   );
 }
