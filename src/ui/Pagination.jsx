@@ -8,6 +8,12 @@ const StyledPagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
 `;
 
 const P = styled.p`
@@ -17,11 +23,21 @@ const P = styled.p`
   & span {
     font-weight: 600;
   }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    text-align: center;
+  }
 `;
 
 const Buttons = styled.div`
   display: flex;
   gap: 0.6rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const PaginationButton = styled.button`
@@ -57,6 +73,10 @@ const PaginationButton = styled.button`
     background-color: var(--color-brand-600);
     color: var(--color-brand-50);
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -84,11 +104,11 @@ function Pagination({ count }) {
   return (
     <StyledPagination>
       <P>
-        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{" "}
+        Mostrando <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> -{" "}
         <span>
           {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
         </span>{" "}
-        of <span>{count}</span> results
+        de <span>{count}</span> resultados
       </P>
 
       <Buttons>
