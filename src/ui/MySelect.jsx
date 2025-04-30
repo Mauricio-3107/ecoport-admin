@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
-  font-size: 1.4rem;
+  width: 100%;
+  font-size: 1.3rem;
   padding: 0.8rem 1.2rem;
   border: 1px solid
     ${(props) =>

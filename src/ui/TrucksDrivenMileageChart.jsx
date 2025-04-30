@@ -114,7 +114,10 @@ function TrucksDrivenMileageChart({
                 tick={{ fill: colors.text, fontSize: 13 }}
                 interval={0} // Forces all labels to be displayed
               />
-              <Tooltip contentStyle={{ backgroundColor: colors.background }} />
+              <Tooltip
+                contentStyle={{ backgroundColor: colors.background }}
+                labelFormatter={(label) => <strong>{label}</strong>}
+              />
               <Bar
                 dataKey="mileage"
                 fill={colors.barFill}

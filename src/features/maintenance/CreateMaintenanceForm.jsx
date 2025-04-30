@@ -152,7 +152,7 @@ function CreateMaintenanceForm({
           >
             Cancelar
           </Button>
-          <Button disabled={isWorking}>Registrar mantenimiento</Button>
+          <Button disabled={isWorking}>Registrar</Button>
         </FormRow>
       </Form>
     </Container>

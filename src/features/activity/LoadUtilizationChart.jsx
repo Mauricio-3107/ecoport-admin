@@ -76,12 +76,6 @@ function LoadUtilizationChart({
                   type="number"
                   domain={[0, 100]}
                   tick={{ fill: colors.text, fontSize: 12 }}
-                  label={{
-                    value: "% Utilización",
-                    position: "insideBottom",
-                    fill: colors.text,
-                    offset: -8,
-                  }}
                 />
                 <YAxis
                   dataKey="licensePlate"
@@ -115,6 +109,7 @@ function LoadUtilizationChart({
             <Tooltip
               contentStyle={{ backgroundColor: colors.background }}
               formatter={(value) => [`${value} %`, "Capacidad utilizada"]}
+              labelFormatter={(label) => <strong>{label}</strong>}
             />
             <Bar
               dataKey="loadUtilization"

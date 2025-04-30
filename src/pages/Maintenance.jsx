@@ -11,7 +11,7 @@ function Maintenance() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Mantenimiento y repuestos</Heading>
+        <Heading as="h1">Mantenimiento</Heading>
         <MaintenanceTableOperations />
       </Row>
       <MaintenanceLayout trucks={trucks} />

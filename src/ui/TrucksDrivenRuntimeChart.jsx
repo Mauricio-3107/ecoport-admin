@@ -129,6 +129,7 @@ function TrucksDrivenRuntimeChart({
               <Tooltip
                 contentStyle={{ backgroundColor: colors.background }}
                 formatter={(value) => [formatRuntime(value * 3600), "Tiempo"]}
+                labelFormatter={(label) => <strong>{label}</strong>}
               />
               <Bar
                 dataKey="runtime"

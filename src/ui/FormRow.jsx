@@ -24,6 +24,15 @@ const StyledFormRow = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+
+      & > button {
+        width: 100%;
+      }
+    }
   }
 
   @media (max-width: 768px) {

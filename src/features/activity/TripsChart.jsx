@@ -116,7 +116,10 @@ function TripsChart({
                 </>
               )}
 
-              <Tooltip contentStyle={{ backgroundColor: colors.background }} />
+              <Tooltip
+                contentStyle={{ backgroundColor: colors.background }}
+                labelFormatter={(label) => <strong>{label}</strong>}
+              />
               <Bar
                 dataKey="trips"
                 fill={colors.barFill}
