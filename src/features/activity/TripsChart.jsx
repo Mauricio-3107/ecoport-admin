@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Heading from "../../ui/Heading";
 import { useDarkMode } from "../../context/DarkModeContext";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ChartBox = styled.div`
   background-color: ${(props) =>
@@ -27,6 +28,10 @@ const ChartBox = styled.div`
 
   & .recharts-cartesian-grid line {
     stroke: var(--color-grey-200);
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 1.6rem;
   }
 `;
 
@@ -50,6 +55,7 @@ function TripsChart({
   periodEmptyMessageData,
 }) {
   const { isDarkMode } = useDarkMode();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const colors = isDarkMode
     ? { barFill: "#0c91ea", text: "#e5e7eb", background: "#18212f" }
@@ -69,21 +75,47 @@ function TripsChart({
             Total: {totalTrips} viajes
           </TotalTrips>
           <ResponsiveContainer width="100%" height={height}>
-            <BarChart data={trips}>
+            <BarChart
+              data={trips}
+              layout={isMobile ? "vertical" : "horizontal"}
+            >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="licensePlate"
-                type="category"
-                tick={{ fill: colors.text, fontSize: 12 }}
-                interval={0}
-              />
-              <YAxis
-                type="number"
-                allowDecimals={false}
-                tickFormatter={(tick) => Math.round(tick)}
-                tick={{ fill: colors.text, fontSize: 12 }}
-                domain={[0, "auto"]}
-              />
+
+              {isMobile ? (
+                <>
+                  <XAxis
+                    type="number"
+                    allowDecimals={false}
+                    tickFormatter={(tick) => Math.round(tick)}
+                    tick={{ fill: colors.text, fontSize: 12 }}
+                    domain={[0, "auto"]}
+                  />
+                  <YAxis
+                    dataKey="licensePlate"
+                    type="category"
+                    width={80}
+                    tick={{ fill: colors.text, fontSize: 12 }}
+                    interval={0}
+                  />
+                </>
+              ) : (
+                <>
+                  <XAxis
+                    dataKey="licensePlate"
+                    type="category"
+                    tick={{ fill: colors.text, fontSize: 12 }}
+                    interval={0}
+                  />
+                  <YAxis
+                    type="number"
+                    allowDecimals={false}
+                    tickFormatter={(tick) => Math.round(tick)}
+                    tick={{ fill: colors.text, fontSize: 12 }}
+                    domain={[0, "auto"]}
+                  />
+                </>
+              )}
+
               <Tooltip contentStyle={{ backgroundColor: colors.background }} />
               <Bar
                 dataKey="trips"

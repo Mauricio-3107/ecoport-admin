@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Heading from "../../ui/Heading";
 import { useDarkMode } from "../../context/DarkModeContext";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ChartBox = styled.div`
   grid-column: 1 / -1;
@@ -24,6 +25,14 @@ const ChartBox = styled.div`
   align-items: center; /* Center the message */
   justify-content: center;
   min-height: ${(props) => props.$height}px; /* Ensure proper height */
+
+  & .recharts-cartesian-grid line {
+    stroke: var(--color-grey-200);
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 1.6rem;
+  }
 `;
 
 const NoDataMessage = styled.p`
@@ -38,7 +47,7 @@ function LoadUtilizationChart({
   periodEmptyMessageData,
 }) {
   const { isDarkMode } = useDarkMode();
-  console.log(trucksLoadData);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const colors = isDarkMode
     ? { barFill: "#e0e7ff", text: "#e5e7eb", background: "#18212f" }
@@ -55,26 +64,53 @@ function LoadUtilizationChart({
         </NoDataMessage>
       ) : (
         <ResponsiveContainer width="100%" height={height}>
-          <BarChart data={trucksLoadData}>
+          <BarChart
+            data={trucksLoadData}
+            layout={isMobile ? "vertical" : "horizontal"}
+          >
             <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis
-              dataKey="licensePlate"
-              type="category"
-              tick={{ fill: colors.text, fontSize: 12 }}
-            />
-
-            <YAxis
-              type="number"
-              domain={[0, 100]}
-              tick={{ fill: colors.text, fontSize: 12 }}
-              label={{
-                value: "% Utilización",
-                angle: -90,
-                position: "insideLeft",
-                fill: colors.text,
-              }}
-            />
+            {isMobile ? (
+              <>
+                <XAxis
+                  type="number"
+                  domain={[0, 100]}
+                  tick={{ fill: colors.text, fontSize: 12 }}
+                  label={{
+                    value: "% Utilización",
+                    position: "insideBottom",
+                    fill: colors.text,
+                    offset: -8,
+                  }}
+                />
+                <YAxis
+                  dataKey="licensePlate"
+                  type="category"
+                  width={80}
+                  tick={{ fill: colors.text, fontSize: 12 }}
+                  interval={0}
+                />
+              </>
+            ) : (
+              <>
+                <XAxis
+                  dataKey="licensePlate"
+                  type="category"
+                  tick={{ fill: colors.text, fontSize: 12 }}
+                />
+                <YAxis
+                  type="number"
+                  domain={[0, 100]}
+                  tick={{ fill: colors.text, fontSize: 12 }}
+                  label={{
+                    value: "% Utilización",
+                    angle: -90,
+                    position: "insideLeft",
+                    fill: colors.text,
+                  }}
+                />
+              </>
+            )}
 
             <Tooltip
               contentStyle={{ backgroundColor: colors.background }}

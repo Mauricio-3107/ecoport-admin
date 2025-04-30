@@ -7,8 +7,13 @@ import Menus from "../../ui/Menus";
 import { useTripCosts } from "./useTripCosts";
 import Table from "../../ui/Table";
 import TripCostsRow from "./TripCostsRow";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import TripCostsTile from "./TripCostsTile";
 
 function TripCostsTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { isLoading, tripCosts } = useTripCosts();
   const [searchParams] = useSearchParams();
 
@@ -43,6 +48,18 @@ function TripCostsTable() {
       }
     }
   });
+
+  if (isMobile) {
+    return (
+      <Menus>
+        <TilesGrid>
+          {sortedTrucks.map((tripCost) => (
+            <TripCostsTile key={tripCost.id} tripCost={tripCost} />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
+  }
 
   return (
     <Menus>
