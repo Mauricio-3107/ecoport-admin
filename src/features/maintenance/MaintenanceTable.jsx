@@ -5,13 +5,18 @@ import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
 import { useMaintenance } from "./useMaintenance";
 import MaintenanceRow from "./MaintenanceRow";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import TilesGrid from "../../ui/TilesGrid";
+import MaintenanceTile from "./MaintenanceTile";
 
 function MaintenanceTable() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [searchParams] = useSearchParams();
   const { isLoading, maintenanceTruck } = useMaintenance();
   if (isLoading) return <Spinner />;
 
-  if (!maintenanceTruck.length) return <Empty resourceName="mantenimiento para este camión" />;
+  if (!maintenanceTruck.length)
+    return <Empty resourceName="mantenimiento para este camión" />;
 
   // 1. Filtering
   const filterValue = searchParams.get("maintenanceKind") || "all";
@@ -42,6 +47,18 @@ function MaintenanceTable() {
       return (a[field] - b[field]) * modifier;
     }
   });
+
+  if (isMobile) {
+    return (
+      <Menus>
+        <TilesGrid>
+          {sortedMaintenance.map((maintenance) => (
+            <MaintenanceTile key={maintenance.id} maintenance={maintenance} />
+          ))}
+        </TilesGrid>
+      </Menus>
+    );
+  }
 
   return (
     <Menus>
