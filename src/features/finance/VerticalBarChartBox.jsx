@@ -157,7 +157,7 @@ function VerticalBarChartBox({
                         <li>⛽ Diésel: Bs {format(fuelConsumptionCost)}</li>
                         <li>🍴 Viáticos: Bs {format(dailyExpensesCost)}</li>
                         <li>
-                          🔧 {isMobile ? "Mantenim." : "Mantenimiento"}: Bs{" "}
+                          🔧 {isMobile ? "Mantenim. " : "Mantenimiento"}: Bs{" "}
                           {format(maintenanceCost)}
                         </li>
                       </ul>
