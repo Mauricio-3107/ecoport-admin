@@ -61,7 +61,7 @@ function VerticalBarChartBox({
         <BarChart
           data={data}
           layout={isMobile ? "vertical" : "horizontal"}
-          margin={isMobile ? { left: 50 } : { bottom: 50 }}
+          margin={isMobile ? { left: 100 } : { bottom: 50 }}
           onClick={(e) => {
             if (onBarClick && e?.activePayload?.[0]) {
               const truck = e.activePayload[0].payload;
@@ -76,7 +76,7 @@ function VerticalBarChartBox({
                 type="category"
                 dataKey="licensePlate"
                 tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
-                width={80}
+                width={100}
               />
               <XAxis
                 type="number"
