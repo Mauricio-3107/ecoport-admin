@@ -45,7 +45,7 @@ function StackedCostRevenueChart({ data }) {
         <BarChart
           data={data}
           layout={isMobile ? "vertical" : "horizontal"}
-          margin={isMobile ? { left: 50 } : { bottom: 50 }}
+          margin={isMobile ? { left: -20 } : { bottom: 50 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           {isMobile ? (
@@ -54,7 +54,7 @@ function StackedCostRevenueChart({ data }) {
                 type="category"
                 dataKey="licensePlate"
                 tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
-                width={80}
+                width={100}
               />
               <XAxis
                 type="number"
