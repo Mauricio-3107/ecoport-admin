@@ -8,6 +8,7 @@ import { useTrucksMileageRuntime } from "../dashboard/useTrucksMileageRuntime";
 import { useRecentTrips } from "./useRecentTrips";
 import TripsChart from "./TripsChart";
 import LoadUtilizationChart from "./LoadUtilizationChart";
+import { TRUCK_CAPACITIES } from "../../utils/constants";
 
 const StyledActivityLayout = styled.div`
   display: grid;
@@ -35,14 +36,15 @@ function ActivityLayout() {
     useTotalMileageTrucks();
 
   // Trips
-  const {
-    isLoading: isLoadingTrips,
-    trips,
-    count,
-  } = useRecentTrips();
+  const { isLoading: isLoadingTrips, trips, count } = useRecentTrips();
 
   if (isLoadingTotalMileage || isLoadingTrucksMileageRuntime || isLoadingTrips)
     return <Spinner />;
+
+  // Sorted license plates
+  const sortedTrucksMileageRuntime = [...trucksMileageRuntime].sort((a, b) =>
+    a.licensePlate.localeCompare(b.licensePlate, "es")
+  );
 
   // Normalizing the trips variable
   const tripsIncomeByTruck = trips.reduce((acc, trip) => {
@@ -55,13 +57,14 @@ function ActivityLayout() {
     return acc;
   }, {});
 
-  const trucksTripsData = Object.keys(tripsIncomeByTruck).map(
-    (licensePlate) => ({
+  const trucksTripsData = Object.keys(tripsIncomeByTruck)
+    .map((licensePlate) => ({
       licensePlate,
       trips: tripsIncomeByTruck[licensePlate].trips,
-    })
-  );
-  
+    }))
+    .sort((a, b) => a.licensePlate.localeCompare(b.licensePlate, "es"));
+
+
   // Income Chart
   // const trucksIncomeData = Object.keys(tripsIncomeByTruck).map(
   //   (licensePlate) => ({
@@ -69,12 +72,6 @@ function ActivityLayout() {
   //     income: tripsIncomeByTruck[licensePlate].income,
   //   })
   // );
-
-  // Load utilization
-  const truckCapacities = {
-    6: 45000, // 6-axle trucks
-    4: 43000, // 5-axle trucks
-  };
 
   // Calculate Load Utilization (%) for each truck
   const trucksLoadUtilization = trips.reduce((acc, trip) => {
@@ -85,7 +82,7 @@ function ActivityLayout() {
 
     // Determine the truck's max weight limit based on the first character of traction
     const axleKey = traction.startsWith("6") ? "6" : "4";
-    const maxWeight = truckCapacities[axleKey];
+    const maxWeight = TRUCK_CAPACITIES[axleKey];
     const realCapacity = maxWeight - tare; // Actual usable capacity
 
     if (!acc[licensePlate]) {
@@ -99,18 +96,19 @@ function ActivityLayout() {
   }, {});
 
   // Convert to array format for charting
-  const trucksLoadData = Object.keys(trucksLoadUtilization).map(
-    (licensePlate) => {
+  const trucksLoadData = Object.keys(trucksLoadUtilization)
+    .map((licensePlate) => {
       const { totalWeight, capacity, trips } =
         trucksLoadUtilization[licensePlate];
       return {
         licensePlate,
         loadUtilization: Number(
           ((totalWeight / trips / capacity) * 100).toFixed()
-        ), // Percentage
+        ),
       };
-    }
-  );
+    })
+    .sort((a, b) => a.licensePlate.localeCompare(b.licensePlate, "es"));
+
 
   const periodMessage =
     filterValuePeriod === "Today" ? "hoy" : `últimos ${filterValuePeriod} días`;
@@ -118,7 +116,7 @@ function ActivityLayout() {
   return (
     <StyledActivityLayout>
       <TrucksDrivenMileageChart
-        trucksMileageRuntime={trucksMileageRuntime}
+        trucksMileageRuntime={sortedTrucksMileageRuntime}
         totalMileage={totalMileageTrucks}
         title={`Actividad ${periodMessage} (Km recorridos)`}
         height={450}
@@ -127,7 +125,7 @@ function ActivityLayout() {
       />
 
       <TrucksDrivenRuntimeChart
-        trucksMileageRuntime={trucksMileageRuntime}
+        trucksMileageRuntime={sortedTrucksMileageRuntime}
         title={`Actividad ${periodMessage} (Tiempo recorrido)`}
         height={450}
         period={filterValuePeriod}

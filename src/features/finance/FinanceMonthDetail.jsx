@@ -15,29 +15,32 @@ const StyledFinanceMonthDetail = styled.div`
 function FinanceMonthDetail() {
   const { isLoading, financeMonth } = useFinanceMonth();
   if (isLoading) return <Spinner />;
-  console.log(financeMonth);
+  
   if (!financeMonth || financeMonth.length === 0)
     return <Empty resourceName={"dato disponibles para este mes"} />;
+  const sortedData = [...financeMonth].sort((a, b) =>
+    a.licensePlate.localeCompare(b.licensePlate, "es")
+  );
   return (
     <StyledFinanceMonthDetail>
-      <StackedCostRevenueChart data={financeMonth} />
+      <StackedCostRevenueChart data={sortedData} />
       <VerticalBarChartBox
         title="Costos por camión"
-        data={financeMonth}
+        data={sortedData}
         dataKey="totalCost"
         color="#c0392b"
         barName="Costo"
       />
       <VerticalBarChartBox
         title="Ingresos por camión"
-        data={financeMonth}
+        data={sortedData}
         dataKey="totalRevenue"
         color="#27ae60"
         barName="Ingreso"
       />
       <VerticalBarChartBox
         title="Utilidad por camión"
-        data={financeMonth}
+        data={sortedData}
         dataKey="profit"
         color="#2980b9"
         barName="Utilidad"

@@ -139,6 +139,11 @@ function DashboardLayout() {
   )
     return <Spinner />;
 
+  // Sorted license plates
+  const sortedTrucksMileageRuntime = [...trucksMileageRuntime].sort((a, b) =>
+    a.licensePlate.localeCompare(b.licensePlate, "es")
+  );
+
   //Filer value
   const filterValue = !searchParams.get("last")
     ? "7"
@@ -158,7 +163,7 @@ function DashboardLayout() {
       <Stats trips={trips} kilometers={pastKilometers} />
       <SalesChart trips={trips} numDays={numDays} />
       <TrucksDrivenMileageChart
-        trucksMileageRuntime={trucksMileageRuntime}
+        trucksMileageRuntime={sortedTrucksMileageRuntime}
         totalMileage={totalMileageTrucks}
         title="Actividad Hoy (Km recorridos)"
         height={400}
@@ -166,7 +171,7 @@ function DashboardLayout() {
       />
 
       <TrucksDrivenRuntimeChart
-        trucksMileageRuntime={trucksMileageRuntime}
+        trucksMileageRuntime={sortedTrucksMileageRuntime}
         title="Actividad de hoy (Tiempo recorrido)"
         height={400}
         period="Today"
