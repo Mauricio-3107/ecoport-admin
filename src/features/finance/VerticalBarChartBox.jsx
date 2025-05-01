@@ -61,7 +61,7 @@ function VerticalBarChartBox({
         <BarChart
           data={data}
           layout={isMobile ? "vertical" : "horizontal"}
-          margin={isMobile ? { left: 100 } : { bottom: 50 }}
+          margin={isMobile ? { left: 0 } : { bottom: 50 }}
           onClick={(e) => {
             if (onBarClick && e?.activePayload?.[0]) {
               const truck = e.activePayload[0].payload;
