@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import Heading from "../../ui/Heading";
 import { useDarkMode } from "../../context/DarkModeContext";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ChartBox = styled.div`
   background-color: ${(props) =>
@@ -33,29 +34,34 @@ const ChartBox = styled.div`
 function VerticalBarChartBox({
   title,
   data,
-  height = 450,
+  height,
   dataKey,
   color,
   barName,
   onBarClick,
 }) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { isDarkMode } = useDarkMode();
+  const responsiveHeight = isMobile ? 600 : 450;
+  const lastHeight = height || responsiveHeight;
 
   if (!data || data.length === 0)
     return (
-      <ChartBox $isDarkMode={isDarkMode} $height={height}>
+      <ChartBox $isDarkMode={isDarkMode} $height={lastHeight}>
         <Heading as="h2">{title} (Bs)</Heading>
         <p>No data for this month.</p>
       </ChartBox>
     );
 
   return (
-    <ChartBox $isDarkMode={isDarkMode} $height={height}>
+    <ChartBox $isDarkMode={isDarkMode} $height={lastHeight}>
       <Heading as="h2">{title} (Bs)</Heading>
-      <ResponsiveContainer width="100%" height={height - 60}>
+      <ResponsiveContainer width="100%" height={lastHeight}>
         <BarChart
           data={data}
-          margin={{ bottom: 50 }}
+          layout={isMobile ? "vertical" : "horizontal"}
+          margin={isMobile ? { left: 50 } : { bottom: 50 }}
           onClick={(e) => {
             if (onBarClick && e?.activePayload?.[0]) {
               const truck = e.activePayload[0].payload;
@@ -64,14 +70,33 @@ function VerticalBarChartBox({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="licensePlate"
-            interval={0}
-            angle={-35}
-            textAnchor="end"
-            tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
-          />
-          <YAxis tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }} />
+          {isMobile ? (
+            <>
+              <YAxis
+                type="category"
+                dataKey="licensePlate"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+                width={80}
+              />
+              <XAxis
+                type="number"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+            </>
+          ) : (
+            <>
+              <XAxis
+                dataKey="licensePlate"
+                interval={0}
+                angle={-35}
+                textAnchor="end"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+              <YAxis
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+            </>
+          )}
           {dataKey === "totalCost" ? (
             <Tooltip
               content={({ active, payload }) => {
