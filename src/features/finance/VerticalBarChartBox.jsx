@@ -150,7 +150,7 @@ function VerticalBarChartBox({
                       </strong>
                       <ul
                         style={{
-                          paddingLeft: isMobile ? "1.4rem" : "1.6rem",
+                          paddingLeft: isMobile ? "1.3rem" : "1.6rem",
                           margin: 0,
                         }}
                       >
