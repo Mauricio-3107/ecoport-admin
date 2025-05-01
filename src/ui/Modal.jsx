@@ -19,7 +19,7 @@ const StyledModal = styled.div`
   @media (max-width: 480px) {
     width: 90vw;
     padding: 2rem;
-    max-height: 80vh;
+    max-height: 70vh;
     overflow-y: auto;
   }
 `;
