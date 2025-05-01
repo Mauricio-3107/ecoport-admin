@@ -10,6 +10,7 @@ import {
 import Heading from "../../ui/Heading";
 import { useDarkMode } from "../../context/DarkModeContext";
 import styled from "styled-components";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const ChartBox = styled.div`
   background-color: ${(props) =>
@@ -31,22 +32,49 @@ const ChartBox = styled.div`
 `;
 
 function StackedCostRevenueChart({ data }) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { isDarkMode } = useDarkMode();
 
+  const height = isMobile ? 600 : 450;
+
   return (
-    <ChartBox $isDarkMode={isDarkMode} $height={450}>
+    <ChartBox $isDarkMode={isDarkMode} $height={height}>
       <Heading as="h2">Costos vs Ingresos (Bs)</Heading>
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart data={data} margin={{ bottom: 50 }}>
+      <ResponsiveContainer width="100%" height={height}>
+        <BarChart
+          data={data}
+          layout={isMobile ? "vertical" : "horizontal"}
+          margin={isMobile ? { left: 50 } : { bottom: 50 }}
+        >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="licensePlate"
-            interval={0}
-            angle={-35}
-            textAnchor="end"
-            tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
-          />
-          <YAxis tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }} />
+          {isMobile ? (
+            <>
+              <YAxis
+                type="category"
+                dataKey="licensePlate"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+                width={80}
+              />
+              <XAxis
+                type="number"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+            </>
+          ) : (
+            <>
+              <XAxis
+                dataKey="licensePlate"
+                interval={0}
+                angle={-35}
+                textAnchor="end"
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+              <YAxis
+                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+              />
+            </>
+          )}
           <Tooltip
             content={({ active, payload }) => {
               if (active && payload && payload.length) {
