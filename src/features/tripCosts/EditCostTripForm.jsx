@@ -48,7 +48,7 @@ function EditCostTripForm({ tripCostToEdit = {}, licensePlate, onCloseModal }) {
             disabled={isEditing}
             id="agent"
             {...register("agent", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Agent must be a positive value" },
               valueAsNumber: true,
             })}
@@ -60,7 +60,7 @@ function EditCostTripForm({ tripCostToEdit = {}, licensePlate, onCloseModal }) {
             disabled={isEditing}
             id="expenses"
             {...register("expenses", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Expenses must be a positive value" },
               valueAsNumber: true,
             })}
@@ -72,13 +72,13 @@ function EditCostTripForm({ tripCostToEdit = {}, licensePlate, onCloseModal }) {
             disabled={isEditing}
             id="extraFuel"
             {...register("extraFuel", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Extra fuel must be a positive value" },
               valueAsNumber: true,
             })}
           />
         </FormRow>
-        <FormRow>
+        <FormRow isButtonRow={true}>
           {/* type is an HTML attribute! */}
           <Button
             variation="secondary"

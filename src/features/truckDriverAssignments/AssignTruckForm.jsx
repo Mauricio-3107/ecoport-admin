@@ -39,7 +39,7 @@ function AssignTruckForm({ driverId, onCloseModal, availableTrucks }) {
     e.preventDefault();
 
     if (!truckId) {
-      setError("This field is required");
+      setError("Este campo es obligatorio");
       return;
     }
 
@@ -65,7 +65,7 @@ function AssignTruckForm({ driverId, onCloseModal, availableTrucks }) {
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"

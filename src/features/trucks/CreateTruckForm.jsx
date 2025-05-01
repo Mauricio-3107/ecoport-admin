@@ -66,7 +66,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="licensePlate"
           {...register("licensePlate", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -77,7 +77,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="year"
           {...register("year", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -88,7 +88,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="hp"
           {...register("hp", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -99,7 +99,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="traction"
           {...register("traction", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -111,7 +111,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
             disabled={isWorking}
             id="tires"
             {...register("tires", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
             })}
           />
         </FormRow>
@@ -123,7 +123,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="tare"
           {...register("tare", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -137,7 +137,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="operationsCard"
           {...register("operationsCard", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -148,7 +148,7 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="insurance"
           {...register("insurance", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -159,12 +159,12 @@ function CreateTruckForm({ truckToEdit = {}, onCloseModal }) {
           accept="image/*"
           type="file"
           {...register("image", {
-            required: isEditSession ? false : "This field is required",
+            required: isEditSession ? false : "Este campo es obligatorio",
           })}
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"

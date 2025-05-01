@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { formatDateBolivia } from "../../utils/helpers";
+import { formatDateBolivia, formatKm } from "../../utils/helpers";
 
 const Card = styled.div`
   background-color: var(--color-grey-0);
@@ -18,7 +18,6 @@ const Card = styled.div`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 `;
-
 
 const Img = styled.img`
   width: 100%;
@@ -72,18 +71,18 @@ function OilTile({ oilTruck }) {
       </Field>
 
       <Field>
+        <span>KM Actual:</span>
+        {formatKm(odometerKm)}
+      </Field>
+
+      <Field>
         <span>Último KM:</span>
-        {lastKm ?? <span>&mdash;</span>}
+        {formatKm(lastKm)}
       </Field>
 
       <Field>
         <span>Próximo KM:</span>
-        {nextKm ?? <span>&mdash;</span>}
-      </Field>
-
-      <Field>
-        <span>KM Actual:</span>
-        {odometerKm ?? <span>&mdash;</span>}
+        {formatKm(nextKm)}
       </Field>
     </Card>
   );

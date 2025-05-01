@@ -69,7 +69,7 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           id="name"
           disabled={isWorking}
           {...register("name", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -80,7 +80,7 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           id="contactName"
           disabled={isWorking}
           {...register("contactName", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -91,7 +91,7 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           id="email"
           disabled={isWorking}
           {...register("email", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -102,7 +102,7 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           id="phoneNumber"
           disabled={isWorking}
           {...register("phoneNumber", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -114,7 +114,7 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           label="ciudad"
           type="white"
           {...register("city", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -124,12 +124,12 @@ function CreateClientForm({ clientToEdit = {}, type, onCloseModal }) {
           id="image"
           accept="image/*"
           {...register("image", {
-            required: isEditSession ? false : "This field is required",
+            required: isEditSession ? false : "Este campo es obligatorio",
           })}
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"

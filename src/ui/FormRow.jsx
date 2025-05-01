@@ -5,7 +5,6 @@ const StyledFormRow = styled.div`
   align-items: center;
   grid-template-columns: 24rem 1fr 1.2fr;
   gap: 2.4rem;
-
   padding: 1.2rem 0;
 
   &:first-child {
@@ -20,35 +19,39 @@ const StyledFormRow = styled.div`
     border-bottom: 1px solid var(--color-grey-100);
   }
 
-  &:has(button) {
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    align-items: start;
+  }
+
+  ${(props) =>
+    props.$isButtonRow &&
+    `
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
 
     @media (max-width: 768px) {
-      flex-direction: column;
-      align-items: stretch;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
 
       & > button {
-        width: 100%;
+        flex: 1 1 auto;
       }
     }
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* 1 column on mobile */
-    gap: 0.8rem;
-    align-items: start;
-  }
+  `}
 `;
 
 const InputIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
+  display: contents;
 
-  @media (min-width: 769px) {
-    display: contents; /* On desktop, behave as if it doesn't exist */
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
   }
 `;
 
@@ -73,16 +76,29 @@ const IconSvg = styled.div`
   }
 `;
 
-function FormRow({ label, error, children, icon = null, color }) {
+function FormRow({
+  label,
+  error,
+  children,
+  icon = null,
+  color,
+  isButtonRow = false,
+}) {
   return (
-    <StyledFormRow>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+    <StyledFormRow $isButtonRow={isButtonRow}>
+      {!isButtonRow && label && (
+        <Label htmlFor={children.props.id}>{label}</Label>
+      )}
 
-      <InputIconWrapper>
-        {children}
-        {error && <Error>{error}</Error>}
-        {icon && <IconSvg color={color}>{icon}</IconSvg>}
-      </InputIconWrapper>
+      {!isButtonRow ? (
+        <InputIconWrapper>
+          {children}
+          {error && <Error>{error}</Error>}
+          {icon && <IconSvg color={color}>{icon}</IconSvg>}
+        </InputIconWrapper>
+      ) : (
+        children
+      )}
     </StyledFormRow>
   );
 }

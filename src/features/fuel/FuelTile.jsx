@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { formatDateBolivia } from "../../utils/helpers";
+import { formatDateBolivia, formatKm } from "../../utils/helpers";
 import { HiOutlinePresentationChartLine } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import Menus from "../../ui/Menus";
@@ -65,8 +65,8 @@ function FuelTile({ fuelTruck }) {
       </Field>
 
       <Field>
-        <span>Kilometraje:</span>
-        {odometerKm}
+        <span>Kilometraje actual:</span>
+        {formatKm(odometerKm)}
       </Field>
 
       <Field>

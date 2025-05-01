@@ -68,7 +68,7 @@ function OilTable() {
           <div>Fecha</div>
           <div>Km cambio</div>
           <div>Km a cambiar</div>
-          <div>Km</div>
+          <div>Odómetro</div>
           <div></div>
         </Table.Header>
         <Table.Body

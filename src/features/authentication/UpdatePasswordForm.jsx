@@ -28,7 +28,7 @@ function UpdatePasswordForm() {
           autoComplete="current-password"
           disabled={isUpdating}
           {...register("password", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             minLength: {
               value: 8,
               message: "Password needs a minimum of 8 characters",
@@ -47,13 +47,13 @@ function UpdatePasswordForm() {
           id="passwordConfirm"
           disabled={isUpdating}
           {...register("passwordConfirm", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             validate: (value) =>
               getValues().password === value || "Passwords need to match",
           })}
         />
       </FormRow>
-      <FormRow>
+      <FormRow isButtonRow={true}>
         <Button onClick={reset} type="reset" variation="secondary">
           Cancelar
         </Button>

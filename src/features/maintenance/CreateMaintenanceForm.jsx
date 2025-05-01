@@ -72,7 +72,11 @@ function CreateMaintenanceForm({
 
   return (
     <Container>
-      <Heading as="h2">Placa: {licensePlate}</Heading>
+      {!isEditSession ? (
+        <Heading as="h2">Placa: {licensePlate}</Heading>
+      ) : (
+        <Heading as="h2">Editar</Heading> // adjust spacing as needed
+      )}
       <Form
         onSubmit={handleSubmit(onSubmit)}
         type={onCloseModal ? "modal" : "regular"}
@@ -90,7 +94,7 @@ function CreateMaintenanceForm({
               { value: "spare", label: "Compra repuesto" },
             ]}
             {...register("maintenanceKind", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
             })}
           />
         </FormRow>
@@ -114,7 +118,7 @@ function CreateMaintenanceForm({
             disabled={isWorking}
             id="cost"
             {...register("cost", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Costo must be a positive value" },
             })}
           />
@@ -126,7 +130,7 @@ function CreateMaintenanceForm({
             disabled={isWorking}
             id="date"
             {...register("date", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               validate: (value) =>
                 (value && value !== "") || "Please select a date",
             })}
@@ -143,7 +147,7 @@ function CreateMaintenanceForm({
           />
         </FormRow>
 
-        <FormRow>
+        <FormRow isButtonRow={true}>
           {/* type is an HTML attribute! */}
           <Button
             variation="secondary"
@@ -152,7 +156,9 @@ function CreateMaintenanceForm({
           >
             Cancelar
           </Button>
-          <Button disabled={isWorking}>Registrar</Button>
+          <Button disabled={isWorking}>
+            {isEditSession ? "Actualizar" : "Registrar"}
+          </Button>
         </FormRow>
       </Form>
     </Container>

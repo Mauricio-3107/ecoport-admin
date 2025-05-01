@@ -51,7 +51,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="fullName"
           {...register("fullName", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -64,7 +64,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="licenseNumber"
           {...register("licenseNumber", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -74,7 +74,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="phoneNumber"
           {...register("phoneNumber", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -84,7 +84,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           id="salary"
           {...register("salary", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             min: {
               value: 1,
               message: "Salario debe ser un número positivo",
@@ -93,7 +93,7 @@ function CreateDriverForm({ driverToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"

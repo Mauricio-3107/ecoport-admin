@@ -97,3 +97,11 @@ export function formatDateBolivia(dateStr) {
     year: "numeric",
   });
 }
+
+export function formatKm(km) {
+  if (typeof km !== "number") return "—";
+  return new Intl.NumberFormat("es-BO", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(km);
+}

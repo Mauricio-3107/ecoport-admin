@@ -88,7 +88,7 @@ function CreateEditOilForm({
             disabled={isWorking}
             id="lastKm"
             {...register("lastKm", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "km cambio must be a positive value" },
             })}
           />
@@ -101,7 +101,7 @@ function CreateEditOilForm({
             disabled={isWorking}
             defaultValue={OIL_COST}
             {...register("oilCost", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Oil cost must be a positive value" },
             })}
           />
@@ -114,7 +114,7 @@ function CreateEditOilForm({
             disabled={isWorking}
             defaultValue={FILTER_COST}
             {...register("filterCost", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: {
                 value: 0,
                 message: "Filter cost must be a positive value",
@@ -133,7 +133,7 @@ function CreateEditOilForm({
             disabled={isWorking}
             defaultValue={LABOR_COST}
             {...register("laborCost", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               min: { value: 0, message: "Labor cost must be a positive value" },
             })}
           />
@@ -145,14 +145,14 @@ function CreateEditOilForm({
             disabled={isWorking}
             id="oilDate"
             {...register("oilDate", {
-              required: "This field is required",
+              required: "Este campo es obligatorio",
               validate: (value) =>
                 (value && value !== "") || "Please select a date",
             })}
           />
         </FormRow>
 
-        <FormRow>
+        <FormRow isButtonRow={true}>
           {/* type is an HTML attribute! */}
           <Button
             variation="secondary"

@@ -5,7 +5,7 @@ import Modal from "../../ui/Modal";
 import { HiPencil } from "react-icons/hi2";
 import CreateEditOilForm from "./CreateEditOilForm";
 import { IoLogInSharp } from "react-icons/io5";
-import { formatDateBolivia } from "../../utils/helpers";
+import { formatDateBolivia, formatKm } from "../../utils/helpers";
 
 const Img = styled.img`
   display: block;
@@ -26,6 +26,7 @@ const LicensePlate = styled.div`
 const NextKm = styled.div`
   font-family: "Sono";
   font-weight: 600;
+  font-size: 1.4rem;
 `;
 
 function OilRow({ oilTruck }) {
@@ -46,9 +47,9 @@ function OilRow({ oilTruck }) {
       <LicensePlate>{licensePlate}</LicensePlate>
       <div>{name ? name : <span>&mdash;</span>}</div>
       <div>{oilDate ? formatDateBolivia(oilDate) : <span>&mdash;</span>}</div>
-      <div>{lastKm ? lastKm : <span>&mdash;</span>}</div>
-      <NextKm>{nextKm ? nextKm : <span>&mdash;</span>}</NextKm>
-      <div>{odometerKm != null ? odometerKm : <span>&mdash;</span>}</div>
+      <div>{formatKm(lastKm)}</div>
+      <NextKm>{formatKm(nextKm)}</NextKm>
+      <div>{formatKm(odometerKm)}</div>
       <div>
         <Modal>
           <Menus.Menu>

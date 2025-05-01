@@ -100,7 +100,7 @@ function CreateTripForm({
           label="ciudad"
           type="white"
           {...register("origin", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -112,7 +112,7 @@ function CreateTripForm({
           label="ciudad"
           type="white"
           {...register("destination", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -124,7 +124,7 @@ function CreateTripForm({
           label="unidad"
           type="white"
           {...register("assignmentId", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -136,7 +136,7 @@ function CreateTripForm({
           label="cliente"
           type="white"
           {...register("client", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -151,7 +151,7 @@ function CreateTripForm({
           label="tipo de carga"
           type="white"
           {...register("cargoType", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -161,7 +161,7 @@ function CreateTripForm({
           type="number"
           id="cargoWeight"
           {...register("cargoWeight", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             min: { value: 0, message: "Debe ser positivo" },
           })}
         />
@@ -189,7 +189,7 @@ function CreateTripForm({
           type="date"
           id="startDate"
           {...register("startDate", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
           })}
         />
       </FormRow>
@@ -199,7 +199,7 @@ function CreateTripForm({
           type="number"
           id="price"
           {...register("price", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             min: {
               value: 0,
               message: "Flete debe ser positivo",
@@ -208,7 +208,7 @@ function CreateTripForm({
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"

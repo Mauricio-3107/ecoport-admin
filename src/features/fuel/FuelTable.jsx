@@ -58,7 +58,7 @@ function FuelTable() {
           <div>Placa</div>
           <div>Fecha</div>
           <div>Lugar</div>
-          <div>Km</div>
+          <div>Km actual</div>
           <div>Litros</div>
           <div>Eficiencia (Km/L)</div>
           <div>Status</div>

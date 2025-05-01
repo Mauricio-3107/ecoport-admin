@@ -23,7 +23,7 @@ function SignupForm() {
           type="text"
           id="fullName"
           disabled={isLoading}
-          {...register("fullName", { required: "This field is required" })}
+          {...register("fullName", { required: "Este campo es obligatorio" })}
         />
       </FormRow>
 
@@ -33,7 +33,7 @@ function SignupForm() {
           id="email"
           disabled={isLoading}
           {...register("email", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             pattern: {
               value: /\S+@\S+\.\S+/,
               message: "Please provide a valid email address",
@@ -51,7 +51,7 @@ function SignupForm() {
           id="password"
           disabled={isLoading}
           {...register("password", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             minLength: {
               value: 8,
               message: "Password needs a minimum of 8 characters",
@@ -66,14 +66,14 @@ function SignupForm() {
           id="passwordConfirm"
           disabled={isLoading}
           {...register("passwordConfirm", {
-            required: "This field is required",
+            required: "Este campo es obligatorio",
             validate: (value) =>
               value === getValues().password || "Passwords neet to match",
           })}
         />
       </FormRow>
 
-      <FormRow>
+      <FormRow isButtonRow={true}>
         {/* type is an HTML attribute! */}
         <Button
           variation="secondary"
