@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Overlay = styled.div`
   display: none;
@@ -43,6 +45,7 @@ const StyledSidebar = styled.aside`
     }
   }
 `;
+
 const NavContainer = styled.div`
   flex: 1;
   overflow-y: auto;
@@ -66,6 +69,12 @@ const BottomLine = styled.div`
 `;
 
 function Sidebar({ isOpen, onClose }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (isOpen) onClose();
+  }, [location.pathname, isOpen, onClose]);
+
   return (
     <>
       <Overlay $isOpen={isOpen} onClick={onClose} />
