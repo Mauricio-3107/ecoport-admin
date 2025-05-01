@@ -56,10 +56,7 @@ function StackedCostRevenueChart({ data }) {
                 tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
                 width={100}
               />
-              <XAxis
-                type="number"
-                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
-              />
+              <XAxis type="number" tick={false} />
             </>
           ) : (
             <>
@@ -71,7 +68,7 @@ function StackedCostRevenueChart({ data }) {
                 tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
               />
               <YAxis
-                tick={{ fontSize: 14, fill: isDarkMode ? "#fff" : "#111" }}
+                tick={false}
               />
             </>
           )}

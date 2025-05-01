@@ -36,11 +36,11 @@ function FinanceMonthDetail() {
         barName="Ingreso"
       />
       <VerticalBarChartBox
-        title="Ganancia por camión"
+        title="Utilidad por camión"
         data={financeMonth}
         dataKey="profit"
         color="#2980b9"
-        barName="Ganancia"
+        barName="Utilidad"
       />
     </StyledFinanceMonthDetail>
   );
