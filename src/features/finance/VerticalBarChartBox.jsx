@@ -31,6 +31,13 @@ const ChartBox = styled.div`
   }
 `;
 
+function format(value) {
+  return value.toLocaleString("es-BO", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 function VerticalBarChartBox({
   title,
   data,
@@ -141,56 +148,19 @@ function VerticalBarChartBox({
                           maximumFractionDigits: 2,
                         })}
                       </strong>
-                      <ul style={{ paddingLeft: "1.6rem", margin: 0 }}>
-                        <li>
-                          🛢️ Aceite: Bs{" "}
-                          {oilCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          👨‍🔧 Sueldo: Bs{" "}
-                          {salaryCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          ⛽ Combustible: Bs{" "}
-                          {fuelConsumptionCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          🍴 Gastos diarios: Bs{" "}
-                          {dailyExpensesCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          🔧 Mantenimiento: Bs{" "}
-                          {maintenanceCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          🛞 Llantas: Bs{" "}
-                          {tiresCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
-                        <li>
-                          🚚 Viajes: Bs{" "}
-                          {travelCost.toLocaleString("es-BO", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </li>
+                      <ul
+                        style={{
+                          paddingLeft: isMobile ? "1.4rem" : "1.6rem",
+                          margin: 0,
+                        }}
+                      >
+                        <li>🛢️ Aceite: Bs {format(oilCost)}</li>
+                        <li>🛞 Llantas: Bs {format(tiresCost)}</li>
+                        <li>👨‍🔧 Sueldo: Bs {format(salaryCost)}</li>
+                        <li>🚚 Viajes: Bs {format(travelCost)}</li>
+                        <li>⛽ Diésel: Bs {format(fuelConsumptionCost)}</li>
+                        <li>🍴 Viáticos: Bs {format(dailyExpensesCost)}</li>
+                        <li>🔧 Mantenimiento: Bs {format(maintenanceCost)}</li>
                       </ul>
                     </div>
                   );
