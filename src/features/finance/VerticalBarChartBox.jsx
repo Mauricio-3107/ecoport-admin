@@ -99,7 +99,16 @@ function VerticalBarChartBox({
           )}
           {dataKey === "totalCost" ? (
             <Tooltip
-              position={isMobile ? { x: 40, y: 40 } : undefined}
+              wrapperStyle={
+                isMobile
+                  ? {
+                      maxWidth: "90vw",
+                      transform: "translateX(-50%)",
+                      left: "50%",
+                      zIndex: 9999,
+                    }
+                  : {}
+              }
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const {
