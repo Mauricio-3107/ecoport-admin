@@ -14,6 +14,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  overflow-y: auto;
 `;
 
 function CreateMaintenanceForm({
@@ -75,7 +76,7 @@ function CreateMaintenanceForm({
       {!isEditSession ? (
         <Heading as="h2">Placa: {licensePlate}</Heading>
       ) : (
-        <Heading as="h2">Editar</Heading> // adjust spacing as needed
+        <Heading as="h2">Editar</Heading>
       )}
       <Form
         onSubmit={handleSubmit(onSubmit)}

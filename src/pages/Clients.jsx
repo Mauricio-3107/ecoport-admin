@@ -8,13 +8,13 @@ function Clients() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Clients</Heading>
+        <Heading as="h1">Clientes</Heading>
         <ClientTableOperations />
       </Row>
       <Row>
         <ClientTable />
         <Row type="horizontal-no-space">
-          <AddClient type="export" /> 
+          <AddClient type="export" />
           <AddClient type="import" />
         </Row>
       </Row>
