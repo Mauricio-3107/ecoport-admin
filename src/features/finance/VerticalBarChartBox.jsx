@@ -142,11 +142,7 @@ function VerticalBarChartBox({
                           marginBottom: "0.8rem",
                         }}
                       >
-                        {licensePlate} - Total: Bs{" "}
-                        {totalCost.toLocaleString("es-BO", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
+                        {licensePlate} - Total: Bs {format(totalCost)}
                       </strong>
                       <ul
                         style={{
@@ -160,7 +156,10 @@ function VerticalBarChartBox({
                         <li>🚚 Viajes: Bs {format(travelCost)}</li>
                         <li>⛽ Diésel: Bs {format(fuelConsumptionCost)}</li>
                         <li>🍴 Viáticos: Bs {format(dailyExpensesCost)}</li>
-                        <li>🔧 Mantenimiento: Bs {format(maintenanceCost)}</li>
+                        <li>
+                          🔧 {isMobile ? "Mantenim." : "Mantenimiento"}: Bs{" "}
+                          {format(maintenanceCost)}
+                        </li>
                       </ul>
                     </div>
                   );
