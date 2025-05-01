@@ -14,6 +14,7 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
+  -webkit-overflow-scrolling: touch;
 
   @media (max-width: 480px) {
     width: 90vw;
