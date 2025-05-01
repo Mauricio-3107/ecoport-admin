@@ -137,7 +137,7 @@ function VerticalBarChartBox({
                     >
                       <strong
                         style={{
-                          fontSize: "1.6rem",
+                          fontSize: isMobile ? "1.5rem" : "1.6rem",
                           display: "block",
                           marginBottom: "0.8rem",
                         }}
