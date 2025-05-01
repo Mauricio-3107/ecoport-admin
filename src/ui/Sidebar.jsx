@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Overlay = styled.div`
   display: none;
@@ -70,10 +70,14 @@ const BottomLine = styled.div`
 
 function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
+  const previousPath = useRef(location.pathname);
 
   useEffect(() => {
-    if (isOpen) onClose();
-  }, [location.pathname, isOpen, onClose]);
+    if (previousPath.current !== location.pathname) {
+      previousPath.current = location.pathname;
+      onClose(); // Close only if path actually changed
+    }
+  }, [location.pathname, onClose]);
 
   return (
     <>
