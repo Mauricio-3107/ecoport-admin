@@ -85,9 +85,9 @@ const TruckContainer = styled.div`
   overflow: visible;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
-  /* @media screen and (max-width: 768px) {
-    height: 50rem;
-  } */
+  @media screen and (max-width: 768px) {
+    height: 55rem;
+  }
 `;
 
 const LegendContainer = styled.div`

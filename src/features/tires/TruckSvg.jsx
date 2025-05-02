@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const TruckSvgContainer = styled.svg`
   width: 100%;
   height: 100%;
 
   @media screen and (max-width: 768px) {
-    transform: scale(1.3);
-    transform-origin: top;
+    transform: scale(2.2);
+    /* transform-origin: top; */
   }
 `;
 
@@ -21,9 +22,9 @@ const TireCircle = styled.circle`
     stroke: var(--color-indigo-700);
   }
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     r: 26;
-  }
+  } */
 `;
 
 const TireText = styled.text`
@@ -33,9 +34,9 @@ const TireText = styled.text`
   font-weight: bold;
   pointer-events: none;
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     font-size: 13px;
-  }
+  } */
 `;
 
 const AxleLabel = styled.text`
@@ -63,6 +64,8 @@ const LegendItem = styled.text`
 `;
 
 const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const is6axle = tires.length > 18;
   const pxOffset = is6axle ? 75 : 0;
   const pxOffset3Axle = is6axle ? 60 : 0;
@@ -258,14 +261,16 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
       })}
 
       {/* Legend for naming convention */}
-      <g transform="translate(40, 80)">
-        <LegendTitle>Tire ID Format:</LegendTitle>
-        <LegendItem y="20">FL1 = Front Left</LegendItem>
-        <LegendItem y="40">2L1 = Second Axle Left Inner</LegendItem>
-        <LegendItem y="60">2L2 = Second Axle Left Outer</LegendItem>
-        <LegendItem y="80">4R1 = Fourth Axle Right Inner</LegendItem>
-        <LegendItem y="100">4R2 = Fourth Axle Right Outer</LegendItem>
-      </g>
+      {isMobile ? null : (
+        <g transform="translate(40, 80)">
+          <LegendTitle>Tire ID Format:</LegendTitle>
+          <LegendItem y="20">FL1 = Front Left</LegendItem>
+          <LegendItem y="40">2L1 = Second Axle Left Inner</LegendItem>
+          <LegendItem y="60">2L2 = Second Axle Left Outer</LegendItem>
+          <LegendItem y="80">4R1 = Fourth Axle Right Inner</LegendItem>
+          <LegendItem y="100">4R2 = Fourth Axle Right Outer</LegendItem>
+        </g>
+      )}
     </TruckSvgContainer>
   );
 };
