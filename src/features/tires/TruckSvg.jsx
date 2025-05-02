@@ -6,7 +6,7 @@ const TruckSvgContainer = styled.svg`
   height: 100%;
 
   @media screen and (max-width: 768px) {
-    transform: scale(2.2);
+    transform: scale(2.5);
     /* transform-origin: top; */
   }
 `;
