@@ -13,6 +13,22 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 // import { DarkModeContext } from "../../context/DarkModeContext";
 
 // Styled Components
+const TooltipOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(107, 114, 128, 0.3); // gray-500 @ 30% opacity
+  z-index: 999;
+
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+`;
+
 const Container = styled.div`
   width: 100%;
   @media screen and (max-width: 768px) {
@@ -289,13 +305,16 @@ const TruckTireVisualization = ({ initialTires }) => {
         />
 
         {isTooltipVisible && selectedTire && (
-          <TireTooltip
-            tire={selectedTire}
-            isEditing={isEditing}
-            position={tooltipPosition}
-            onClose={handleCloseTooltip}
-            onUpdateTire={handleUpdateTire}
-          />
+          <>
+            <TooltipOverlay onClick={handleCloseTooltip} />
+            <TireTooltip
+              tire={selectedTire}
+              isEditing={isEditing}
+              position={tooltipPosition}
+              onClose={handleCloseTooltip}
+              onUpdateTire={handleUpdateTire}
+            />
+          </>
         )}
       </TruckContainer>
 
