@@ -124,6 +124,9 @@ const StatusIndicator = styled.div`
   margin-right: 0.75rem;
   flex-shrink: 0;
   background-color: ${(props) => props.color};
+  @media (min-width: 768px) {
+    margin-right: 0.75rem;
+  }
 `;
 
 const LegendItemContent = styled.div``;

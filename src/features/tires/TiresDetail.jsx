@@ -14,7 +14,6 @@ const PageContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 768px) {
-    width: 90%;
     flex-direction: column;
     padding: 0rem;
   }
@@ -36,7 +35,7 @@ const CardContainer = styled.div`
 
 const CardContent = styled.div`
   padding: 1.5rem;
-  
+
   @media screen and (max-width: 768px) {
     /* display: contents; */
     padding: 0.5rem;

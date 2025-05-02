@@ -204,25 +204,29 @@ const TruckSvg = ({ tires, getTireStatusColor, onTireClick }) => {
         )}
 
         {/* Axle labels */}
-        <AxleLabel x="570" y="105">
-          1st Axle
-        </AxleLabel>
-        <AxleLabel x="570" y="185">
-          2nd Axle
-        </AxleLabel>
-        <AxleLabel x="570" y={`${325 - pxOffset3Axle}`}>
-          3rd Axle
-        </AxleLabel>
-        <AxleLabel x="570" y="395">
-          4th Axle
-        </AxleLabel>
-        <AxleLabel x="570" y="465">
-          5th Axle
-        </AxleLabel>
-        {is6axle && (
-          <AxleLabel x="570" y="535">
-            6th Axle
-          </AxleLabel>
+        {isMobile ? null : (
+          <>
+            <AxleLabel x="570" y="105">
+              1st Axle
+            </AxleLabel>
+            <AxleLabel x="570" y="185">
+              2nd Axle
+            </AxleLabel>
+            <AxleLabel x="570" y={`${325 - pxOffset3Axle}`}>
+              3rd Axle
+            </AxleLabel>
+            <AxleLabel x="570" y="395">
+              4th Axle
+            </AxleLabel>
+            <AxleLabel x="570" y="465">
+              5th Axle
+            </AxleLabel>
+            {is6axle && (
+              <AxleLabel x="570" y="535">
+                6th Axle
+              </AxleLabel>
+            )}
+          </>
         )}
 
         {/* Section labels */}
