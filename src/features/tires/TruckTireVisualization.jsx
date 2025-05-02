@@ -86,7 +86,7 @@ const TruckContainer = styled.div`
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
   @media screen and (max-width: 768px) {
-    height: 55rem;
+    height: 65rem;
   }
 `;
 
@@ -100,11 +100,14 @@ const LegendContainer = styled.div`
 
 const LegendGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1rem;
   }
 `;
 
@@ -134,6 +137,10 @@ const LegendItemContent = styled.div``;
 const LegendItemSubtitle = styled.div`
   font-size: 1.5rem;
   color: var(--color-grey-600);
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
 `;
 
 const LegendNote = styled.div`
@@ -141,6 +148,9 @@ const LegendNote = styled.div`
   font-size: 1.5rem;
   color: var(--color-grey-600);
   font-style: italic;
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const TruckTireVisualization = ({ initialTires }) => {
@@ -183,16 +193,23 @@ const TruckTireVisualization = ({ initialTires }) => {
     // UPDATED CALCULATION: Adjust positioning for right side tires
     let x, y;
 
-    if (isRightSide) {
-      // For right side tires, position tooltip slightly to the left of the tire
-      // but not as far as before, using a smaller offset
-      x = rect.left - svgContainerRect.left - 270; // Less offset
+    if (isMobile) {
+      // 🟢 Mobile: Tooltip appears **below the tire**, centered
+      if (isRightSide) {
+        x = rect.left - svgContainerRect.left - 200;
+      } else {
+        x = rect.right - svgContainerRect.left - 50;
+      }
+      y = rect.bottom - svgContainerRect.top + 10;
     } else {
-      // For left side tires, keep the current positioning
-      x = rect.right - svgContainerRect.left + 10;
+      // 🖥️ Desktop: Keep side logic
+      if (isRightSide) {
+        x = rect.left - svgContainerRect.left - 260;
+      } else {
+        x = rect.right - svgContainerRect.left + 10;
+      }
+      y = rect.top - svgContainerRect.top;
     }
-
-    y = rect.top - svgContainerRect.top;
 
     setTooltipPosition({ x, y });
     setSelectedTire(tire);
@@ -289,21 +306,23 @@ const TruckTireVisualization = ({ initialTires }) => {
           <LegendItem>
             <StatusIndicator color="var(--color-green-300)" />
             <LegendItemContent>
-              <Heading as="h2">Óptima Condición</Heading>
+              <Heading as={`${isMobile ? "h7" : "h2"}`}>
+                Óptima Condición
+              </Heading>
               <LegendItemSubtitle>Menos de 30.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
             <StatusIndicator color="var(--color-yellow-300)" />
             <LegendItemContent>
-              <Heading as="h2">Precaución</Heading>
+              <Heading as={`${isMobile ? "h7" : "h2"}`}>Precaución</Heading>
               <LegendItemSubtitle>30.000 - 40.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
           <LegendItem>
             <StatusIndicator color="var(--color-red-300)" />
             <LegendItemContent>
-              <Heading as="h2">Crítico</Heading>
+              <Heading as={`${isMobile ? "h7" : "h2"}`}>Crítico</Heading>
               <LegendItemSubtitle>Más de 40.000 km</LegendItemSubtitle>
             </LegendItemContent>
           </LegendItem>
