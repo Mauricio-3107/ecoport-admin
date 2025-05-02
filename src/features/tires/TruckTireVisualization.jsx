@@ -9,11 +9,15 @@ import {
   HiOutlineInformationCircle,
 } from "react-icons/hi2";
 import { useEditTires } from "./useEditTires";
+import useMediaQuery from "../../hooks/useMediaQuery";
 // import { DarkModeContext } from "../../context/DarkModeContext";
 
 // Styled Components
 const Container = styled.div`
   width: 100%;
+  @media screen and (max-width: 768px) {
+    min-width: 90%;
+  }
 `;
 
 const StatusSummary = styled.div`
@@ -23,6 +27,10 @@ const StatusSummary = styled.div`
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const HeaderSection = styled.div``;
@@ -30,6 +38,13 @@ const HeaderSection = styled.div``;
 const BadgesContainer = styled.div`
   display: flex;
   gap: 0.75rem;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 `;
 
 const CustomBadge = styled.div`
@@ -40,6 +55,22 @@ const CustomBadge = styled.div`
   border: 1.5px solid #e5e7eb;
   border-radius: 0.375rem;
   font-size: 1.5rem;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 1rem 1.4rem;
+    font-size: 1.3rem;
+    min-width: 7.5rem;
+    span {
+      margin-top: 0.3rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
 `;
 
 const TruckContainer = styled.div`
@@ -54,6 +85,9 @@ const TruckContainer = styled.div`
   overflow: visible;
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
+  /* @media screen and (max-width: 768px) {
+    height: 50rem;
+  } */
 `;
 
 const LegendContainer = styled.div`
@@ -107,6 +141,8 @@ const LegendNote = styled.div`
 `;
 
 const TruckTireVisualization = ({ initialTires }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const [tires, setTires] = useState(initialTires);
   const [selectedTire, setSelectedTire] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
@@ -202,19 +238,22 @@ const TruckTireVisualization = ({ initialTires }) => {
 
         <BadgesContainer>
           <CustomBadge>
-            <HiOutlineCheckCircle size={22} color="var(--color-green-300)" />
+            <HiOutlineCheckCircle
+              size={isMobile ? 14 : 22}
+              color="var(--color-green-300)"
+            />
             <span>{statusCounts.good} Óptimo</span>
           </CustomBadge>
           <CustomBadge>
             <HiOutlineExclamationTriangle
-              size={22}
+              size={isMobile ? 14 : 22}
               color="var(--color-yellow-300)"
             />
             <span>{statusCounts.warning} Precaución</span>
           </CustomBadge>
           <CustomBadge>
             <HiOutlineInformationCircle
-              size={22}
+              size={isMobile ? 14 : 22}
               color="var(--color-red-300)"
             />
             <span>{statusCounts.critical} Crítico</span>

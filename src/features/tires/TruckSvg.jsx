@@ -3,6 +3,11 @@ import styled from "styled-components";
 const TruckSvgContainer = styled.svg`
   width: 100%;
   height: 100%;
+
+  @media screen and (max-width: 768px) {
+    transform: scale(1.3);
+    transform-origin: top;
+  }
 `;
 
 const TireCircle = styled.circle`
@@ -15,6 +20,10 @@ const TireCircle = styled.circle`
   &:hover {
     stroke: var(--color-indigo-700);
   }
+
+  @media screen and (max-width: 768px) {
+    r: 26;
+  }
 `;
 
 const TireText = styled.text`
@@ -23,6 +32,10 @@ const TireText = styled.text`
   text-anchor: middle;
   font-weight: bold;
   pointer-events: none;
+
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const AxleLabel = styled.text`
