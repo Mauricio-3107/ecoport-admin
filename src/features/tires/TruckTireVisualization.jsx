@@ -102,7 +102,7 @@ const TruckContainer = styled.div`
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
   @media screen and (max-width: 768px) {
-    height: 65rem;
+    aspect-ratio: 10 / 19;
   }
 `;
 
@@ -266,10 +266,10 @@ const TruckTireVisualization = ({ initialTires }) => {
       {/* Status Summary */}
       <StatusSummary>
         <HeaderSection>
-          <Heading as="h6">
+          <p>
             Haz click en cualquier neumático para ver los detalles y actualizar
             la información
-          </Heading>
+          </p>
         </HeaderSection>
 
         <BadgesContainer>
@@ -320,7 +320,9 @@ const TruckTireVisualization = ({ initialTires }) => {
 
       {/* Legend */}
       <LegendContainer>
-        <Heading as="h5">Estado del kilometraje</Heading>
+        <Heading as={`${isMobile ? "h6" : "h5"}`}>
+          Estado del kilometraje
+        </Heading>
         <LegendGrid>
           <LegendItem>
             <StatusIndicator color="var(--color-green-300)" />
@@ -348,8 +350,7 @@ const TruckTireVisualization = ({ initialTires }) => {
         </LegendGrid>
 
         <LegendNote>
-          Nota: Los colores de los neumáticos indican el kilometraje. Haga click
-          en cualquier neumático para ver detalles y actualizar la información.
+          Nota: Los colores de los neumáticos indican el kilometraje. 
         </LegendNote>
       </LegendContainer>
     </Container>
