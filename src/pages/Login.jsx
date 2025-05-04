@@ -23,7 +23,7 @@ function Login() {
   return (
     <LoginLayout>
       <Logo />
-      <Heading as="h4">Inicia sesión en tu cuentaaaa</Heading>
+      <Heading as="h4">Inicia sesión en tu cuentaaaaaaaa</Heading>
       <LoginForm />
     </LoginLayout>
   );
