@@ -491,7 +491,11 @@ const TireTooltip = ({ tire, isEditing, position, onClose, onUpdateTire }) => {
                 </EditButton>
               </EditContainer>
               <ValueDisplay>
-                {tire.type.charAt(0).toUpperCase() + tire.type.slice(1)}
+                {tire.type === "new"
+                  ? "Nuevo"
+                  : tire.type === "retread"
+                  ? "Reencauchado"
+                  : "—"}
               </ValueDisplay>
             </div>
           )}
