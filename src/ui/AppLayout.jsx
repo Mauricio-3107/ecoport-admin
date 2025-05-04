@@ -63,11 +63,12 @@ const HeaderWrapper = styled.div`
   grid-area: header;
   z-index: 900; // So it stays above Sidebar if needed
   @media screen and (max-width: 768px) {
-    position: sticky;
+    position: fixed;
     top: 0;
-    background-color: var(
-      --color-grey-0
-    ); // Ensure it doesn’t become transparent
+    left: 0;
+    right: 0;
+    z-index: 999; // slightly above ToggleButton
+    background-color: var(--color-grey-0);
   }
 `;
 
