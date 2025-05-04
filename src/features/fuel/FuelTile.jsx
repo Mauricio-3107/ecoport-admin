@@ -94,7 +94,7 @@ function FuelTile({ fuelTruck }) {
       </Field>
 
       <Field>
-        <span>Eficiencia:</span>
+        <span>Eficiencia (Km/L):</span>
         {fuelEfficiency || "—"}
       </Field>
 
