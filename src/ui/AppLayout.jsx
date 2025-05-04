@@ -31,7 +31,9 @@ const Main = styled.main`
   overflow-x: hidden;
 
   @media screen and (max-width: 768px) {
-    padding: 2rem;
+    padding-top: 7rem; // Add space for fixed header (~56px + gap)
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 `;
 
