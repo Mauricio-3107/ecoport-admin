@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
   @media screen and (max-width: 768px) {
     padding: 1.2rem 2rem;
     gap: 1.2rem;
-    position: sticky; /* 👈 clave */
+    position: fixed; /* 👈 clave */
     top: 0; /* 👈 anclado arriba */
     z-index: 1000; /* 👈 asegúrate que esté encima de otros elementos */
   }
