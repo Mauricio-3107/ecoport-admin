@@ -43,7 +43,9 @@ function FuelRow({ fuelTruck }) {
     location,
     id,
   } = fuelTruck;
-  const status = "";
+  const status =
+    fuelEfficiency && parseFloat(fuelEfficiency) >= 2.5 ? "green" : "red";
+
   const navigate = useNavigate();
 
   return (
@@ -57,7 +59,18 @@ function FuelRow({ fuelTruck }) {
       <Efficency>
         {fuelEfficiency ? fuelEfficiency : <span>&mdash;</span>}
       </Efficency>
-      <Status>{status ? status : <span>&mdash;</span>}</Status>
+      <Status status={status}>
+        {fuelEfficiency ? (
+          status === "green" ? (
+            "Bueno"
+          ) : (
+            "Malo"
+          )
+        ) : (
+          <span>&mdash;</span>
+        )}
+      </Status>
+
       <div>
         <Menus.Menu>
           <Menus.Toggle id={truckId} />

@@ -21,7 +21,8 @@ const Img = styled.img`
   aspect-ratio: 16 / 12;
   object-fit: cover;
   border-radius: var(--border-radius-sm);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
+  box-shadow: var(--shadow-sm);
 `;
 
 const Field = styled.div`
@@ -42,6 +43,19 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
+const StatusBadge = styled.div`
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: ${({ $status }) =>
+    $status === "green" ? "var(--color-green-700)" : "var(--color-red-700)"};
+  background-color: ${({ $status }) =>
+    $status === "green" ? "var(--color-green-100)" : "var(--color-red-100)"};
+  width: fit-content;
+`;
+
 function FuelTile({ fuelTruck }) {
   const {
     trucks: { licensePlate, image, id: truckId },
@@ -52,7 +66,8 @@ function FuelTile({ fuelTruck }) {
     location,
     id,
   } = fuelTruck;
-  const status = "";
+  const parsedEfficiency = parseFloat(fuelEfficiency);
+  const status = fuelEfficiency && parsedEfficiency >= 2.5 ? "green" : "red";
   const navigate = useNavigate();
 
   return (
@@ -95,12 +110,22 @@ function FuelTile({ fuelTruck }) {
 
       <Field>
         <span>Eficiencia (Km/L):</span>
-        {fuelEfficiency || "—"}
+        <strong>
+          {fuelEfficiency
+            ? parseFloat(fuelEfficiency).toFixed(1).replace(".", ",")
+            : "—"}
+        </strong>
       </Field>
 
       <Field>
         <span>Status:</span>
-        {status || "—"}
+        {fuelEfficiency ? (
+          <StatusBadge $status={status}>
+            {status === "green" ? "Bueno" : "Malo"}
+          </StatusBadge>
+        ) : (
+          "—"
+        )}
       </Field>
     </Card>
   );
