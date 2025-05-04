@@ -27,13 +27,6 @@ const StyledDashboardLayout = styled.div`
   & > :first-child {
     grid-column: 1 / -1;
   }
-
-  @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-    /* grid-template-rows: 1fr; */
-    row-gap: 2.4rem;
-    overflow-x: auto;
-  }
 `;
 
 function formatCompanyDocs(companyData) {
