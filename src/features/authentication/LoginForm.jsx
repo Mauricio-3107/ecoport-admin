@@ -27,7 +27,7 @@ function LoginForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormRowVertical label="Email address">
+      <FormRowVertical label="Email">
         <Input
           type="email"
           id="email"
@@ -38,7 +38,7 @@ function LoginForm() {
           disabled={isLoading}
         />
       </FormRowVertical>
-      <FormRowVertical label="Password">
+      <FormRowVertical label="Contraseña">
         <Input
           type="password"
           id="password"
@@ -49,7 +49,9 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">{isLoading ? <SpinnerMini /> : "Login"}</Button>
+        <Button size="large">
+          {isLoading ? <SpinnerMini /> : "Iniciar sesión"}
+        </Button>
       </FormRowVertical>
     </Form>
   );
