@@ -24,7 +24,6 @@ const StyledFuelChart = styled(DashboardBoxFuel)`
 
 function FuelEfficiencyChart({ fuelTruckId }) {
   const { isDarkMode } = useDarkMode();
-  console.log(fuelTruckId);
 
   const data = fuelTruckId.map((record) => ({
     label: format(new Date(record.fuelDate), "MMM dd"),
@@ -60,7 +59,10 @@ function FuelEfficiencyChart({ fuelTruckId }) {
             tickLine={{ stroke: colors.text }}
           />
           <CartesianGrid strokeDasharray="4" />
-          <Tooltip contentStyle={{ backgroundColor: colors.background }} />
+          <Tooltip
+            contentStyle={{ backgroundColor: colors.background }}
+            cursor={{ stroke: "#10b981", strokeWidth: 1 }}
+          />
           <Area
             dataKey="fuelEfficiency"
             type="monotone"
@@ -69,6 +71,7 @@ function FuelEfficiencyChart({ fuelTruckId }) {
             strokeWidth={2}
             name="Eficiencia combustible"
             unit=" Km/L"
+            dot={{ r: 3 }}
           />
         </AreaChart>
       </ResponsiveContainer>

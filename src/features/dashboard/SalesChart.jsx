@@ -72,6 +72,7 @@ function SalesChart({ trips, numDays }) {
           />
           <CartesianGrid strokeDasharray="4" />
           <Tooltip
+            cursor={{ stroke: colors.totalSales.stroke, strokeWidth: 1 }}
             content={({ active, payload, label }) => {
               if (active && payload && payload.length) {
                 const { totalSales } = payload[0].payload;
@@ -118,6 +119,7 @@ function SalesChart({ trips, numDays }) {
             fill={colors.totalSales.fill}
             strokeWidth={2}
             name="Total de ventas"
+            dot={{ r: 3 }}
           />
         </AreaChart>
       </ResponsiveContainer>
