@@ -32,7 +32,9 @@ const Main = styled.main`
   overflow-x: hidden;
 
   @media screen and (max-width: 768px) {
-    padding: 2rem;
+    padding-top: 8rem; // Add space for fixed header (~56px + gap)
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 `;
 
@@ -63,6 +65,14 @@ const ToggleButton = styled.button`
 const HeaderWrapper = styled.div`
   grid-area: header;
   z-index: 900; // So it stays above Sidebar if needed
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; // slightly above ToggleButton
+    background-color: var(--color-grey-0);
+  }
 `;
 
 function AppLayout() {
