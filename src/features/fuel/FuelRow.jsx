@@ -29,8 +29,8 @@ const Efficency = styled.div`
 const Status = styled.div`
   font-family: "Sono";
   font-weight: 500;
-  color: ${({ status }) =>
-    status === "green" ? "var(--color-green-700)" : "var(--color-red-700)"};
+  color: ${({ $status }) =>
+    $status === "green" ? "var(--color-green-700)" : "var(--color-red-700)"};
 `;
 
 function FuelRow({ fuelTruck }) {
@@ -59,7 +59,7 @@ function FuelRow({ fuelTruck }) {
       <Efficency>
         {fuelEfficiency ? fuelEfficiency : <span>&mdash;</span>}
       </Efficency>
-      <Status status={status}>
+      <Status $status={status}>
         {fuelEfficiency ? (
           status === "green" ? (
             "Bueno"

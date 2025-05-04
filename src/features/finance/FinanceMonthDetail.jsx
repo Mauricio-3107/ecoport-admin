@@ -42,13 +42,13 @@ function FinanceMonthDetail() {
   const { isLoading, financeMonth, month } = useFinanceMonth();
   if (isLoading) return <Spinner />;
 
-  console.log(month);
   if (!financeMonth || financeMonth.length === 0)
     return <Empty resourceName={"dato disponibles para este mes"} />;
   const sortedData = [...financeMonth].sort((a, b) =>
     a.licensePlate.localeCompare(b.licensePlate, "es")
   );
   const monthLiteral = formatMonthLiteral(month);
+  
   return (
     <>
       <Heading as={isMobile ? "h3" : "h1"}>{monthLiteral}</Heading>
