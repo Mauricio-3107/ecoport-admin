@@ -15,5 +15,5 @@ export function useFinanceMonth() {
     retry: false,
   });
 
-  return { isLoading, financeMonth, error };
+  return { isLoading, financeMonth, error, month };
 }
