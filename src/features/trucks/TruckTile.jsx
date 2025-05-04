@@ -12,6 +12,15 @@ const Card = styled.div`
   gap: 0.8rem;
 `;
 
+const Img = styled.img`
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 12;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 1.2rem;
+`;
+
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -34,6 +43,7 @@ export default function TruckTile({ truck }) {
   // const { isDeleting, deleteTruck } = useDeleteTruck();
   return (
     <Card>
+      <Img src={truck.image} alt={truck.licensePlate} />
       <Header>
         <Heading as="h3">{truck.licensePlate}</Heading>
         {/* <Modal>

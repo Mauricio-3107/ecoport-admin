@@ -49,8 +49,9 @@ const InputIconWrapper = styled.div`
 
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 1.2rem;
   }
 `;

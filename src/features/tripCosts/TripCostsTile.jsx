@@ -18,12 +18,12 @@ const Card = styled.div`
 `;
 
 const Img = styled.img`
-  display: block;
   width: 100%;
   height: auto;
-  max-height: 12rem;
+  aspect-ratio: 16 / 12;
   object-fit: cover;
   border-radius: var(--border-radius-sm);
+  margin-bottom: 1.2rem;
 `;
 
 const LicensePlate = styled.h3`

@@ -21,7 +21,8 @@ const Card = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  aspect-ratio: 16/9;
+  height: auto;
+  aspect-ratio: 16 / 12;
   object-fit: cover;
   border-radius: var(--border-radius-sm);
   margin-bottom: 1.2rem;
