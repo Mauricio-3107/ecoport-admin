@@ -52,7 +52,7 @@ function FuelTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.3fr 1.3fr 1.3fr 1fr 1fr 1fr 1fr 0.5fr">
+      <Table columns="0.6fr 1.3fr 1.3fr 1.3fr 1fr 1fr 1fr 0.5fr">
         <Table.Header role="row">
           <div></div>
           <div>Placa</div>
@@ -61,7 +61,7 @@ function FuelTable() {
           <div>Km actual</div>
           <div>Litros</div>
           <div>Eficiencia (Km/L)</div>
-          <div>Status</div>
+          {/* <div>Status</div> */}
           <div></div>
         </Table.Header>
         <Table.Body
