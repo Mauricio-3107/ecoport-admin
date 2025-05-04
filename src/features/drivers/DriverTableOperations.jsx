@@ -34,11 +34,11 @@ function DriverTableOperations() {
           },
           {
             value: "fullName-asc",
-            label: "Ordenar por name (A - Z)",
+            label: "Ordenar por nombre (A - Z)",
           },
           {
             value: "fullName-desc",
-            label: "Ordenar por name (Z - A)",
+            label: "Ordenar por nombre (Z - A)",
           },
         ]}
       />
