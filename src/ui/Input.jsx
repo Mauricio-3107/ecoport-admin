@@ -14,6 +14,10 @@ const Input = styled.input`
     -webkit-appearance: none;
     -moz-appearance: none;
   }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export default Input;
