@@ -21,6 +21,7 @@ const StyledAppLayout = styled.div`
       "header"
       "main";
   }
+  
 `;
 
 const Main = styled.main`
