@@ -9,7 +9,7 @@ export function useEditMaintenance() {
     mutationFn: ({ newMaintenanceData, id }) =>
       createEditMaintenance(newMaintenanceData, id),
     onSuccess: () => {
-      toast.success("Maintenance  successfully edited");
+      toast.success("Mantenimiento editado exitosamente");
       queryClient.invalidateQueries({
         active: true,
       });

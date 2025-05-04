@@ -7,7 +7,7 @@ export function useDeleteDriver() {
   const { mutate: deleteDriver, isLoading: isDeleting } = useMutation({
     mutationFn: (id) => deleteDriverApi(id),
     onSuccess: () => {
-      toast.success("Driver successfully deleted");
+      toast.success("Conductor eliminado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["drivers"],
       });

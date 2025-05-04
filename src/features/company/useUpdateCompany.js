@@ -8,7 +8,7 @@ export function useUpdateCompany() {
   const { mutate: updateCompany, isLoading: isUpdating } = useMutation({
     mutationFn: (newData) => updateCompanyApi(newData),
     onSuccess: () => {
-      toast.success("Company data successfully updated");
+      toast.success("Datos de la empresa actualizados exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["company"],
       });

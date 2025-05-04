@@ -8,7 +8,7 @@ export function useCreateOil() {
   const { isLoading: isCreating, mutate: createOil } = useMutation({
     mutationFn: (newOil) => createOilApi(newOil),
     onSuccess: () => {
-      toast.success("Oil successfully logged");
+      toast.success("Cambio de aceite registrado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["oil"],
       });

@@ -10,7 +10,7 @@ export function useDeleteMaintenance() {
   const { mutate: deleteMaintenance, isLoading: isDeleting } = useMutation({
     mutationFn: (id) => deleteMaintenanceApi(id),
     onSuccess: () => {
-      toast.success("Maintenance successfully deleted");
+      toast.success("Mantenimiento eliminado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["maintenance", truckId],
       });

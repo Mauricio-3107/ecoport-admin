@@ -8,7 +8,7 @@ export function useEditTrip() {
   const { isLoading: isEditing, mutate: editTrip } = useMutation({
     mutationFn: ({ newTripData, id }) => createEditTrip(newTripData, id),
     onSuccess: () => {
-      toast.success("Trip successfully edited");
+      toast.success("Viaje editado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["trips"],
       });

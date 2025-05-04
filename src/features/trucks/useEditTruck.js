@@ -7,7 +7,7 @@ export function useEditTruck() {
   const { isLoading: isEditing, mutate: editTruck } = useMutation({
     mutationFn: ({ newTruckData, id }) => createEditTruck(newTruckData, id),
     onSuccess: () => {
-      toast.success("Truck successfully edited");
+      toast.success("Camión editado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["trucks"],
       });

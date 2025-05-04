@@ -8,7 +8,7 @@ export function useEditClient() {
   const { isLoading: isEditing, mutate: editClient } = useMutation({
     mutationFn: ({ newClientData, id }) => createEditClient(newClientData, id),
     onSuccess: () => {
-      toast.success("Client successfully edited");
+      toast.success("Cliente editado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["clients"],
       });

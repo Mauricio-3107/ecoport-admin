@@ -9,7 +9,7 @@ export function useCreateMaintenance() {
     mutationFn: (newMaintenance) => createEditMaintenance(newMaintenance),
     onSuccess: (data) => {
       const truckId = data.truckId;
-      toast.success("Maintenance successfully logged");
+      toast.success("Mantenimiento registrado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["maintenance", truckId],
       });

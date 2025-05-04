@@ -36,6 +36,12 @@ const Field = styled.div`
   }
 `;
 
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 function FuelTile({ fuelTruck }) {
   const {
     trucks: { licensePlate, image, id: truckId },
@@ -52,7 +58,20 @@ function FuelTile({ fuelTruck }) {
   return (
     <Card>
       <Img src={image} alt={truckId} />
-      <Heading as="h3">{licensePlate}</Heading>
+      <Row>
+        <Heading as="h3">{licensePlate}</Heading>
+        <Menus.Menu>
+          <Menus.Toggle id={truckId} />
+          <Menus.List id={truckId}>
+            <Menus.Button
+              icon={<HiOutlinePresentationChartLine />}
+              onClick={() => navigate(`/fuel/${truckId}`)}
+            >
+              Ver historial de consumo
+            </Menus.Button>
+          </Menus.List>
+        </Menus.Menu>
+      </Row>
 
       <Field>
         <span>Fecha:</span>
@@ -83,18 +102,6 @@ function FuelTile({ fuelTruck }) {
         <span>Status:</span>
         {status || "—"}
       </Field>
-
-      <Menus.Menu>
-        <Menus.Toggle id={truckId} />
-        <Menus.List id={truckId}>
-          <Menus.Button
-            icon={<HiOutlinePresentationChartLine />}
-            onClick={() => navigate(`/fuel/${truckId}`)}
-          >
-            See history consumption
-          </Menus.Button>
-        </Menus.List>
-      </Menus.Menu>
     </Card>
   );
 }

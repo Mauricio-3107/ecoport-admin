@@ -10,7 +10,7 @@ export function useUnassignTruckDriver() {
       return unassignTruckDriver(assignmentEndDate, id);
     },
     onSuccess: () => {
-      toast.success("Unassignment successfully completed");
+      toast.success("Desasignación completada exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["truckDriverAssignments"],
       });

@@ -8,7 +8,7 @@ export function useDeleteTrip() {
   const { isLoading: isDeleting, mutate: deleteTrip } = useMutation({
     mutationFn: (id) => deleteTripApi(id),
     onSuccess: () => {
-      toast.success("Trip successfully deleted");
+      toast.success("Viaje eliminado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["trips"],
       });

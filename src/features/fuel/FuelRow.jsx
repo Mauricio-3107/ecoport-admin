@@ -66,7 +66,7 @@ function FuelRow({ fuelTruck }) {
               icon={<HiOutlinePresentationChartLine />}
               onClick={() => navigate(`/fuel/${truckId}`)}
             >
-              See history consumption
+              Ver historial de consumo
             </Menus.Button>
           </Menus.List>
         </Menus.Menu>

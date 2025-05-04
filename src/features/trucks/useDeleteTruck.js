@@ -7,7 +7,7 @@ export function useDeleteTruck() {
   const { mutate: deleteTruck, isLoading: isDeleting } = useMutation({
     mutationFn: (id) => deleteTruckApi(id),
     onSuccess: () => {
-      toast.success("Truck successfully deleted");
+      toast.success("Camión eliminado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["trucks"],
       });

@@ -8,7 +8,7 @@ export function useEditOil() {
   const { isLoading: isEditing, mutate: editOil } = useMutation({
     mutationFn: ({ editOil, id }) => editOilApi(editOil, id),
     onSuccess: () => {
-      toast.success("Oil successfully edited");
+      toast.success("Cambio de aceite editado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["oil"],
       });

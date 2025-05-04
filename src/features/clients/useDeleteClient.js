@@ -8,7 +8,7 @@ export function useDeleteClient() {
   const { isLoading: isDeleting, mutate: deleteClient } = useMutation({
     mutationFn: (id) => deleteClientApi(id),
     onSuccess: () => {
-      toast.success("Client successfully deleted");
+      toast.success("Cliente eliminado exitosamente");
       queryClient.invalidateQueries({
         queryKey: ["clients"],
       });
