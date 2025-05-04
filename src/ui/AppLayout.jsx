@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { RiMenu2Fill } from "react-icons/ri";
 
@@ -21,7 +21,6 @@ const StyledAppLayout = styled.div`
       "header"
       "main";
   }
-  
 `;
 
 const Main = styled.main`
@@ -76,8 +75,16 @@ const HeaderWrapper = styled.div`
 `;
 
 function AppLayout() {
+  const mainRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   // ☰
+  const location = useLocation();
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [location.pathname]);
+
   return (
     <StyledAppLayout>
       <ToggleButton onClick={() => setIsSidebarOpen((prev) => !prev)}>
@@ -87,7 +94,7 @@ function AppLayout() {
         <Header />
       </HeaderWrapper>
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <Main>
+      <Main ref={mainRef}>
         <Container>
           <Outlet />
         </Container>
