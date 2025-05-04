@@ -57,7 +57,7 @@ function FuelRow({ fuelTruck }) {
       <Efficency>
         {fuelEfficiency ? fuelEfficiency : <span>&mdash;</span>}
       </Efficency>
-      {/* <Status>{status ? status : <span>&mdash;</span>}</Status> */}
+      <Status>{status ? status : <span>&mdash;</span>}</Status>
       <div>
         <Menus.Menu>
           <Menus.Toggle id={truckId} />

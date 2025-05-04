@@ -98,10 +98,10 @@ function FuelTile({ fuelTruck }) {
         {fuelEfficiency || "—"}
       </Field>
 
-      {/* <Field>
+      <Field>
         <span>Status:</span>
         {status || "—"}
-      </Field> */}
+      </Field>
     </Card>
   );
 }
